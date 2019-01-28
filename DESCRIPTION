@@ -14,3 +14,5 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Suggests: 
     testthat
+URL: https://github.com/ChadGoymer/msgr
+BugReports: https://github.com/ChadGoymer/msgr/issues
