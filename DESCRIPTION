@@ -1,12 +1,14 @@
 Package: msgr
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Extends messages, warnings and errors by adding levels of messages 
+    and the option to record them in a log file.
+Version: 0.0.1
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Chad",
+           family = "Goymer",
            role = c("aut", "cre"),
-           email = "first.last@example.com")
-Description: What the package does (one paragraph).
+           email = "chad.goymer@gmail.com")
+Description: Extends messages, warnings and errors by adding levels of
+    messages and the option to record them in a log file.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
