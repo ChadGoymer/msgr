@@ -53,3 +53,17 @@ is_logical <- function(x) {
 is_boolean <- function(x) {
   is_logical(x) && is_scalar(x)
 }
+
+#  FUNCTION: is_numeric -----------------------------------------------------------------------
+#
+#' Checks whether the variable is a numeric vector
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a numeric vector, FALSE otherwise
+#'
+#' @export
+#'
+is_numeric <- function(x) {
+  is_vector(x) && is.numeric(x)
+}

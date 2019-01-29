@@ -2,5 +2,6 @@
 
 export(is_boolean)
 export(is_logical)
+export(is_numeric)
 export(is_scalar)
 export(is_vector)
