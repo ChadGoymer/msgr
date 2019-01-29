@@ -51,3 +51,26 @@ test_that("is_scalar returns FALSE for invalid vectors", {
   expect_false(is_scalar(NULL))
 
 })
+
+# TEST: is_logical ----------------------------------------------------------------------------
+
+test_that("is_logical returns TRUE for valid vectors", {
+
+  expect_true(is_logical(TRUE))
+  expect_true(is_logical(c(TRUE, FALSE)))
+  expect_true(is_logical(NA))
+
+})
+
+test_that("is_logical returns FALSE for invalid vectors", {
+
+  expect_false(is_logical(1:3))
+  expect_false(is_logical(c(3.142, 2.718, 1.414)))
+  expect_false(is_logical(c("bob", "jane", "jim")))
+
+  expect_false(is_logical(list(1:3)))
+  expect_false(is_logical(matrix(1:4, nrow = 2)))
+  expect_false(is_logical(data.frame(x = LETTERS[1:3], y = 1:3)))
+  expect_false(is_logical(NULL))
+
+})

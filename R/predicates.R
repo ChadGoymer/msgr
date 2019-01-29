@@ -25,3 +25,17 @@ is_vector <- function(x) {
 is_scalar <- function(x) {
   is_vector(x) && identical(length(x), 1L)
 }
+
+#  FUNCTION: is_logical -----------------------------------------------------------------------
+#
+#' Checks whether the variable is a logical vector
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a logical vector, FALSE otherwise
+#'
+#' @export
+#'
+is_logical <- function(x) {
+  is_vector(x) && is.logical(x)
+}
