@@ -67,3 +67,17 @@ is_boolean <- function(x) {
 is_numeric <- function(x) {
   is_vector(x) && is.numeric(x)
 }
+
+#  FUNCTION: is_number ------------------------------------------------------------------------
+#
+#' Checks whether the variable is a numeric vector of length 1
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a numeric vector of length 1, FALSE otherwise
+#'
+#' @export
+#'
+is_number <- function(x) {
+  is_numeric(x) && is_scalar(x)
+}

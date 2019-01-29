@@ -121,3 +121,27 @@ test_that("is_numeric returns FALSE for invalid vectors", {
   expect_false(is_numeric(NULL))
 
 })
+
+# TEST: is_number ----------------------------------------------------------------------------
+
+test_that("is_number returns TRUE for valid vectors", {
+
+  expect_true(is_number(1L))
+  expect_true(is_number(3.142))
+  expect_true(is_number(NA_real_))
+
+})
+
+test_that("is_number returns FALSE for invalid vectors", {
+
+  expect_false(is_number(1:3))
+  expect_false(is_number(c(3.142, 2.718, 1.414)))
+  expect_false(is_number(c(TRUE, FALSE)))
+  expect_false(is_number(c("bob", "jane", "jim")))
+
+  expect_false(is_number(list(1:3)))
+  expect_false(is_number(matrix(1:4, nrow = 2)))
+  expect_false(is_number(data.frame(x = LETTERS[1:3], y = 1:3)))
+  expect_false(is_number(NULL))
+
+})
