@@ -1,0 +1,20 @@
+Package: msgr
+Title: Extends messages, warnings and errors by adding levels of messages 
+    and the option to record them in a log file.
+Version: 0.0.1
+Authors@R: 
+    person(given = "Chad",
+           family = "Goymer",
+           role = c("aut", "cre"),
+           email = "chad.goymer@gmail.com")
+Description: Extends messages, warnings and errors by adding levels of
+    messages and the option to record them in a log file.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
+Suggests: 
+    testthat
+URL: https://github.com/ChadGoymer/msgr
+BugReports: https://github.com/ChadGoymer/msgr/issues
