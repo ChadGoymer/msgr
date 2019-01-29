@@ -39,3 +39,17 @@ is_scalar <- function(x) {
 is_logical <- function(x) {
   is_vector(x) && is.logical(x)
 }
+
+#  FUNCTION: is_boolean -----------------------------------------------------------------------
+#
+#' Checks whether the variable is a logical vector of length 1
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a logical vector of length 1, FALSE otherwise
+#'
+#' @export
+#'
+is_boolean <- function(x) {
+  is_logical(x) && is_scalar(x)
+}

@@ -74,3 +74,26 @@ test_that("is_logical returns FALSE for invalid vectors", {
   expect_false(is_logical(NULL))
 
 })
+
+# TEST: is_boolean ----------------------------------------------------------------------------
+
+test_that("is_boolean returns TRUE for valid vectors", {
+
+  expect_true(is_boolean(TRUE))
+  expect_true(is_boolean(NA))
+
+})
+
+test_that("is_boolean returns FALSE for invalid vectors", {
+
+  expect_false(is_boolean(c(TRUE, FALSE)))
+  expect_false(is_boolean(1:3))
+  expect_false(is_boolean(c(3.142, 2.718, 1.414)))
+  expect_false(is_boolean(c("bob", "jane", "jim")))
+
+  expect_false(is_boolean(list(1:3)))
+  expect_false(is_boolean(matrix(1:4, nrow = 2)))
+  expect_false(is_boolean(data.frame(x = LETTERS[1:3], y = 1:3)))
+  expect_false(is_boolean(NULL))
+
+})
