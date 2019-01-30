@@ -5,7 +5,7 @@
 \alias{msgr}
 \alias{msgr-package}
 \title{msgr: Extends messages, warnings and errors by adding levels of messages 
-    and the option to record them in a log file.}
+    and the option to record them in a log file}
 \description{
 Extends messages, warnings and errors by adding levels of
     messages and the option to record them in a log file.

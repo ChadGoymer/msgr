@@ -1,6 +1,6 @@
 Package: msgr
 Title: Extends messages, warnings and errors by adding levels of messages 
-    and the option to record them in a log file.
+    and the option to record them in a log file
 Version: 0.0.1
 Authors@R: 
     person(given = "Chad",
