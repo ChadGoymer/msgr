@@ -263,3 +263,41 @@ is_readable <- function(x) {
 is_writeable <- function(x) {
   is_string(x) && file.exists(x) && file.access(x, mode = 2)[[1]] == 0
 }
+
+#  FUNCTION: is_in ----------------------------------------------------------------------------
+#
+#' Checks whether all elements of one variable are in another
+#'
+#' @param x (any) The object with elements to test
+#' @param y (any) The object with elements to test against
+#'
+#' @return TRUE if all elements in x are in y, FALSE otherwise
+#'
+#' @export
+#'
+is_in <- function(x, y) {
+  all(x %in% y)
+}
+
+#  FUNCTION: has_names ------------------------------------------------------------------------
+#
+#' Checks whether the variable has names
+#'
+#' @param x (any) The object to test
+#' @param nm (character, optional) The names to check for. If not specified then the function
+#'   checks for any names.
+#'
+#' @return TRUE if x has any names, FALSE otherwise
+#'
+#' @export
+#'
+has_names <- function(x, nm) {
+  names_exist <- !is.null(names(x))
+
+  if (!missing(nm) && names_exist) {
+    is_character(nm) || stop("names ('nm') must be given as a character vector")
+    is_in(nm, names(x))
+  } else {
+    names_exist
+  }
+}
