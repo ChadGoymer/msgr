@@ -193,3 +193,73 @@ is_null <- function(x) {
 is_na <- function(x) {
   !is.null(x) && is.na(x)
 }
+
+#  FUNCTION: is_url ---------------------------------------------------------------------------
+#
+#' Checks whether the variable is a valid URL
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a valid URL, FALSE otherwise
+#'
+#' @export
+#'
+is_url <- function(x) {
+  is_string(x) && grepl("^(https|http)://", x)
+}
+
+#  FUNCTION: is_dir ---------------------------------------------------------------------------
+#
+#' Checks whether the variable is a path to an existing directory
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a path to an existing directory, FALSE otherwise
+#'
+#' @export
+#'
+is_dir <- function(x) {
+  is_string(x) && dir.exists(x)
+}
+
+#  FUNCTION: is_file --------------------------------------------------------------------------
+#
+#' Checks whether the variable is a path to an existing file
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a path to an existing file, FALSE otherwise
+#'
+#' @export
+#'
+is_file <- function(x) {
+  is_string(x) && file.exists(x) && !file.info(x)$isdir
+}
+
+#  FUNCTION: is_readable ----------------------------------------------------------------------
+#
+#' Checks whether the variable is a path to an existing, readable file or directory
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a path to an existing, readable file or directory, FALSE otherwise
+#'
+#' @export
+#'
+is_readable <- function(x) {
+  is_string(x) && file.exists(x) && file.access(x, mode = 4)[[1]] == 0
+}
+
+#  FUNCTION: is_writeable ---------------------------------------------------------------------
+#
+#' Checks whether the variable is a path to an existing, writeable file or directory
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a path to an existing, writeable file or directory, FALSE otherwise
+#'
+#' @export
+#'
+is_writeable <- function(x) {
+  is_string(x) && file.exists(x) && file.access(x, mode = 2)[[1]] == 0
+}
