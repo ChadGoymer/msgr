@@ -303,3 +303,25 @@ test_that("is_data_frame returns FALSE for invalid data.frames", {
   expect_false(is_data_frame(NULL))
 
 })
+
+# TEST: is_null -------------------------------------------------------------------------------
+
+test_that("is_null returns TRUE for NULL", {
+
+  expect_true(is_null(NULL))
+
+})
+
+test_that("is_null returns FALSE for non-NULLs", {
+
+  expect_false(is_null(TRUE))
+  expect_false(is_null(1L))
+  expect_false(is_null(3.142))
+  expect_false(is_null("bob"))
+
+  expect_false(is_null(NA))
+  expect_false(is_null(list(1:3)))
+  expect_false(is_null(matrix(1:4, nrow = 2)))
+  expect_false(is_null(data.frame(x = LETTERS[1:3], y = 1:3)))
+
+})

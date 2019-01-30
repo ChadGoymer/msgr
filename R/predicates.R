@@ -165,3 +165,17 @@ is_list <- function(x) {
 is_data_frame <- function(x) {
   is.data.frame(x)
 }
+
+#  FUNCTION: is_null --------------------------------------------------------------------------
+#
+#' Checks whether the variable is NULL
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is NULL, FALSE otherwise
+#'
+#' @export
+#'
+is_null <- function(x) {
+  is.null(x)
+}
