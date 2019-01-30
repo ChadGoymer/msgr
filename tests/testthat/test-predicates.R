@@ -194,3 +194,30 @@ test_that("is_natural returns FALSE for invalid vectors", {
   expect_false(is_natural(NULL))
 
 })
+
+# TEST: is_character --------------------------------------------------------------------------
+
+test_that("is_character returns TRUE for valid vectors", {
+
+  expect_true(is_character("bob"))
+  expect_true(is_character(c("bob", "jane", "jim")))
+  expect_true(is_character(NA_character_))
+
+})
+
+test_that("is_character returns FALSE for invalid vectors", {
+
+  expect_false(is_character(TRUE))
+  expect_false(is_character(1L))
+  expect_false(is_character(3.142))
+
+  expect_false(is_character(c(TRUE, FALSE)))
+  expect_false(is_character(1:3))
+  expect_false(is_character(c(3.142, 2.718, 1.414)))
+
+  expect_false(is_character(list(1:3)))
+  expect_false(is_character(matrix(1:4, nrow = 2)))
+  expect_false(is_character(data.frame(x = LETTERS[1:3], y = 1:3)))
+  expect_false(is_character(NULL))
+
+})

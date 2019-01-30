@@ -109,3 +109,17 @@ is_integer <- function(x) {
 is_natural <- function(x) {
   is_integer(x) && is_scalar(x) && isTRUE(x > 0)
 }
+
+#  FUNCTION: is_character ---------------------------------------------------------------------
+#
+#' Checks whether the variable is a character vector
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a character vector, FALSE otherwise
+#'
+#' @export
+#'
+is_character <- function(x) {
+  is_vector(x) && is.character(x)
+}
