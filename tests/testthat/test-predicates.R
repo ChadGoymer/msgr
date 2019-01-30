@@ -500,3 +500,33 @@ test_that("is_in returns FALSE if not all the elements of the first variable are
   expect_false(is_in(LETTERS, c("A", "B", "C")))
 
 })
+
+# TEST: has_names -----------------------------------------------------------------------------
+
+test_that("has_names returns TRUE for an object with names", {
+
+  expect_true(has_names(c(a = 1, b = 2)))
+  expect_true(has_names(list(a = 1, b = 2)))
+  expect_true(has_names(data.frame(a = 1, b = 2)))
+
+  expect_true(has_names(c(a = 1, b = 2), "a"))
+  expect_true(has_names(list(a = 1, b = 2), c("a", "b")))
+  expect_true(has_names(data.frame(a = 1, b = 2), "a"))
+
+})
+
+test_that("has_names returns FALSE for an object without names", {
+
+  expect_false(has_names(1:3))
+  expect_false(has_names("bob"))
+  expect_false(has_names(list(1:3)))
+
+  expect_false(has_names(c(a = 1, b = 2), "c"))
+  expect_false(has_names(list(a = 1, b = 2), c("b", "c")))
+  expect_false(has_names(data.frame(a = 1, b = 2), "c"))
+
+  expect_false(has_names(1:3, "a"))
+  expect_false(has_names("bob", "a"))
+  expect_false(has_names(list(1:3), "a"))
+
+})

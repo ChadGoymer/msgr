@@ -278,3 +278,26 @@ is_writeable <- function(x) {
 is_in <- function(x, y) {
   all(x %in% y)
 }
+
+#  FUNCTION: has_names ------------------------------------------------------------------------
+#
+#' Checks whether the variable has names
+#'
+#' @param x (any) The object to test
+#' @param nm (character, optional) The names to check for. If not specified then the function
+#'   checks for any names.
+#'
+#' @return TRUE if x has any names, FALSE otherwise
+#'
+#' @export
+#'
+has_names <- function(x, nm) {
+  names_exist <- !is.null(names(x))
+
+  if (!missing(nm) && names_exist) {
+    is_character(nm) || stop("names ('nm') must be given as a character vector")
+    is_in(nm, names(x))
+  } else {
+    names_exist
+  }
+}
