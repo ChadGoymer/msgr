@@ -249,3 +249,30 @@ test_that("is_string returns FALSE for invalid vectors", {
   expect_false(is_string(NULL))
 
 })
+
+# TEST: is_list -------------------------------------------------------------------------------
+
+test_that("is_list returns TRUE for valid lists", {
+
+  expect_true(is_list(list(1:3)))
+  expect_true(is_list(data.frame(x = LETTERS[1:3], y = 1:3)))
+
+})
+
+test_that("is_list returns FALSE for invalid lists", {
+
+  expect_false(is_list(TRUE))
+  expect_false(is_list(1L))
+  expect_false(is_list(3.142))
+  expect_false(is_list("bob"))
+
+  expect_false(is_list(c(TRUE, FALSE)))
+  expect_false(is_list(1:3))
+  expect_false(is_list(c(3.142, 2.718, 1.414)))
+  expect_false(is_list(c("bob", "jane", "jim")))
+
+  expect_false(is_list(matrix(1:4, nrow = 2)))
+  expect_false(is_list(NA))
+  expect_false(is_list(NULL))
+
+})

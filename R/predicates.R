@@ -137,3 +137,17 @@ is_character <- function(x) {
 is_string <- function(x) {
   is_character(x) && is_scalar(x)
 }
+
+#  FUNCTION: is_list --------------------------------------------------------------------------
+#
+#' Checks whether the variable is a list
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a list, FALSE otherwise
+#'
+#' @export
+#'
+is_list <- function(x) {
+  is.list(x)
+}
