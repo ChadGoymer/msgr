@@ -3,6 +3,7 @@
 export(is_boolean)
 export(is_integer)
 export(is_logical)
+export(is_natural)
 export(is_number)
 export(is_numeric)
 export(is_scalar)

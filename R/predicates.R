@@ -95,3 +95,17 @@ is_number <- function(x) {
 is_integer <- function(x) {
   is_numeric(x) && all(x == as.integer(x), na.rm = TRUE)
 }
+
+#  FUNCTION: is_natural -----------------------------------------------------------------------
+#
+#' Checks whether the variable is a natural number
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a natural number, FALSE otherwise
+#'
+#' @export
+#'
+is_natural <- function(x) {
+  is_integer(x) && is_scalar(x) && isTRUE(x > 0)
+}

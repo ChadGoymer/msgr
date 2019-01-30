@@ -169,3 +169,28 @@ test_that("is_integer returns FALSE for invalid vectors", {
   expect_false(is_integer(NULL))
 
 })
+
+# TEST: is_natural ----------------------------------------------------------------------------
+
+test_that("is_natural returns TRUE for valid vectors", {
+
+  expect_true(is_natural(1))
+
+})
+
+test_that("is_natural returns FALSE for invalid vectors", {
+
+  expect_false(is_natural(-1))
+  expect_false(is_natural(1:3))
+  expect_false(is_natural(NA_integer_))
+  expect_false(is_natural(3.142))
+  expect_false(is_natural(c(3.142, 2.718, 1.414)))
+  expect_false(is_natural(c(TRUE, FALSE)))
+  expect_false(is_natural(c("bob", "jane", "jim")))
+
+  expect_false(is_natural(list(1:3)))
+  expect_false(is_natural(matrix(1:4, nrow = 2)))
+  expect_false(is_natural(data.frame(x = LETTERS[1:3], y = 1:3)))
+  expect_false(is_natural(NULL))
+
+})
