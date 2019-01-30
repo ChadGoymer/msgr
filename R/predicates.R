@@ -221,3 +221,17 @@ is_url <- function(x) {
 is_dir <- function(x) {
   is_string(x) && dir.exists(x)
 }
+
+#  FUNCTION: is_file --------------------------------------------------------------------------
+#
+#' Checks whether the variable is a path to an existing file
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a path to an existing file, FALSE otherwise
+#'
+#' @export
+#'
+is_file <- function(x) {
+  is_string(x) && file.exists(x) && !file.info(x)$isdir
+}

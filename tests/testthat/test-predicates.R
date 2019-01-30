@@ -400,3 +400,28 @@ test_that("is_dir returns FALSE for an invalid directory", {
   expect_false(is_dir(c(temp_dir, temp_dir)))
 
 })
+
+# TEST: is_file -------------------------------------------------------------------------------
+
+test_that("is_file returns TRUE for an existing directory", {
+
+  temp_file <- tempfile(fileext = ".txt")
+  file.create(temp_file)
+  on.exit(unlink(temp_file))
+
+  expect_true(is_file(temp_file))
+
+})
+
+test_that("is_file returns FALSE for an invalid directory", {
+
+  temp_file <- tempfile(fileext = ".txt")
+  file.create(temp_file)
+  on.exit(unlink(temp_file))
+  no_file <- file.path(tempdir(), "does_not_exist.txt")
+
+  expect_false(is_file("C:/does/not/exist.txt"))
+  expect_false(is_file(no_file))
+  expect_false(is_file(c(temp_file, temp_file)))
+
+})
