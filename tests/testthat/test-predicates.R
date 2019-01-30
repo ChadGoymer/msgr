@@ -454,3 +454,32 @@ test_that("is_readable returns FALSE for an unreadable file or directory", {
   expect_false(is_readable(temp_file))
 
 })
+
+# TEST: is_writeable --------------------------------------------------------------------------
+
+test_that("is_writeable returns TRUE for a readable file or directory", {
+
+  temp_dir <- tempdir()
+  on.exit(unlink(temp_dir))
+
+  temp_file <- file.path(temp_dir, "writeable_file.txt")
+  file.create(temp_file)
+
+  expect_true(is_writeable(temp_dir))
+  expect_true(is_writeable(temp_file))
+
+})
+
+test_that("is_writeable returns FALSE for an unreadable file or directory", {
+
+  temp_dir <- tempdir()
+  on.exit(unlink(temp_dir))
+  no_dir <- file.path(temp_dir, "does_not_exist")
+
+  temp_file <- file.path(temp_dir, "unwriteable_file.txt")
+
+  expect_false(is_writeable("C:/does/not/exist"))
+  expect_false(is_writeable(no_dir))
+  expect_false(is_writeable(temp_file))
+
+})
