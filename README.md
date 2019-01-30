@@ -1,5 +1,7 @@
 # msgr
 
+[![Travis build status](https://travis-ci.org/ChadGoymer/msgr.svg?branch=master)](https://travis-ci.org/ChadGoymer/msgr)
+
 This package extends the `message()`, `warning()` and `stop()` functions by adding _levels_ 
 of messages and the option to record them in a log file.
 
