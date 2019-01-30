@@ -81,3 +81,17 @@ is_numeric <- function(x) {
 is_number <- function(x) {
   is_numeric(x) && is_scalar(x)
 }
+
+#  FUNCTION: is_integer -----------------------------------------------------------------------
+#
+#' Checks whether the variable is a numeric vector of integers
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a numeric vector of integers, FALSE otherwise
+#'
+#' @export
+#'
+is_integer <- function(x) {
+  is_numeric(x) && all(x == as.integer(x), na.rm = TRUE)
+}

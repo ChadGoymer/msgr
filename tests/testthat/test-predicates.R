@@ -145,3 +145,27 @@ test_that("is_number returns FALSE for invalid vectors", {
   expect_false(is_number(NULL))
 
 })
+
+# TEST: is_integer ----------------------------------------------------------------------------
+
+test_that("is_integer returns TRUE for valid vectors", {
+
+  expect_true(is_integer(1L))
+  expect_true(is_integer(1:3))
+  expect_true(is_integer(NA_integer_))
+
+})
+
+test_that("is_integer returns FALSE for invalid vectors", {
+
+  expect_false(is_integer(3.142))
+  expect_false(is_integer(c(3.142, 2.718, 1.414)))
+  expect_false(is_integer(c(TRUE, FALSE)))
+  expect_false(is_integer(c("bob", "jane", "jim")))
+
+  expect_false(is_integer(list(1:3)))
+  expect_false(is_integer(matrix(1:4, nrow = 2)))
+  expect_false(is_integer(data.frame(x = LETTERS[1:3], y = 1:3)))
+  expect_false(is_integer(NULL))
+
+})
