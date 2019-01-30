@@ -276,3 +276,30 @@ test_that("is_list returns FALSE for invalid lists", {
   expect_false(is_list(NULL))
 
 })
+
+# TEST: is_data_frame -------------------------------------------------------------------------
+
+test_that("is_data_frame returns TRUE for valid data.frames", {
+
+  expect_true(is_data_frame(data.frame(x = LETTERS[1:3], y = 1:3)))
+
+})
+
+test_that("is_data_frame returns FALSE for invalid data.frames", {
+
+  expect_false(is_data_frame(TRUE))
+  expect_false(is_data_frame(1L))
+  expect_false(is_data_frame(3.142))
+  expect_false(is_data_frame("bob"))
+
+  expect_false(is_data_frame(c(TRUE, FALSE)))
+  expect_false(is_data_frame(1:3))
+  expect_false(is_data_frame(c(3.142, 2.718, 1.414)))
+  expect_false(is_data_frame(c("bob", "jane", "jim")))
+
+  expect_false(is_data_frame(list(1:3)))
+  expect_false(is_data_frame(matrix(1:4, nrow = 2)))
+  expect_false(is_data_frame(NA))
+  expect_false(is_data_frame(NULL))
+
+})

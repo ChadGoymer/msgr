@@ -151,3 +151,17 @@ is_string <- function(x) {
 is_list <- function(x) {
   is.list(x)
 }
+
+#  FUNCTION: is_data_frame --------------------------------------------------------------------
+#
+#' Checks whether the variable is a data frame
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a data frame, FALSE otherwise
+#'
+#' @export
+#'
+is_data_frame <- function(x) {
+  is.data.frame(x)
+}
