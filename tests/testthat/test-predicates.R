@@ -351,3 +351,29 @@ test_that("is_na returns FALSE for non-NAs", {
   expect_false(is_na(data.frame(x = LETTERS[1:3], y = 1:3)))
 
 })
+
+
+# TEST: is_url --------------------------------------------------------------------------------
+
+test_that("is_url returns TRUE for valid URLs", {
+
+  expect_true(is_url("https://www.secure.com"))
+  expect_true(is_url("http://www.insecure.com"))
+
+  expect_true(is_url("https://www.secure.com/some/endpoint"))
+  expect_true(is_url("http://www.insecure.com/some/endpoint"))
+
+})
+
+test_that("is_url returns FALSE for invalid URLs", {
+
+  expect_false(is_url(TRUE))
+  expect_false(is_url(3.142))
+  expect_false(is_url("bob"))
+  expect_false(is_url(list(1:3)))
+  expect_false(is_url(matrix(1:4, nrow = 2)))
+  expect_false(is_url(data.frame(x = LETTERS[1:3], y = 1:3)))
+
+  expect_false(is_url(c("https://www.secure.com/endpoint1", "https://www.secure.com/endpoint2")))
+
+})

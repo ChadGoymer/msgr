@@ -193,3 +193,17 @@ is_null <- function(x) {
 is_na <- function(x) {
   !is.null(x) && is.na(x)
 }
+
+#  FUNCTION: is_url ---------------------------------------------------------------------------
+#
+#' Checks whether the variable is a valid URL
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a valid URL, FALSE otherwise
+#'
+#' @export
+#'
+is_url <- function(x) {
+  is_string(x) && grepl("^(https|http)://", x)
+}
