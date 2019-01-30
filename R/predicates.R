@@ -207,3 +207,17 @@ is_na <- function(x) {
 is_url <- function(x) {
   is_string(x) && grepl("^(https|http)://", x)
 }
+
+#  FUNCTION: is_dir ---------------------------------------------------------------------------
+#
+#' Checks whether the variable is a path to an existing directory
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a path to an existing directory, FALSE otherwise
+#'
+#' @export
+#'
+is_dir <- function(x) {
+  is_string(x) && dir.exists(x)
+}

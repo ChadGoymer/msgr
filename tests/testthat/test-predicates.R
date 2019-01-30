@@ -377,3 +377,26 @@ test_that("is_url returns FALSE for invalid URLs", {
   expect_false(is_url(c("https://www.secure.com/endpoint1", "https://www.secure.com/endpoint2")))
 
 })
+
+# TEST: is_dir --------------------------------------------------------------------------------
+
+test_that("is_dir returns TRUE for an existing directory", {
+
+  temp_dir <- tempdir()
+  on.exit(unlink(temp_dir))
+
+  expect_true(is_dir(temp_dir))
+
+})
+
+test_that("is_dir returns FALSE for an invalid directory", {
+
+  temp_dir <- tempdir()
+  on.exit(unlink(temp_dir))
+  no_dir <- file.path(temp_dir, "does_not_exist")
+
+  expect_false(is_dir("C:/does/not/exist"))
+  expect_false(is_dir(no_dir))
+  expect_false(is_dir(c(temp_dir, temp_dir)))
+
+})
