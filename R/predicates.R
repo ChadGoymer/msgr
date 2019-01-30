@@ -123,3 +123,17 @@ is_natural <- function(x) {
 is_character <- function(x) {
   is_vector(x) && is.character(x)
 }
+
+#  FUNCTION: is_string ------------------------------------------------------------------------
+#
+#' Checks whether the variable is a character vector of length 1
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a character vector of length 1, FALSE otherwise
+#'
+#' @export
+#'
+is_string <- function(x) {
+  is_character(x) && is_scalar(x)
+}

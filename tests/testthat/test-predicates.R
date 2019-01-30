@@ -221,3 +221,31 @@ test_that("is_character returns FALSE for invalid vectors", {
   expect_false(is_character(NULL))
 
 })
+
+# TEST: is_string -----------------------------------------------------------------------------
+
+test_that("is_string returns TRUE for valid vectors", {
+
+  expect_true(is_string("bob"))
+  expect_true(is_string(NA_character_))
+
+})
+
+test_that("is_string returns FALSE for invalid vectors", {
+
+  expect_false(is_string(c("bob", "jane", "jim")))
+
+  expect_false(is_string(TRUE))
+  expect_false(is_string(1L))
+  expect_false(is_string(3.142))
+
+  expect_false(is_string(c(TRUE, FALSE)))
+  expect_false(is_string(1:3))
+  expect_false(is_string(c(3.142, 2.718, 1.414)))
+
+  expect_false(is_string(list(1:3)))
+  expect_false(is_string(matrix(1:4, nrow = 2)))
+  expect_false(is_string(data.frame(x = LETTERS[1:3], y = 1:3)))
+  expect_false(is_string(NULL))
+
+})
