@@ -483,3 +483,20 @@ test_that("is_writeable returns FALSE for an unreadable file or directory", {
   expect_false(is_writeable(temp_file))
 
 })
+
+# TEST: is_in ---------------------------------------------------------------------------------
+
+test_that("is_in returns TRUE if all elements of the first variable are in the second", {
+
+  expect_true(is_in(1, 1:3))
+  expect_true(is_in(c("a", "b"), letters))
+  expect_true(is_in(list("a", "b"), as.list(letters)))
+
+})
+
+test_that("is_in returns FALSE if not all the elements of the first variable are in the second", {
+
+  expect_false(is_in(0, 1:3))
+  expect_false(is_in(LETTERS, c("A", "B", "C")))
+
+})

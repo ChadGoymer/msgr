@@ -263,3 +263,18 @@ is_readable <- function(x) {
 is_writeable <- function(x) {
   is_string(x) && file.exists(x) && file.access(x, mode = 2)[[1]] == 0
 }
+
+#  FUNCTION: is_in ----------------------------------------------------------------------------
+#
+#' Checks whether all elements of one variable are in another
+#'
+#' @param x (any) The object with elements to test
+#' @param y (any) The object with elements to test against
+#'
+#' @return TRUE if all elements in x are in y, FALSE otherwise
+#'
+#' @export
+#'
+is_in <- function(x, y) {
+  all(x %in% y)
+}
