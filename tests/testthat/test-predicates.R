@@ -383,7 +383,6 @@ test_that("is_url returns FALSE for invalid URLs", {
 test_that("is_dir returns TRUE for an existing directory", {
 
   temp_dir <- tempdir()
-  on.exit(unlink(temp_dir))
 
   expect_true(is_dir(temp_dir))
 
@@ -392,7 +391,6 @@ test_that("is_dir returns TRUE for an existing directory", {
 test_that("is_dir returns FALSE for an invalid directory", {
 
   temp_dir <- tempdir()
-  on.exit(unlink(temp_dir))
   no_dir <- file.path(temp_dir, "does_not_exist")
 
   expect_false(is_dir("C:/does/not/exist"))
@@ -407,7 +405,6 @@ test_that("is_file returns TRUE for an existing directory", {
 
   temp_file <- tempfile(fileext = ".txt")
   file.create(temp_file)
-  on.exit(unlink(temp_file))
 
   expect_true(is_file(temp_file))
 
@@ -417,7 +414,6 @@ test_that("is_file returns FALSE for an invalid directory", {
 
   temp_file <- tempfile(fileext = ".txt")
   file.create(temp_file)
-  on.exit(unlink(temp_file))
   no_file <- file.path(tempdir(), "does_not_exist.txt")
 
   expect_false(is_file("C:/does/not/exist.txt"))
@@ -431,7 +427,6 @@ test_that("is_file returns FALSE for an invalid directory", {
 test_that("is_readable returns TRUE for a readable file or directory", {
 
   temp_dir <- tempdir()
-  on.exit(unlink(temp_dir))
 
   temp_file <- file.path(temp_dir, "readable_file.txt")
   file.create(temp_file)
@@ -444,7 +439,6 @@ test_that("is_readable returns TRUE for a readable file or directory", {
 test_that("is_readable returns FALSE for an unreadable file or directory", {
 
   temp_dir <- tempdir()
-  on.exit(unlink(temp_dir))
   no_dir <- file.path(temp_dir, "does_not_exist")
 
   temp_file <- file.path(temp_dir, "unreadable_file.txt")
@@ -460,7 +454,6 @@ test_that("is_readable returns FALSE for an unreadable file or directory", {
 test_that("is_writeable returns TRUE for a readable file or directory", {
 
   temp_dir <- tempdir()
-  on.exit(unlink(temp_dir))
 
   temp_file <- file.path(temp_dir, "writeable_file.txt")
   file.create(temp_file)
@@ -473,7 +466,6 @@ test_that("is_writeable returns TRUE for a readable file or directory", {
 test_that("is_writeable returns FALSE for an unreadable file or directory", {
 
   temp_dir <- tempdir()
-  on.exit(unlink(temp_dir))
   no_dir <- file.path(temp_dir, "does_not_exist")
 
   temp_file <- file.path(temp_dir, "unwriteable_file.txt")
