@@ -179,3 +179,17 @@ is_data_frame <- function(x) {
 is_null <- function(x) {
   is.null(x)
 }
+
+#  FUNCTION: is_na ----------------------------------------------------------------------------
+#
+#' Checks whether the variable is NA
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is NA, FALSE otherwise
+#'
+#' @export
+#'
+is_na <- function(x) {
+  !is.null(x) && is.na(x)
+}

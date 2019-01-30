@@ -325,3 +325,29 @@ test_that("is_null returns FALSE for non-NULLs", {
   expect_false(is_null(data.frame(x = LETTERS[1:3], y = 1:3)))
 
 })
+
+# TEST: is_na ---------------------------------------------------------------------------------
+
+test_that("is_na returns TRUE for NA", {
+
+  expect_true(is_na(NA))
+  expect_true(is_na(NA_integer_))
+  expect_true(is_na(NA_real_))
+  expect_true(is_na(NA_complex_))
+  expect_true(is_na(NA_character_))
+
+})
+
+test_that("is_na returns FALSE for non-NAs", {
+
+  expect_false(is_na(TRUE))
+  expect_false(is_na(1L))
+  expect_false(is_na(3.142))
+  expect_false(is_na("bob"))
+
+  expect_false(is_na(NULL))
+  expect_false(is_na(list(1:3)))
+  expect_false(is_na(matrix(1:4, nrow = 2)))
+  expect_false(is_na(data.frame(x = LETTERS[1:3], y = 1:3)))
+
+})
