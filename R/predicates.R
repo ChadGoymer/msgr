@@ -235,3 +235,17 @@ is_dir <- function(x) {
 is_file <- function(x) {
   is_string(x) && file.exists(x) && !file.info(x)$isdir
 }
+
+#  FUNCTION: is_readable ----------------------------------------------------------------------
+#
+#' Checks whether the variable is a path to an existing, readable file or directory
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a path to an existing, readable file or directory, FALSE otherwise
+#'
+#' @export
+#'
+is_readable <- function(x) {
+  is_string(x) && file.exists(x) && file.access(x, mode = 4)[[1]] == 0
+}

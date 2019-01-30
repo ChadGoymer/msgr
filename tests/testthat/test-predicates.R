@@ -425,3 +425,32 @@ test_that("is_file returns FALSE for an invalid directory", {
   expect_false(is_file(c(temp_file, temp_file)))
 
 })
+
+# TEST: is_readable ---------------------------------------------------------------------------
+
+test_that("is_readable returns TRUE for a readable file or directory", {
+
+  temp_dir <- tempdir()
+  on.exit(unlink(temp_dir))
+
+  temp_file <- file.path(temp_dir, "readable_file.txt")
+  file.create(temp_file)
+
+  expect_true(is_readable(temp_dir))
+  expect_true(is_readable(temp_file))
+
+})
+
+test_that("is_readable returns FALSE for an unreadable file or directory", {
+
+  temp_dir <- tempdir()
+  on.exit(unlink(temp_dir))
+  no_dir <- file.path(temp_dir, "does_not_exist")
+
+  temp_file <- file.path(temp_dir, "unreadable_file.txt")
+
+  expect_false(is_readable("C:/does/not/exist"))
+  expect_false(is_readable(no_dir))
+  expect_false(is_readable(temp_file))
+
+})
