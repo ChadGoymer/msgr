@@ -3,3 +3,4 @@
 ^LICENSE\.md$
 ^msgr\.Rproj$
 ^\.Rproj\.user$
+^msgr.Rcheck
