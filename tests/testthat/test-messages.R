@@ -194,3 +194,15 @@ test_that("invalid arguments for warn throw an error", {
     "'log_path' must be a string: 0")
 
 })
+
+# TEST: info_if -------------------------------------------------------------------------------
+
+test_that("info_if returns a message if the condition is true", {
+  test_info_if <- function(x, y) info_if(x > y)
+
+  expect_message(test_info_if(2, 1), "In test_info_if\\(\\): x > y is true")
+  expect_silent(test_info_if(1, 2))
+
+  test_info_if_msg <- function(x, y) info_if(x > y, "This is rubbish")
+  expect_message(test_info_if_msg(2, 1), "In test_info_if_msg\\(\\): This is rubbish")
+})
