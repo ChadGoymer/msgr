@@ -194,3 +194,52 @@ test_that("invalid arguments for warn throw an error", {
     "'log_path' must be a string: 0")
 
 })
+
+# TEST: info_if -------------------------------------------------------------------------------
+
+test_that("info_if returns a message if the condition is true", {
+  test_info_if <- function(x, y) info_if(x > y)
+
+  expect_message(test_info_if(2, 1), "In test_info_if\\(\\): x > y is true")
+  expect_silent(test_info_if(1, 2))
+
+  test_info_if_msg <- function(x, y) info_if(x > y, "This is rubbish")
+  expect_message(test_info_if_msg(2, 1), "In test_info_if_msg\\(\\): This is rubbish")
+})
+
+# TEST: warn_if -------------------------------------------------------------------------------
+
+test_that("warn_if returns a warning if the condition is true", {
+  test_warn_if <- function(x, y) warn_if(x > y)
+
+  expect_warning(test_warn_if(2, 1), "In test_warn_if\\(\\): x > y is true")
+  expect_silent(test_warn_if(1, 2))
+
+  test_warn_if_msg <- function(x, y) warn_if(x > y, "This is rubbish")
+  expect_warning(test_warn_if_msg(2, 1), "In test_warn_if_msg\\(\\): This is rubbish")
+})
+
+# TEST: error_if -------------------------------------------------------------------------------
+
+test_that("error_if returns an error if the condition is true", {
+  test_error_if <- function(x, y) error_if(x > y)
+
+  expect_error(test_error_if(2, 1), "In test_error_if\\(\\): x > y is true")
+  expect_silent(test_error_if(1, 2))
+
+  test_error_if_msg <- function(x, y) error_if(x > y, "This is rubbish")
+  expect_error(test_error_if_msg(2, 1), "In test_error_if_msg\\(\\): This is rubbish")
+})
+
+# TEST: assert ---------------------------------------------------------------------------------
+
+test_that("assert returns an error if the condition is false", {
+  test_assert <- function(x, y) assert(x > y)
+
+  expect_error(test_assert(1, 2), "In test_assert\\(\\): x > y is false")
+  expect_silent(test_assert(2, 1))
+
+  test_assert_msg <- function(x, y) assert(x > y, "This is rubbish")
+  expect_error(test_assert_msg(1, 2), "In test_assert_msg\\(\\): This is rubbish")
+})
+
