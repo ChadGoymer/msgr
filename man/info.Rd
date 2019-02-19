@@ -37,7 +37,7 @@ Whether a message is shown, or written to the log, depends on two options:
 \code{level} and if it is below the \code{msg_level} (set in the package option \code{msgr.level} by
 default) the message is displayed and written to the log.
 \item \strong{Type}: The type is refers to whether the message is "INFO", "WARNING" or "ERROR", as
-produced by the functions \code{\link[=info]{info()}}, \code{\link[=warn]{warn()}} and \code{error()} respectively. If the message
+produced by the functions \code{\link[=info]{info()}}, \code{\link[=warn]{warn()}} and \code{\link[=error]{error()}} respectively. If the message
 type is in the \code{msg_types} (set in the package option \code{msgr.types} by default) the
 message is displayed and written to the log. This allows you to for instance, just
 display errors and warnings and ignore messages.
