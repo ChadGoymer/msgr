@@ -291,3 +291,60 @@ info_if <- function(
       level = level, msg_level = msg_level, msg_types = msg_types, log_path = log_path)
   }
 }
+
+# FUNCTION: warn_if ---------------------------------------------------------------------------
+#
+#' Display a warning, and record in a log file, if a condition is true.
+#'
+#' This function calls the [warn()] function to display a warning if the specified condition
+#' is true. If a message is not specified then a generic message is displayed.
+#'
+#' @param condition (boolean) The condition to check.
+#' @param ... (strings) message to be displayed or written to file.
+#' @param level (integer, optional) The level of the message, from 1 to 10. Default: 1.
+#' @param msg_level (integer, optional) The maximum level of messages to output. Default: set
+#'   in the option `"msgr.level"`.
+#' @param msg_types (character, optional) The type to write or display. Must either NULL or one
+#'  or more from "INFO", "WARNING" or "ERROR". Default: set in the option `"msgr.types"`.
+#' @param log_path (string, optional) The file path to the text log file. If set to "", then no
+#'   logs are written. Default: set in the option `"msgr.log_path"`.
+#'
+#' @return A string is return invisibly containing the warning.
+#'
+#' @export
+#'
+warn_if <- function(
+  condition,
+  ...,
+  level     = 1,
+  msg_level = getOption("msgr.level"),
+  msg_types = getOption("msgr.types"),
+  log_path  = getOption("msgr.log_path"))
+{
+  {
+    (is_natural(level) && level <= 10) ||
+      stop("'level' must be an integer between 1 and 10: ", level)
+    (is_natural(msg_level) && msg_level <= 10) ||
+      stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
+    ((is_null(msg_types) || is_character(msg_types)) && is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+      stop("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
+    is_string(log_path) ||
+      stop("'log_path' must be a string: ", log_path)
+  }
+
+  if (isTRUE(condition)) {
+    uneval_condition <- substitute(condition)
+    calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+
+    msg <- list(...)
+    if (identical(length(msg), 0L)) {
+      msg <- paste(deparse(uneval_condition), "is true")
+    } else {
+      msg <- as.character(msg)
+    }
+
+    warn(
+      "In ", calling_function, "(): ", msg,
+      level = level, msg_level = msg_level, msg_types = msg_types, log_path = log_path)
+  }
+}

@@ -206,3 +206,15 @@ test_that("info_if returns a message if the condition is true", {
   test_info_if_msg <- function(x, y) info_if(x > y, "This is rubbish")
   expect_message(test_info_if_msg(2, 1), "In test_info_if_msg\\(\\): This is rubbish")
 })
+
+# TEST: warn_if -------------------------------------------------------------------------------
+
+test_that("warn_if returns a message if the condition is true", {
+  test_warn_if <- function(x, y) warn_if(x > y)
+
+  expect_warning(test_warn_if(2, 1), "In test_warn_if\\(\\): x > y is true")
+  expect_silent(test_warn_if(1, 2))
+
+  test_warn_if_msg <- function(x, y) warn_if(x > y, "This is rubbish")
+  expect_warning(test_warn_if_msg(2, 1), "In test_warn_if_msg\\(\\): This is rubbish")
+})
