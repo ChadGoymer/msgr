@@ -277,18 +277,22 @@ info_if <- function(
 
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
-    calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+
+    if (sys.nframe() > 1) {
+      calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+      prefix <- paste0("In ", calling_function, "(): ")
+    } else {
+      prefix <- ""
+    }
 
     msg <- list(...)
     if (identical(length(msg), 0L)) {
       msg <- paste(deparse(uneval_condition), "is true")
     } else {
-      msg <- as.character(msg)
+      msg <- paste(as.character(msg), collapse = "")
     }
 
-    info(
-      "In ", calling_function, "(): ", msg,
-      level = level, msg_level = msg_level, msg_types = msg_types, log_path = log_path)
+    info(prefix, msg, level = level, msg_level = msg_level, msg_types = msg_types, log_path = log_path)
   }
 }
 
@@ -334,18 +338,22 @@ warn_if <- function(
 
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
-    calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+
+    if (sys.nframe() > 1) {
+      calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+      prefix <- paste0("In ", calling_function, "(): ")
+    } else {
+      prefix <- ""
+    }
 
     msg <- list(...)
     if (identical(length(msg), 0L)) {
       msg <- paste(deparse(uneval_condition), "is true")
     } else {
-      msg <- as.character(msg)
+      msg <- paste(as.character(msg), collapse = "")
     }
 
-    warn(
-      "In ", calling_function, "(): ", msg,
-      level = level, msg_level = msg_level, msg_types = msg_types, log_path = log_path)
+    warn(prefix, msg, level = level, msg_level = msg_level, msg_types = msg_types, log_path = log_path)
   }
 }
 
@@ -391,18 +399,22 @@ error_if <- function(
 
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
-    calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+
+    if (sys.nframe() > 1) {
+      calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+      prefix <- paste0("In ", calling_function, "(): ")
+    } else {
+      prefix <- ""
+    }
 
     msg <- list(...)
     if (identical(length(msg), 0L)) {
       msg <- paste(deparse(uneval_condition), "is true")
     } else {
-      msg <- as.character(msg)
+      msg <- paste(as.character(msg), collapse = "")
     }
 
-    error(
-      "In ", calling_function, "(): ", msg,
-      level = level, msg_level = msg_level, msg_types = msg_types, log_path = log_path)
+    error(prefix, msg, level = level, msg_level = msg_level, msg_types = msg_types, log_path = log_path)
   }
 }
 
@@ -448,7 +460,13 @@ assert <- function(
 
   if (!isTRUE(condition)) {
     uneval_condition <- substitute(condition)
-    calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+
+    if (sys.nframe() > 1) {
+      calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+      prefix <- paste0("In ", calling_function, "(): ")
+    } else {
+      prefix <- ""
+    }
 
     msg <- list(...)
     if (identical(length(msg), 0L)) {
@@ -457,8 +475,6 @@ assert <- function(
       msg <- as.character(msg)
     }
 
-    error(
-      "In ", calling_function, "(): ", msg,
-      level = level, msg_level = msg_level, msg_types = msg_types, log_path = log_path)
+    error(prefix, msg, level = level, msg_level = msg_level, msg_types = msg_types, log_path = log_path)
   }
 }
