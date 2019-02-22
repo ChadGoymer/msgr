@@ -166,6 +166,20 @@ is_data_frame <- function(x) {
   is.data.frame(x)
 }
 
+#  FUNCTION: is_function ----------------------------------------------------------------------
+#
+#' Checks whether the variable is a function
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a function, FALSE otherwise
+#'
+#' @export
+#'
+is_function <- function(x) {
+  is.function(x)
+}
+
 #  FUNCTION: is_null --------------------------------------------------------------------------
 #
 #' Checks whether the variable is NULL

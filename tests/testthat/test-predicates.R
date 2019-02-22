@@ -304,6 +304,27 @@ test_that("is_data_frame returns FALSE for invalid data.frames", {
 
 })
 
+# TEST: is_function ---------------------------------------------------------------------------
+
+test_that("is_function returns TRUE for valid functions", {
+
+  expect_true(is_function(mean))
+  expect_true(is_function(function(x) x))
+
+  identity_fn <- function(x) x
+  expect_true(is_function(identity_fn))
+
+})
+
+test_that("is_function returns FALSE for invalid functions", {
+
+  expect_false(is_function(TRUE))
+  expect_false(is_function(1L))
+  expect_false(is_function(3.142))
+  expect_false(is_function("bob"))
+
+})
+
 # TEST: is_null -------------------------------------------------------------------------------
 
 test_that("is_null returns TRUE for NULL", {
