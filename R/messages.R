@@ -2,7 +2,7 @@
 #
 #' Display a message, and record it in a log file.
 #'
-#' `info()` is similar to [base::message()], but it also writes the message to a log file.
+#' `info()` is similar to [message()], but it also writes the message to a log file.
 #' Whether it is shown, or written to the log, depends on the level and type of the message.
 #' See details below for more information.
 #'
@@ -81,7 +81,7 @@ info <- function(
 #
 #' Display a warning, and record it in a log file.
 #'
-#' `warn()` is similar to [base::warning()], but it also writes the warning to a log file.
+#' `warn()` is similar to [warning()], but it also writes the warning to a log file.
 #' Whether it is shown, or written to the log, depends on the level and type of the warning.
 #' See details below for more information.
 #'
@@ -160,7 +160,7 @@ warn <- function(
 #
 #' Display an error, and record it in a log file.
 #'
-#' `error()` is similar to [base::stop()], but it also writes the error to a log file.
+#' `error()` is similar to [stop()], but it also writes the error to a log file.
 #' Whether it is shown, or written to the log, depends on the level and type of the error.
 #' See details below for more information.
 #'

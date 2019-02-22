@@ -26,7 +26,7 @@ logs are written. Default: set in the option \code{"msgr.log_path"}.}
 A string is return invisibly containing the warning
 }
 \description{
-\code{warn()} is similar to \code{\link[base:warning]{base::warning()}}, but it also writes the warning to a log file.
+\code{warn()} is similar to \code{\link[=warning]{warning()}}, but it also writes the warning to a log file.
 Whether it is shown, or written to the log, depends on the level and type of the warning.
 See details below for more information.
 }
