@@ -266,13 +266,13 @@ info_if <- function(
 {
   {
     (is_natural(level) && level <= 10) ||
-      stop("'level' must be an integer between 1 and 10: ", level)
+      error("'level' must be an integer between 1 and 10: ", level)
     (is_natural(msg_level) && msg_level <= 10) ||
-      stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
+      error("'msg_level' must be an integer between 1 and 10: ", msg_level)
     ((is_null(msg_types) || is_character(msg_types)) && is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
-      stop("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
+      error("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
     is_string(log_path) ||
-      stop("'log_path' must be a string: ", log_path)
+      error("'log_path' must be a string: ", log_path)
   }
 
   if (isTRUE(condition)) {
@@ -323,13 +323,13 @@ warn_if <- function(
 {
   {
     (is_natural(level) && level <= 10) ||
-      stop("'level' must be an integer between 1 and 10: ", level)
+      error("'level' must be an integer between 1 and 10: ", level)
     (is_natural(msg_level) && msg_level <= 10) ||
-      stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
+      error("'msg_level' must be an integer between 1 and 10: ", msg_level)
     ((is_null(msg_types) || is_character(msg_types)) && is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
-      stop("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
+      error("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
     is_string(log_path) ||
-      stop("'log_path' must be a string: ", log_path)
+      error("'log_path' must be a string: ", log_path)
   }
 
   if (isTRUE(condition)) {
@@ -380,13 +380,13 @@ error_if <- function(
 {
   {
     (is_natural(level) && level <= 10) ||
-      stop("'level' must be an integer between 1 and 10: ", level)
+      error("'level' must be an integer between 1 and 10: ", level)
     (is_natural(msg_level) && msg_level <= 10) ||
-      stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
+      error("'msg_level' must be an integer between 1 and 10: ", msg_level)
     ((is_null(msg_types) || is_character(msg_types)) && is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
-      stop("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
+      error("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
     is_string(log_path) ||
-      stop("'log_path' must be a string: ", log_path)
+      error("'log_path' must be a string: ", log_path)
   }
 
   if (isTRUE(condition)) {
@@ -406,7 +406,7 @@ error_if <- function(
   }
 }
 
-# FUNCTION: error_if --------------------------------------------------------------------------
+# FUNCTION: assert ----------------------------------------------------------------------------
 #
 #' Display an error, and record in a log file, if a condition is false
 #'
@@ -437,13 +437,13 @@ assert <- function(
 {
   {
     (is_natural(level) && level <= 10) ||
-      stop("'level' must be an integer between 1 and 10: ", level)
+      error("'level' must be an integer between 1 and 10: ", level)
     (is_natural(msg_level) && msg_level <= 10) ||
-      stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
+      error("'msg_level' must be an integer between 1 and 10: ", msg_level)
     ((is_null(msg_types) || is_character(msg_types)) && is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
-      stop("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
+      error("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
     is_string(log_path) ||
-      stop("'log_path' must be a string: ", log_path)
+      error("'log_path' must be a string: ", log_path)
   }
 
   if (!isTRUE(condition)) {
