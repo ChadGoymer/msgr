@@ -26,7 +26,7 @@ logs are written. Default: set in the option \code{"msgr.log_path"}.}
 A string is return invisibly containing the error
 }
 \description{
-\code{error()} is similar to \code{\link[base:stop]{base::stop()}}, but it also writes the error to a log file.
+\code{error()} is similar to \code{\link[=stop]{stop()}}, but it also writes the error to a log file.
 Whether it is shown, or written to the log, depends on the level and type of the error.
 See details below for more information.
 }
