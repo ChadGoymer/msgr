@@ -31,6 +31,8 @@ test_that("info displays a message, and records it in a log file", {
 
   expect_identical(length(readLines(log_path)), log_length)
 
+  expect_message(info("This ", "is ", "INFO"), "This is INFO")
+
 })
 
 test_that("invalid arguments for info throw an error", {
@@ -95,6 +97,8 @@ test_that("warn displays a warning, and records it in a log file", {
     "This is a WARNING")
 
   expect_identical(length(readLines(log_path)), log_length)
+
+  expect_warning(warn("This ", "is ", "a ", "WARNING"), "This is a WARNING")
 
 })
 
@@ -161,6 +165,8 @@ test_that("error displays a error, and records it in a log file", {
 
   expect_identical(length(readLines(log_path)), log_length)
 
+  expect_error(error("This ", "is ", "an ", "ERROR"), "This is an ERROR")
+
 })
 
 test_that("invalid arguments for warn throw an error", {
@@ -198,6 +204,7 @@ test_that("invalid arguments for warn throw an error", {
 # TEST: info_if -------------------------------------------------------------------------------
 
 test_that("info_if returns a message if the condition is true", {
+
   expect_message(info_if(2 > 1), "2 > 1 is true")
 
   test_info_if <- function(x, y) info_if(x > y)
@@ -207,11 +214,16 @@ test_that("info_if returns a message if the condition is true", {
 
   test_info_if_msg <- function(x, y) info_if(x > y, "This is rubbish")
   expect_message(test_info_if_msg(2, 1), "In test_info_if_msg\\(\\): This is rubbish")
+
+  test_info_if_split_msg <- function(x, y) info_if(x > y, "This ", "is ", "rubbish")
+  expect_message(test_info_if_split_msg(2, 1), "In test_info_if_split_msg\\(\\): This is rubbish")
+
 })
 
 # TEST: warn_if -------------------------------------------------------------------------------
 
 test_that("warn_if returns a warning if the condition is true", {
+
   expect_warning(warn_if(2 > 1), "2 > 1 is true")
 
   test_warn_if <- function(x, y) warn_if(x > y)
@@ -221,11 +233,16 @@ test_that("warn_if returns a warning if the condition is true", {
 
   test_warn_if_msg <- function(x, y) warn_if(x > y, "This is rubbish")
   expect_warning(test_warn_if_msg(2, 1), "In test_warn_if_msg\\(\\): This is rubbish")
+
+  test_warn_if_split_msg <- function(x, y) warn_if(x > y, "This ", "is ", "rubbish")
+  expect_warning(test_warn_if_split_msg(2, 1), "In test_warn_if_split_msg\\(\\): This is rubbish")
+
 })
 
 # TEST: error_if -------------------------------------------------------------------------------
 
 test_that("error_if returns an error if the condition is true", {
+
   expect_error(error_if(2 > 1), "2 > 1 is true")
 
   test_error_if <- function(x, y) error_if(x > y)
@@ -235,11 +252,16 @@ test_that("error_if returns an error if the condition is true", {
 
   test_error_if_msg <- function(x, y) error_if(x > y, "This is rubbish")
   expect_error(test_error_if_msg(2, 1), "In test_error_if_msg\\(\\): This is rubbish")
+
+  test_error_if_split_msg <- function(x, y) error_if(x > y, "This ", "is ", "rubbish")
+  expect_error(test_error_if_split_msg(2, 1), "In test_error_if_split_msg\\(\\): This is rubbish")
+
 })
 
 # TEST: assert ---------------------------------------------------------------------------------
 
 test_that("assert returns an error if the condition is false", {
+
   expect_error(assert(2 < 1), "2 < 1 is false")
 
   test_assert <- function(x, y) assert(x > y)
@@ -249,5 +271,9 @@ test_that("assert returns an error if the condition is false", {
 
   test_assert_msg <- function(x, y) assert(x > y, "This is rubbish")
   expect_error(test_assert_msg(1, 2), "In test_assert_msg\\(\\): This is rubbish")
+
+  test_assert_split_msg <- function(x, y) assert(x > y, "This ", "is ", "rubbish")
+  expect_error(test_assert_split_msg(1, 2), "In test_assert_split_msg\\(\\): This is rubbish")
+
 })
 

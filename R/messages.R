@@ -472,7 +472,7 @@ assert <- function(
     if (identical(length(msg), 0L)) {
       msg <- paste(deparse(uneval_condition), "is false")
     } else {
-      msg <- as.character(msg)
+      msg <- paste(as.character(msg), collapse = "")
     }
 
     error(prefix, msg, level = level, msg_level = msg_level, msg_types = msg_types, log_path = log_path)
