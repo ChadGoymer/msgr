@@ -157,7 +157,7 @@ try_map <- function(
       prefix <- paste0("\n'", names(result)[sapply(result, is, "error")], "': ")
     }
 
-    error_messages <- result[sapply(result, is, "error")] %>% sapply(getElement, "message")
+    error_messages <- sapply(result[sapply(result, is, "error")], getElement, "message")
     error_msg <- paste0(prefix, error_messages, collapse = "\n")
     if (!is_null(msg_prefix)) {
       error_msg <- paste0(msg_prefix, "\n", error_msg)
@@ -287,7 +287,7 @@ try_pmap <- function(
       prefix <- paste0("\n'", names(result)[sapply(result, is, "error")], "': ")
     }
 
-    error_messages <- result[sapply(result, is, "error")] %>% sapply(getElement, "message")
+    error_messages <- sapply(result[sapply(result, is, "error")], getElement, "message")
     error_msg <- paste0(prefix, error_messages, collapse = "\n")
     if (!is_null(msg_prefix)) {
       error_msg <- paste0(msg_prefix, "\n", error_msg)
