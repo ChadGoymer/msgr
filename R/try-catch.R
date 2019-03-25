@@ -129,7 +129,7 @@ try_map <- function(
       error("'use_names' must be boolean")
   }
 
-  result <- sapply(X = x, simplify = simplify, USE.NAMES = use_names, ..., FUN = function(x, ...) {
+  result <- sapply(X = x, simplify = FALSE, USE.NAMES = use_names, ..., FUN = function(x, ...) {
     tryCatch({
       f(x, ...)
     },
@@ -157,7 +157,7 @@ try_map <- function(
       prefix <- paste0("\n'", names(result)[sapply(result, is, "error")], "': ")
     }
 
-    error_messages <- result[sapply(result, is, "error")] %>% sapply(getElement, "message")
+    error_messages <- sapply(result[sapply(result, is, "error")], getElement, "message")
     error_msg <- paste0(prefix, error_messages, collapse = "\n")
     if (!is_null(msg_prefix)) {
       error_msg <- paste0(msg_prefix, "\n", error_msg)
@@ -168,6 +168,10 @@ try_map <- function(
       error = error(error_msg, level = error_level),
       warn  = warn( error_msg, level = error_level),
       info  = info( error_msg, level = error_level))
+  }
+
+  if (simplify && all(sapply(result, length) == 1L)) {
+    result <- unlist(result)
   }
 
   result
@@ -270,7 +274,7 @@ try_pmap <- function(
     })
   }
 
-  result <- do.call(mapply, c(FUN = try_f, l, list(MoreArgs = list(...)), SIMPLIFY = simplify, USE.NAMES = use_names))
+  result <- do.call(mapply, c(FUN = try_f, l, list(MoreArgs = list(...)), SIMPLIFY = FALSE, USE.NAMES = use_names))
 
   if (!use_names) {
     names(result) <- NULL
@@ -283,7 +287,7 @@ try_pmap <- function(
       prefix <- paste0("\n'", names(result)[sapply(result, is, "error")], "': ")
     }
 
-    error_messages <- result[sapply(result, is, "error")] %>% sapply(getElement, "message")
+    error_messages <- sapply(result[sapply(result, is, "error")], getElement, "message")
     error_msg <- paste0(prefix, error_messages, collapse = "\n")
     if (!is_null(msg_prefix)) {
       error_msg <- paste0(msg_prefix, "\n", error_msg)
@@ -294,6 +298,10 @@ try_pmap <- function(
       error = error(error_msg, level = error_level),
       warn  = warn( error_msg, level = error_level),
       info  = info( error_msg, level = error_level))
+  }
+
+  if (simplify && all(sapply(result, length) == 1L)) {
+    result <- unlist(result)
   }
 
   result
