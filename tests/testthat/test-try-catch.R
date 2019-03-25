@@ -44,6 +44,9 @@ test_that("try_map catches errors and displays a warning", {
   expect_error(
     suppressWarnings(try_map(1:3, function(x, y) if (x > y) stop("x > y") else x, 2)),
     "x > y")
+  expect_error(
+    suppressWarnings(try_map(3, function(x, y) if (x > y) stop("x > y") else x, 2)),
+    "x > y")
 
   expect_warning(
     try_map(1:3, test_try_map, 2, on_error = "warn", warn_level = 0),
@@ -80,6 +83,9 @@ test_that("try_pmap catches errors and displays a warning", {
     "Failed for x = 3")
   expect_error(
     suppressWarnings(try_pmap(list(1:3, 3:1), function(x, y) if (x > y) stop("x > y") else x)),
+    "x > y")
+  expect_error(
+    suppressWarnings(try_pmap(list(3, 1), function(x, y) if (x > y) stop("x > y") else x)),
     "x > y")
 
   expect_warning(
