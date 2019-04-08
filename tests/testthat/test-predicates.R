@@ -357,6 +357,14 @@ test_that("is_na returns TRUE for NA", {
   expect_true(is_na(NA_complex_))
   expect_true(is_na(NA_character_))
 
+  expect_identical(is_na(c(1, NA, 3)), c(FALSE, TRUE, FALSE))
+  expect_identical(
+    is_na(matrix(c(1, 2, NA, 4), nrow = 2)),
+    matrix(c(FALSE, FALSE, TRUE, FALSE), nrow = 2))
+  expect_identical(
+    is_na(data.frame(x = LETTERS[1:3], y = c(1, NA, 3))),
+    matrix(c(FALSE, FALSE, FALSE, FALSE, TRUE, FALSE), nrow = 3, dimnames = list(NULL, c("x", "y"))))
+
 })
 
 test_that("is_na returns FALSE for non-NAs", {
@@ -368,8 +376,6 @@ test_that("is_na returns FALSE for non-NAs", {
 
   expect_false(is_na(NULL))
   expect_false(is_na(list(1:3)))
-  expect_false(is_na(matrix(1:4, nrow = 2)))
-  expect_false(is_na(data.frame(x = LETTERS[1:3], y = 1:3)))
 
 })
 
