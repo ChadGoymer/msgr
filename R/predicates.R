@@ -205,7 +205,10 @@ is_null <- function(x) {
 #' @export
 #'
 is_na <- function(x) {
-  !is.null(x) && is.na(x)
+  if (is.null(x)) {
+    return(FALSE)
+  }
+  is.na(x)
 }
 
 #  FUNCTION: is_url ---------------------------------------------------------------------------
