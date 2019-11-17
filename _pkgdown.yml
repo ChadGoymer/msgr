@@ -1,5 +1,18 @@
 navbar:
   type: inverse
+  left:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    news:
+      text: Release Notes
+      href: news/index.html
+  right:
+    - icon: fa-github fa-lg
+      href: http://github.com/ChadGoymer/msgr
 reference:
 - title: Create messages, warnings and errors
   desc: These functions create messages and write them to a log file
@@ -51,3 +64,5 @@ reference:
   - '`is_file`'
   - '`is_readable`'
   - '`is_writeable`'
+news:
+- one_page: false

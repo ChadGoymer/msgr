@@ -138,7 +138,7 @@ try_map <- function(
         x <- paste0(substr(as.character(x), 1, 20), "...")
       }
 
-      if (warn_level > 0) warn("Failed for ", formalArgs(f)[1], " = ", x, level = warn_level)
+      if (warn_level > 0) warn("Failed for ", names(formals(f))[1], " = ", x, level = warn_level)
       if (is_string(mapped_function)) {
         e$message <- paste0("In ", mapped_function, "(): ", e$message)
       }
@@ -150,14 +150,16 @@ try_map <- function(
     names(result) <- NULL
   }
 
-  if (any(sapply(result, is, "error"))) {
+  is_error <- sapply(result, function(r) "error" %in% class(r))
+
+  if (any(is_error)) {
     if (is.null(names(result))) {
       prefix <- "\n"
     } else {
-      prefix <- paste0("\n'", names(result)[sapply(result, is, "error")], "': ")
+      prefix <- paste0("\n'", names(result)[is_error], "': ")
     }
 
-    error_messages <- sapply(result[sapply(result, is, "error")], getElement, "message")
+    error_messages <- sapply(result[is_error], getElement, "message")
     error_msg <- paste0(prefix, error_messages, collapse = "\n")
     if (!is_null(msg_prefix)) {
       error_msg <- paste0(msg_prefix, "\n", error_msg)
@@ -266,7 +268,7 @@ try_pmap <- function(
       if (nchar(as.character(args[[1]])) > 20) {
         args[[1]] <- paste0(substr(as.character(args[[1]]), 1, 20), "...")
       }
-      if (warn_level > 0) warn("Failed for ", formalArgs(f)[1], " = ", args[[1]], level = warn_level)
+      if (warn_level > 0) warn("Failed for ", names(formals(f))[1], " = ", args[[1]], level = warn_level)
       if (is_string(mapped_function)) {
         e$message <- paste0("In ", mapped_function, "(): ", e$message)
       }
@@ -280,14 +282,16 @@ try_pmap <- function(
     names(result) <- NULL
   }
 
-  if (any(sapply(result, is, "error"))) {
+  is_error <- sapply(result, function(r) "error" %in% class(r))
+
+  if (any(is_error)) {
     if (is.null(names(result))) {
       prefix <- "\n"
     } else {
-      prefix <- paste0("\n'", names(result)[sapply(result, is, "error")], "': ")
+      prefix <- paste0("\n'", names(result)[is_error], "': ")
     }
 
-    error_messages <- sapply(result[sapply(result, is, "error")], getElement, "message")
+    error_messages <- sapply(result[is_error], getElement, "message")
     error_msg <- paste0(prefix, error_messages, collapse = "\n")
     if (!is_null(msg_prefix)) {
       error_msg <- paste0(msg_prefix, "\n", error_msg)
