@@ -42,13 +42,13 @@ info <- function(
   log_path  = getOption("msgr.log_path"))
 {
   {
-    (is_natural(level) && level <= 10) ||
+    (is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
       stop("'level' must be an integer between 1 and 10: ", level)
-    (is_natural(msg_level) && msg_level <= 10) ||
+    (is_scalar_integerish(msg_level) && isTRUE(msg_level > 0) && isTRUE(msg_level <= 10)) ||
       stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
     ((is_null(msg_types) || is_character(msg_types)) && is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
       stop("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
-    is_string(log_path) ||
+    is_scalar_character(log_path) ||
       stop("'log_path' must be a string: ", log_path)
   }
 
@@ -121,13 +121,13 @@ warn <- function(
   log_path  = getOption("msgr.log_path"))
 {
   {
-    (is_natural(level) && level <= 10) ||
+    (is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
       stop("'level' must be an integer between 1 and 10: ", level)
-    (is_natural(msg_level) && msg_level <= 10) ||
+    (is_scalar_integerish(msg_level) && isTRUE(msg_level > 0) && isTRUE(msg_level <= 10)) ||
       stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
     ((is_null(msg_types) || is_character(msg_types)) && is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
       stop("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
-    is_string(log_path) ||
+    is_scalar_character(log_path) ||
       stop("'log_path' must be a string: ", log_path)
   }
 
@@ -200,13 +200,13 @@ error <- function(
   log_path  = getOption("msgr.log_path"))
 {
   {
-    (is_natural(level) && level <= 10) ||
+    (is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
       stop("'level' must be an integer between 1 and 10: ", level)
-    (is_natural(msg_level) && msg_level <= 10) ||
+    (is_scalar_integerish(msg_level) && isTRUE(msg_level > 0) && isTRUE(msg_level <= 10)) ||
       stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
     ((is_null(msg_types) || is_character(msg_types)) && is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
       stop("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
-    is_string(log_path) ||
+    is_scalar_character(log_path) ||
       stop("'log_path' must be a string: ", log_path)
   }
 
@@ -265,13 +265,13 @@ info_if <- function(
   log_path  = getOption("msgr.log_path"))
 {
   {
-    (is_natural(level) && level <= 10) ||
+    (is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
       error("'level' must be an integer between 1 and 10: ", level)
-    (is_natural(msg_level) && msg_level <= 10) ||
+    (is_scalar_integerish(msg_level) && isTRUE(msg_level > 0) && isTRUE(msg_level <= 10)) ||
       error("'msg_level' must be an integer between 1 and 10: ", msg_level)
     ((is_null(msg_types) || is_character(msg_types)) && is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
       error("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
-    is_string(log_path) ||
+    is_scalar_character(log_path) ||
       error("'log_path' must be a string: ", log_path)
   }
 
@@ -326,13 +326,13 @@ warn_if <- function(
   log_path  = getOption("msgr.log_path"))
 {
   {
-    (is_natural(level) && level <= 10) ||
+    (is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
       error("'level' must be an integer between 1 and 10: ", level)
-    (is_natural(msg_level) && msg_level <= 10) ||
+    (is_scalar_integerish(msg_level) && isTRUE(msg_level > 0) && isTRUE(msg_level <= 10)) ||
       error("'msg_level' must be an integer between 1 and 10: ", msg_level)
     ((is_null(msg_types) || is_character(msg_types)) && is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
       error("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
-    is_string(log_path) ||
+    is_scalar_character(log_path) ||
       error("'log_path' must be a string: ", log_path)
   }
 
@@ -387,13 +387,13 @@ error_if <- function(
   log_path  = getOption("msgr.log_path"))
 {
   {
-    (is_natural(level) && level <= 10) ||
+    (is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
       error("'level' must be an integer between 1 and 10: ", level)
-    (is_natural(msg_level) && msg_level <= 10) ||
+    (is_scalar_integerish(msg_level) && isTRUE(msg_level > 0) && isTRUE(msg_level <= 10)) ||
       error("'msg_level' must be an integer between 1 and 10: ", msg_level)
     ((is_null(msg_types) || is_character(msg_types)) && is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
       error("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
-    is_string(log_path) ||
+    is_scalar_character(log_path) ||
       error("'log_path' must be a string: ", log_path)
   }
 
@@ -448,13 +448,13 @@ assert <- function(
   log_path  = getOption("msgr.log_path"))
 {
   {
-    (is_natural(level) && level <= 10) ||
+    (is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
       error("'level' must be an integer between 1 and 10: ", level)
-    (is_natural(msg_level) && msg_level <= 10) ||
+    (is_scalar_integerish(msg_level) && isTRUE(msg_level > 0) && isTRUE(msg_level <= 10)) ||
       error("'msg_level' must be an integer between 1 and 10: ", msg_level)
     ((is_null(msg_types) || is_character(msg_types)) && is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
       error("'msg_types' must be NULL (no messages) or a character vector containing \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types)
-    is_string(log_path) ||
+    is_scalar_character(log_path) ||
       error("'log_path' must be a string: ", log_path)
   }
 
