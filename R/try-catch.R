@@ -53,12 +53,12 @@ try_catch <- function(
 #
 #' Apply a function over a vector or list, capturing any errors to display at the end
 #'
-#' This function is similar to [sapply()] except that instead of stopping at the first
+#' This function is similar to [purrr::map()] except that instead of stopping at the first
 #' error it captures them and continues. If there are any errors it collects them together
 #' and displays them at the end. You have the option to specify a prefix to the error message
 #' using the `msg_prefix` argument.
 #'
-#' If the mapped function is a long running process `try_map` can output a warning at the time
+#' If the mapped function is a long running process `try_map()` can output a warning at the time
 #' an error occurs, but specifying the `warn_level` argument to be greater than 0 (see
 #' [warn()] for more details about message levels. Similarly `error_level` argument specifies
 #' the level of any reported error, as detailed in [error()].
@@ -66,9 +66,9 @@ try_catch <- function(
 #' If you do not want the function to stop with an error, you can insted return a warning or
 #' info message using the `on_error` argument.
 #'
-#' Finally, `simplify` and `use_names` are the same as their [sapply()] conterparts, allowing
-#' the user to specify whether to simplify the output to a vector, if possible, and whether
-#' to use the vector input `x` as names to the resulting list.
+#' Finally, `simplify` and `use_names` allow the user to specify whether to simplify the output
+#' to an atomic vector, if possible, and whether to use the vector input `x` as names to the
+#' resulting list.
 #'
 #' @param x (vector or list) The vector or list to map the function to.
 #' @param f (function) The function to map to the elements of `x`.
@@ -80,12 +80,12 @@ try_catch <- function(
 #' @param on_error (string) The kind of message to produce if there is an error. Either "info",
 #'   "warn", or "error". Default: "error".
 #' @param simplify (boolean, optional) Whether to try to simplify the result of the mapping
-#'   (see [sapply()] for details). Default: FALSE.
+#'   into an atomic vector. Default: FALSE.
 #' @param use_names (boolean, optional) Whether to use 'x' as names in the resulting list. 'x'
 #'   must be a character vector for this to work. Default: TRUE.
 #'
 #' @return If `simplify = FALSE` a list is returned. Otherwise, the function attempts to
-#'   simplify the result to a vector or array.
+#'   simplify the result to an atomic vector or array.
 #'
 #' @export
 #'
@@ -100,36 +100,34 @@ try_map <- function(
   simplify    = FALSE,
   use_names   = TRUE)
 {
-  {
-    if (missing(msg_prefix)) {
-      mapped_function <- as.character(substitute(f))
-      if (sys.nframe() > 1) {
-        calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
-        msg_prefix <- paste0("In ", calling_function, "(): ")
-      } else {
-        msg_prefix <- "In try_map():"
-      }
+  if (missing(msg_prefix)) {
+    mapped_function <- as.character(substitute(f))
+    if (sys.nframe() > 1) {
+      calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+      msg_prefix <- paste0("In ", calling_function, "(): ")
+    } else {
+      msg_prefix <- "In try_map():"
     }
-
-    (is_vector(x) || is_list(x)) ||
-      error("'x' must be an atomic vector or a list")
-    (is_function(f)) ||
-      error("'f' must be a function")
-    (is_null(msg_prefix) || is_string(msg_prefix)) ||
-      error("'msg_prefix' must be NULL or a string")
-    (is_scalar(warn_level) && is_integer(warn_level) && warn_level >= 0) ||
-      error("'warn_level' must be an integer greater or equal to 0")
-    (is_natural(error_level)) ||
-      error("'error_level' must be an integer greater than 0")
-    (is_string(on_error) && on_error %in% c("info", "warn", "error")) ||
-      error("'on_error' must be either 'info', 'warn' or 'error'")
-    (is_boolean(simplify)) ||
-      error("'simplify' must be boolean")
-    (is_boolean(use_names)) ||
-      error("'use_names' must be boolean")
   }
 
-  result <- sapply(X = x, simplify = FALSE, USE.NAMES = use_names, ..., FUN = function(x, ...) {
+  (is_atomic(x) || is_list(x)) ||
+    error("'x' must be an atomic vector or a list")
+  (is_function(f)) ||
+    error("'f' must be a function")
+  (is_null(msg_prefix) || is_scalar_character(msg_prefix)) ||
+    error("'msg_prefix' must be NULL or a string")
+  (is_scalar_integerish(warn_level) && isTRUE(warn_level >= 0)) ||
+    error("'warn_level' must be an integer greater or equal to 0")
+  (is_scalar_integerish(error_level) && isTRUE(error_level > 0)) ||
+    error("'error_level' must be an integer greater than 0")
+  (is_scalar_character(on_error) && on_error %in% c("info", "warn", "error")) ||
+    error("'on_error' must be either 'info', 'warn' or 'error'")
+  (is_scalar_logical(simplify)) ||
+    error("'simplify' must be boolean")
+  (is_scalar_logical(use_names)) ||
+    error("'use_names' must be boolean")
+
+  result <- map(.x = x, ..., .f = function(x, ...) {
     tryCatch({
       f(x, ...)
     },
@@ -138,10 +136,14 @@ try_map <- function(
         x <- paste0(substr(as.character(x), 1, 20), "...")
       }
 
-      if (warn_level > 0) warn("Failed for ", names(formals(f))[1], " = ", x, level = warn_level)
-      if (is_string(mapped_function)) {
+      if (warn_level > 0) {
+        warn("Failed for ", names(formals(f))[1], " = ", x, level = warn_level)
+      }
+
+      if (is_scalar_character(mapped_function)) {
         e$message <- paste0("In ", mapped_function, "(): ", e$message)
       }
+
       e
     })
   })
@@ -150,17 +152,16 @@ try_map <- function(
     names(result) <- NULL
   }
 
-  is_error <- sapply(result, function(r) "error" %in% class(r))
+  is_error <- map_lgl(result, function(r) "error" %in% class(r))
 
   if (any(is_error)) {
-    if (is.null(names(result))) {
+    if (is_null(names(result))) {
       prefix <- "\n"
     } else {
       prefix <- paste0("\n'", names(result)[is_error], "': ")
     }
 
-    error_messages <- sapply(result[is_error], getElement, "message")
-    error_msg <- paste0(prefix, error_messages, collapse = "\n")
+    error_msg <- paste0(prefix, map_chr(result[is_error], "message"), collapse = "\n")
     if (!is_null(msg_prefix)) {
       error_msg <- paste0(msg_prefix, "\n", error_msg)
     }
@@ -172,7 +173,7 @@ try_map <- function(
       info  = info( error_msg, level = error_level))
   }
 
-  if (simplify && all(sapply(result, length) == 1L)) {
+  if (simplify && all(map_int(result, length) == 1L)) {
     result <- unlist(result)
   }
 
@@ -183,7 +184,7 @@ try_map <- function(
 #
 #' Apply a function over a list of vectors, capturing any errors to display at the end
 #'
-#' This function is similar to [mapply()] except that instead of stopping at the first
+#' This function is similar to [purrr::pmap()] except that instead of stopping at the first
 #' error it captures them and continues. If there are any errors it collects them together
 #' and displays them at the end. You have the option to specify a prefix to the error message
 #' using the `msg_prefix` argument.
@@ -196,9 +197,9 @@ try_map <- function(
 #' If you do not want the function to stop with an error, you can insted return a warning or
 #' info message using the `on_error` argument.
 #'
-#' Finally, `simplify` and `use_names` are the same as their [mapply()] conterparts, allowing
-#' the user to specify whether to simplify the output to a vector, if possible, and whether
-#' to use the vector input `x` as names to the resulting list.
+#' Finally, `simplify` and `use_names` allow the user to specify whether to simplify the output
+#' to an atomic vector, if possible, and whether to use the vector input `x` as names to the
+#' resulting list.
 #'
 #' @param l (list) A list of vectors the same length to apply the function to.
 #' @param f (function) The function to map to the elements of the vectors in `l`.
@@ -210,12 +211,12 @@ try_map <- function(
 #' @param on_error (string) The kind of message to produce if there is an error. Either "info",
 #'   "warn", or "error". Default: "error".
 #' @param simplify (boolean, optional) Whether to try to simplify the result of the mapping
-#'   (see [sapply()] for details). Default: FALSE.
+#'   into an atomic vector. Default: FALSE.
 #' @param use_names (boolean, optional) Whether to use 'x' as names in the resulting list. 'x'
 #'   must be a character vector for this to work. Default: TRUE.
 #'
 #' @return If `simplify = FALSE` a list is returned. Otherwise, the function attempts to
-#'   simplify the result to a vector or array.
+#'   simplify the result to an atomic vector.
 #'
 #' @export
 #'
@@ -230,59 +231,61 @@ try_pmap <- function(
   simplify    = FALSE,
   use_names   = TRUE)
 {
-  {
-    if (missing(msg_prefix)) {
-      mapped_function <- as.character(substitute(f))
-      if (sys.nframe() > 1) {
-        calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
-        msg_prefix <- paste0("In ", calling_function, "(): ")
-      } else {
-        msg_prefix <- "In try_pmap():"
-      }
+  if (missing(msg_prefix)) {
+    mapped_function <- as.character(substitute(f))
+    if (sys.nframe() > 1) {
+      calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+      msg_prefix <- paste0("In ", calling_function, "(): ")
+    } else {
+      msg_prefix <- "In try_pmap():"
     }
-
-    (is_list(l) && identical(length(unique(sapply(l, length))), 1L)) ||
-      error("'x' must be a list of vectors with equal length")
-    (is_function(f)) ||
-      error("'f' must be a function")
-    (is_null(msg_prefix) || is_string(msg_prefix)) ||
-      error("'msg_prefix' must be NULL or a string")
-    (is_scalar(warn_level) && is_integer(warn_level) && warn_level >= 0) ||
-      error("'warn_level' must be an integer greater or equal to 0")
-    (is_natural(error_level)) ||
-      error("'error_level' must be an integer greater than 0")
-    (is_string(on_error) && on_error %in% c("info", "warn", "error")) ||
-      error("'on_error' must be either 'info', 'warn' or 'error'")
-    (is_boolean(simplify)) ||
-      error("'simplify' must be boolean")
-    (is_boolean(use_names)) ||
-      error("'use_names' must be boolean")
   }
 
-  try_f <- function(...) {
+  (is_list(l) && identical(length(unique(map_int(l, length))), 1L)) ||
+    error("'x' must be a list of vectors with equal length")
+  (is_function(f)) ||
+    error("'f' must be a function")
+  (is_null(msg_prefix) || is_scalar_character(msg_prefix)) ||
+    error("'msg_prefix' must be NULL or a string")
+  (is_scalar_integerish(warn_level) && isTRUE(warn_level >= 0)) ||
+    error("'warn_level' must be an integer greater or equal to 0")
+  (is_scalar_integerish(error_level) && isTRUE(error_level > 0)) ||
+    error("'error_level' must be an integer greater than 0")
+  (is_scalar_character(on_error) && on_error %in% c("info", "warn", "error")) ||
+    error("'on_error' must be either 'info', 'warn' or 'error'")
+  (is_scalar_logical(simplify)) ||
+    error("'simplify' must be boolean")
+  (is_scalar_logical(use_names)) ||
+    error("'use_names' must be boolean")
+
+  result <- pmap(.l = l, ..., .f = function(...) {
     tryCatch({
-      f(...)
+      exec(f, ...)
     },
     error = function(e) {
       args <- list(...)
+
       if (nchar(as.character(args[[1]])) > 20) {
         args[[1]] <- paste0(substr(as.character(args[[1]]), 1, 20), "...")
       }
-      if (warn_level > 0) warn("Failed for ", names(formals(f))[1], " = ", args[[1]], level = warn_level)
-      if (is_string(mapped_function)) {
+
+      if (warn_level > 0) {
+        warn("Failed for ", names(formals(f))[1], " = ", args[[1]], level = warn_level)
+      }
+
+      if (is_scalar_character(mapped_function)) {
         e$message <- paste0("In ", mapped_function, "(): ", e$message)
       }
+
       e
     })
-  }
-
-  result <- do.call(mapply, c(FUN = try_f, l, list(MoreArgs = list(...)), SIMPLIFY = FALSE, USE.NAMES = use_names))
+  })
 
   if (!use_names) {
     names(result) <- NULL
   }
 
-  is_error <- sapply(result, function(r) "error" %in% class(r))
+  is_error <- map_lgl(result, function(r) "error" %in% class(r))
 
   if (any(is_error)) {
     if (is.null(names(result))) {
@@ -291,8 +294,7 @@ try_pmap <- function(
       prefix <- paste0("\n'", names(result)[is_error], "': ")
     }
 
-    error_messages <- sapply(result[is_error], getElement, "message")
-    error_msg <- paste0(prefix, error_messages, collapse = "\n")
+    error_msg <- paste0(prefix, map_chr(result[is_error], "message"), collapse = "\n")
     if (!is_null(msg_prefix)) {
       error_msg <- paste0(msg_prefix, "\n", error_msg)
     }
@@ -304,7 +306,7 @@ try_pmap <- function(
       info  = info( error_msg, level = error_level))
   }
 
-  if (simplify && all(sapply(result, length) == 1L)) {
+  if (simplify && all(map_int(result, length) == 1L)) {
     result <- unlist(result)
   }
 

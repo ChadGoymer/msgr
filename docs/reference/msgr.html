@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Version 0.6 • msgr</title>
+<title>Extends messages, warnings and errors by adding levels and log files — msgr • msgr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,14 @@
 
 
 
-<meta property="og:title" content="Version 0.6" />
+<meta property="og:title" content="Extends messages, warnings and errors by adding levels and log files — msgr" />
+
+<meta property="og:description" content="Provides new functions info(), warn() and error(), similar to message(),
+warning() and stop() respectively. However, the new functions can have a level
+associated with them, so that when executed the global level option determines whether
+they are shown or not. This allows dobug modes, outputting more information. The can also
+output all messages to a log file." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +54,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -99,29 +106,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small>0.6</small></h1>
-      
+    <h1>Extends messages, warnings and errors by adding levels and log files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ChadGoymer/msgr/blob/master/R/msgr-package.R'><code>R/msgr-package.R</code></a></small>
+    <div class="hidden name"><code>msgr.Rd</code></div>
     </div>
 
-    <div id="msgr-06" class="section level1">
-<h1 class="page-header">
-<a href="#msgr-06" class="anchor"></a>msgr 0.6</h1>
-<ul>
-<li>Added code coverage to Travis and README</li>
-<li>Add codecov configuration</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    
+    <p>Provides new functions <code><a href='info.html'>info()</a></code>, <code><a href='warn.html'>warn()</a></code> and <code><a href='error.html'>error()</a></code>, similar to <code><a href='https://www.rdocumentation.org/packages/base/topics/message'>message()</a></code>,
+<code><a href='https://www.rdocumentation.org/packages/base/topics/warning'>warning()</a></code> and <code><a href='https://www.rdocumentation.org/packages/base/topics/stop'>stop()</a></code> respectively. However, the new functions can have a <code>level</code>
+associated with them, so that when executed the global level option determines whether
+they are shown or not. This allows dobug modes, outputting more information. The can also
+output all messages to a log file.</p>
+    
+    </div>
 
+        
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Useful links:</p><ul>
+<li><p><a href='https://github.com/ChadGoymer/msgr'>https://github.com/ChadGoymer/msgr</a></p></li>
+<li><p>Report bugs at <a href='https://github.com/ChadGoymer/msgr/issues'>https://github.com/ChadGoymer/msgr/issues</a></p></li>
+</ul></div>
+    
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#msgr-06">0.6</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
+    <h2>Author</h2>
+    <p>Chad Goymer <a href='mailto:chad.goymer@gmail.com'>chad.goymer@gmail.com</a></p>
+  </div>
 </div>
 
       <footer>

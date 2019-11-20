@@ -1,6 +1,11 @@
+# msgr 1.1.0
+
+- Updated predicates and removed any that are in purrr
+- Updated `try_map()` and `try_pmap()` to use `purrr::map()` and `purrr::pmap()`
+
 # msgr 1.0.3
 
-- Added a NEWS.md file
+- Added a NEWS.md file.
 - Ensure package passes `devtools::check()`
 
 # msgr 1.0.2

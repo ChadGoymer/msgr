@@ -1,19 +1,21 @@
 Package: msgr
-Title: Extends messages, warnings and errors by adding levels of messages 
-    and the option to record them in a log file
-Version: 1.0.3
+Title: Extends messages, warnings and errors by adding levels and log files
+Version: 1.1.0
 Authors@R: 
-    person(given = "Chad",
-           family = "Goymer",
-           role = c("aut", "cre"),
-           email = "chad.goymer@gmail.com")
-Description: Extends messages, warnings and errors by adding levels of
-    messages and the option to record them in a log file.
+    person("Chad" , "Goymer", email = "chad.goymer@lloyds.com" , role = c("aut", "cre"))
+Description: Provides new functions [info()], [warn()] and [error()], similar to [message()],
+    [warning()] and [stop()] respectively. However, the new functions can have a `level`
+    associated with them, so that when executed the global level option determines whether
+    they are shown or not. This allows dobug modes, outputting more information. The can also
+    output all messages to a log file.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+Imports:
+    rlang,
+    purrr
 Suggests: 
     testthat,
     covr

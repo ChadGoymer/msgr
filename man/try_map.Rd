@@ -25,23 +25,23 @@ If 0 then no warnings are shown. Default: 2.}
 "warn", or "error". Default: "error".}
 
 \item{simplify}{(boolean, optional) Whether to try to simplify the result of the mapping
-(see \code{\link[=sapply]{sapply()}} for details). Default: FALSE.}
+into an atomic vector. Default: FALSE.}
 
 \item{use_names}{(boolean, optional) Whether to use 'x' as names in the resulting list. 'x'
 must be a character vector for this to work. Default: TRUE.}
 }
 \value{
 If \code{simplify = FALSE} a list is returned. Otherwise, the function attempts to
-simplify the result to a vector or array.
+simplify the result to an atomic vector or array.
 }
 \description{
-This function is similar to \code{\link[=sapply]{sapply()}} except that instead of stopping at the first
+This function is similar to \code{\link[purrr:map]{purrr::map()}} except that instead of stopping at the first
 error it captures them and continues. If there are any errors it collects them together
 and displays them at the end. You have the option to specify a prefix to the error message
 using the \code{msg_prefix} argument.
 }
 \details{
-If the mapped function is a long running process \code{try_map} can output a warning at the time
+If the mapped function is a long running process \code{try_map()} can output a warning at the time
 an error occurs, but specifying the \code{warn_level} argument to be greater than 0 (see
 \code{\link[=warn]{warn()}} for more details about message levels. Similarly \code{error_level} argument specifies
 the level of any reported error, as detailed in \code{\link[=error]{error()}}.
@@ -49,7 +49,7 @@ the level of any reported error, as detailed in \code{\link[=error]{error()}}.
 If you do not want the function to stop with an error, you can insted return a warning or
 info message using the \code{on_error} argument.
 
-Finally, \code{simplify} and \code{use_names} are the same as their \code{\link[=sapply]{sapply()}} conterparts, allowing
-the user to specify whether to simplify the output to a vector, if possible, and whether
-to use the vector input \code{x} as names to the resulting list.
+Finally, \code{simplify} and \code{use_names} allow the user to specify whether to simplify the output
+to an atomic vector, if possible, and whether to use the vector input \code{x} as names to the
+resulting list.
 }
