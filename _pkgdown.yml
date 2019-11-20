@@ -33,32 +33,12 @@ reference:
   - '`try_catch`'
   - '`try_map`'
   - '`try_pmap`'
-- title: Predicate functions for vectors and scalars
+- title: Predicate functions
   desc: These functions help specify conditions
   contents:
-  - '`is_vector`'
-  - '`is_scalar`'
-  - '`is_logical`'
-  - '`is_boolean`'
-  - '`is_numeric`'
-  - '`is_number`'
-  - '`is_integer`'
-  - '`is_natural`'
-  - '`is_character`'
-  - '`is_string`'
-- title: Predicate functions for non-vectors
-  desc: These functions help specify conditions
-  contents:
-  - '`is_list`'
-  - '`is_data_frame`'
-  - '`is_function`'
-  - '`is_null`'
   - '`is_na`'
   - '`is_in`'
   - '`has_names`'
-- title: Predicate functions for files and folders
-  desc: These functions help specify conditions
-  contents:
   - '`is_url`'
   - '`is_dir`'
   - '`is_file`'
