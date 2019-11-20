@@ -9,7 +9,7 @@
 #' @export
 #'
 is_na <- function(x) {
-  if (is.null(x)) {
+  if (is_null(x)) {
     return(FALSE)
   }
   is.na(x)
@@ -113,7 +113,7 @@ is_in <- function(x, y) {
 #' @export
 #'
 has_names <- function(x, nm) {
-  names_exist <- !is.null(names(x))
+  names_exist <- !is_null(names(x))
 
   if (!missing(nm) && names_exist) {
     is_character(nm) || stop("names ('nm') must be given as a character vector")

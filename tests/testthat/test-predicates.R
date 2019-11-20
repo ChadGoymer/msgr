@@ -1,5 +1,6 @@
 context("predicates")
 
+
 # TEST: is_na ---------------------------------------------------------------------------------
 
 test_that("is_na returns TRUE for NA", {
