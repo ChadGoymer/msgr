@@ -7,3 +7,4 @@
 ^msgr\.Rproj$
 ^\.Rproj\.user$
 ^msgr.Rcheck
+^.github$
