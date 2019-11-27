@@ -148,8 +148,8 @@ try_map <- function(
     })
   })
 
-  if (!use_names) {
-    names(result) <- NULL
+  if (use_names && is_character(x)) {
+    names(result) <- x
   }
 
   is_error <- map_lgl(result, function(r) "error" %in% class(r))
@@ -281,8 +281,8 @@ try_pmap <- function(
     })
   })
 
-  if (!use_names) {
-    names(result) <- NULL
+  if (use_names && is_character(l[[1]])) {
+    names(result) <- l[[1]]
   }
 
   is_error <- map_lgl(result, function(r) "error" %in% class(r))
