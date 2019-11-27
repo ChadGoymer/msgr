@@ -1,3 +1,7 @@
+# msgr 1.1.1
+
+- Added character check in `gh_map()` and `gh_pmap()`
+
 # msgr 1.1.0
 
 - Updated predicates and removed any that are in purrr
