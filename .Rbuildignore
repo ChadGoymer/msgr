@@ -8,3 +8,4 @@
 ^\.Rproj\.user$
 ^msgr.Rcheck
 ^.github$
+^appveyor\.yml$

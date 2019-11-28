@@ -1,6 +1,6 @@
 # msgr
 
-[![Build status](https://travis-ci.org/ChadGoymer/msgr.svg?branch=master)](https://travis-ci.org/ChadGoymer/msgr) [![Code coverage](https://codecov.io/github/ChadGoymer/msgr/branch/master/graphs/badge.svg)](https://codecov.io/github/ChadGoymer/msgr) 
+[![Build status](https://travis-ci.org/ChadGoymer/msgr.svg?branch=master)](https://travis-ci.org/ChadGoymer/msgr) [![Build status](https://ci.appveyor.com/api/projects/status/github/ChadGoymer/msgr?branch=master&svg=true)](https://ci.appveyor.com/project/ChadGoymer/msgr) [![Code coverage](https://codecov.io/github/ChadGoymer/msgr/branch/master/graphs/badge.svg)](https://codecov.io/github/ChadGoymer/msgr) 
 
 This package extends the `message()`, `warning()` and `stop()` functions by adding _levels_ 
 of messages and the option to record them in a log file.
