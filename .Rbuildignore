@@ -9,3 +9,4 @@
 ^msgr.Rcheck
 ^.github$
 ^appveyor\.yml$
+^cran-comments\.md$
