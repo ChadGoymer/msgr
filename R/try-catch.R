@@ -63,7 +63,7 @@ try_catch <- function(
 #' [warn()] for more details about message levels. Similarly `error_level` argument specifies
 #' the level of any reported error, as detailed in [error()].
 #'
-#' If you do not want the function to stop with an error, you can insted return a warning or
+#' If you do not want the function to stop with an error, you can instead return a warning or
 #' info message using the `on_error` argument.
 #'
 #' Finally, `simplify` and `use_names` allow the user to specify whether to simplify the output
@@ -194,7 +194,7 @@ try_map <- function(
 #' [warn()] for more details about message levels. Similarly `error_level` argument specifies
 #' the level of any reported error, as detailed in [error()].
 #'
-#' If you do not want the function to stop with an error, you can insted return a warning or
+#' If you do not want the function to stop with an error, you can instead return a warning or
 #' info message using the `on_error` argument.
 #'
 #' Finally, `simplify` and `use_names` allow the user to specify whether to simplify the output
