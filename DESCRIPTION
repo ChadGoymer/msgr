@@ -2,7 +2,7 @@ Package: msgr
 Title: Extends messages, warnings and errors by adding levels and log files
 Version: 1.1.2
 Authors@R: 
-    person("Chad" , "Goymer", email = "chad.goymer@lloyds.com" , role = c("aut", "cre"))
+    person("Chad" , "Goymer", email = "chad.goymer@gmail.com" , role = c("aut", "cre"))
 Description: Provides new functions [info()], [warn()] and [error()], similar to [message()],
     [warning()] and [stop()] respectively. However, the new functions can have a `level`
     associated with them, so that when executed the global level option determines whether
