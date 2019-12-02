@@ -1,3 +1,7 @@
+# msgr 1.1.2
+
+- Added CRAN comments file
+
 # msgr 1.1.1
 
 - Added character check in `gh_map()` and `gh_pmap()`
@@ -28,7 +32,7 @@
 # msgr 0.11
 
 - Added `try_pmap()`
-- Added `try_map`
+- Added `try_map()`
 - Added `try_catch()`
 
 # msgr 0.10
@@ -99,8 +103,8 @@
 # msgr 0.2
 
 - Built package documentation
-- Added `onAttach()` function to validate options
-- Added `onLoad()` function to set environment variables and options
+- Added `.onAttach()` function to validate options
+- Added `.onLoad()` function to set environment variables and options
 
 # msgr 0.1
 
