@@ -9,7 +9,7 @@
 Provides new functions \code{\link[=info]{info()}}, \code{\link[=warn]{warn()}} and \code{\link[=error]{error()}}, similar to \code{\link[=message]{message()}},
 \code{\link[=warning]{warning()}} and \code{\link[=stop]{stop()}} respectively. However, the new functions can have a \code{level}
 associated with them, so that when executed the global level option determines whether
-they are shown or not. This allows dobug modes, outputting more information. The can also
+they are shown or not. This allows debug modes, outputting more information. The can also
 output all messages to a log file.
 }
 \seealso{

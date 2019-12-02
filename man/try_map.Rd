@@ -46,7 +46,7 @@ an error occurs, but specifying the \code{warn_level} argument to be greater tha
 \code{\link[=warn]{warn()}} for more details about message levels. Similarly \code{error_level} argument specifies
 the level of any reported error, as detailed in \code{\link[=error]{error()}}.
 
-If you do not want the function to stop with an error, you can insted return a warning or
+If you do not want the function to stop with an error, you can instead return a warning or
 info message using the \code{on_error} argument.
 
 Finally, \code{simplify} and \code{use_names} allow the user to specify whether to simplify the output
