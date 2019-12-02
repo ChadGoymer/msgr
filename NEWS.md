@@ -1,3 +1,7 @@
+# msgr 1.1.2
+
+- Added CRAN comments file
+
 # msgr 1.1.1
 
 - Added character check in `gh_map()` and `gh_pmap()`
