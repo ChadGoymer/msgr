@@ -15,3 +15,12 @@ TRUE if x is NA, FALSE otherwise
 \description{
 Checks whether the variable is NA
 }
+\examples{
+is_na(1)
+is_na("foo")
+is_na(NA)
+
+is_na(c(1, NA))
+is_na(c(NA, NA))
+
+}

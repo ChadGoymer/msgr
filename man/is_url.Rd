@@ -15,3 +15,12 @@ TRUE if x is a valid URL, FALSE otherwise
 \description{
 Checks whether the variable is a valid URL
 }
+\examples{
+is_url("http://something.com")
+is_url("https://google.com")
+
+is_url(1)
+is_url("foo")
+is_url(NA)
+
+}

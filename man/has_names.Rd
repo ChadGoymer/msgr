@@ -18,3 +18,12 @@ TRUE if x has any names, FALSE otherwise
 \description{
 Checks whether the variable has names
 }
+\examples{
+x <- list(a = 1, b = 2)
+
+has_names(x, "a")
+has_names(x, c("a", "b"))
+
+has_names(x, "c")
+
+}
