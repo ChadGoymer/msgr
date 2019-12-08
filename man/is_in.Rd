@@ -17,3 +17,11 @@ TRUE if all elements in x are in y, FALSE otherwise
 \description{
 Checks whether all elements of one variable are in another
 }
+\examples{
+is_in("a", letters)
+is_in(c("a", "b", "c"), letters)
+
+is_in(1, LETTERS)
+is_in(1:2, LETTERS)
+
+}

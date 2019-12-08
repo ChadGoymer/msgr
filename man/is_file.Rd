@@ -15,3 +15,13 @@ TRUE if x is a path to an existing file, FALSE otherwise
 \description{
 Checks whether the variable is a path to an existing file
 }
+\examples{
+tmpfile <- tempfile()
+file.create(tmpfile)
+
+is_file(tmpfile)
+
+is_file("/does/not/exist.txt")
+is_file(1)
+
+}

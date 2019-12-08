@@ -53,3 +53,11 @@ Finally, \code{simplify} and \code{use_names} allow the user to specify whether 
 to an atomic vector, if possible, and whether to use the vector input \code{x} as names to the
 resulting list.
 }
+\examples{
+\dontrun{
+  test_try_map <- function(x, y) if (x > y) stop("x > y") else x
+  try_map(1:3, test_try_map, y = 2)
+  try_map(1:3, test_try_map, y = 5)
+}
+
+}

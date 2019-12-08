@@ -47,3 +47,17 @@ The location of the log file is set in the package option \code{msgr.log_path}, 
 this function. messages are added with a time stamp. If the \code{log_path} is equal to "" then no
 log is produced.
 }
+\examples{
+# Use info() to create timed messages
+info("This is a simple message")
+info("This is a level 2 message, so not shown by default", level = 2)
+
+# Set default level in options to determine what is shown
+options(msgr.level = 2)
+info("This is a level 2 message, so is shown now", level = 2)
+
+# Set message types in options to determine what is shown
+options(msgr.types = c("WARNING", "ERROR"))
+info("This is message, so will not be shown now")
+
+}

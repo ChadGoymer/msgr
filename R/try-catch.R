@@ -17,6 +17,12 @@
 #'
 #' @return The result of the evaluated expression
 #'
+#' @examples
+#' \dontrun{
+#'   try_catch(x <- "foo")
+#'   try_catch(stop("This is an error"))
+#' }
+#'
 #' @export
 #'
 try_catch <- function(
@@ -86,6 +92,13 @@ try_catch <- function(
 #'
 #' @return If `simplify = FALSE` a list is returned. Otherwise, the function attempts to
 #'   simplify the result to an atomic vector or array.
+#'
+#' @examples
+#' \dontrun{
+#'   test_try_map <- function(x, y) if (x > y) stop("x > y") else x
+#'   try_map(1:3, test_try_map, y = 2)
+#'   try_map(1:3, test_try_map, y = 5)
+#' }
 #'
 #' @export
 #'
@@ -217,6 +230,13 @@ try_map <- function(
 #'
 #' @return If `simplify = FALSE` a list is returned. Otherwise, the function attempts to
 #'   simplify the result to an atomic vector.
+#'
+#' @examples
+#' \dontrun{
+#'   test_try_pmap <- function(x, y) if (x > y) stop("x > y") else x
+#'   try_pmap(list(1:3, 3:1), test_try_pmap)
+#'   try_pmap(list(1:3, 2:4), test_try_pmap)
+#' }
 #'
 #' @export
 #'

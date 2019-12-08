@@ -15,3 +15,9 @@ TRUE if x is a path to an existing directory, FALSE otherwise
 \description{
 Checks whether the variable is a path to an existing directory
 }
+\examples{
+is_dir(tempdir())
+is_dir("/does/not/exist")
+is_dir(1)
+
+}

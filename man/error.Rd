@@ -47,3 +47,15 @@ The location of the log file is set in the package option \code{msgr.log_path}, 
 this function. messages are added with a time stamp. If the \code{log_path} is equal to "" then no
 log is produced.
 }
+\examples{
+\dontrun{
+  # Use error() to create timed errors
+  error("This is a simple error")
+  error("This is a level 2 error, so not shown by default", level = 2)
+
+  # Set default level in options to determine what is shown
+  options(msgr.level = 2)
+  error("This is a level 2 error, so is shown now", level = 2)
+}
+
+}

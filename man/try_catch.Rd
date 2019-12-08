@@ -26,3 +26,10 @@ and presented using \code{\link[=error]{error()}}. Messages and warnings are not
 In addition, a "finally" expression can be specified which is evaluated at the end of
 the call no matter the result.
 }
+\examples{
+\dontrun{
+  try_catch(x <- "foo")
+  try_catch(stop("This is an error"))
+}
+
+}

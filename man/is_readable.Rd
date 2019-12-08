@@ -15,3 +15,13 @@ TRUE if x is a path to an existing, readable file or directory, FALSE otherwise
 \description{
 Checks whether the variable is a path to an existing, readable file or directory
 }
+\examples{
+tmpfile <- tempfile()
+file.create(tmpfile)
+
+is_readable(tmpfile)
+
+is_readable("/does/not/exist.txt")
+is_readable(1)
+
+}

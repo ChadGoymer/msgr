@@ -32,3 +32,18 @@ A string is return invisibly containing the error
 This function calls the \code{\link[=error]{error()}} function to display an error if the specified condition
 is true. If a message is not specified then a generic message is displayed.
 }
+\examples{
+\dontrun{
+  # Use error_if() to create conditional timed errors
+  error_if(2 > 1, "Condition is true so this error is shown")
+  error_if(1 > 2, "Condition is false so this error is not shown")
+
+  # As with error() a level can be set
+  error_if(2 > 1, "This is a level 2 error, so not shown by default", level = 2)
+
+  # Set default level in options to determine what is shown
+  options(msgr.level = 2)
+  error_if(2 > 1, "This is a level 2 error, so is shown now", level = 2)
+}
+
+}

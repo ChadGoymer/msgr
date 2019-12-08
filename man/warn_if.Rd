@@ -31,3 +31,20 @@ A string is return invisibly containing the warning.
 This function calls the \code{\link[=warn]{warn()}} function to display a warning if the specified condition
 is true. If a message is not specified then a generic message is displayed.
 }
+\examples{
+# Use warn_if() to create conditional timed warnings
+warn_if(2 > 1, "Condition is true so this warning is shown")
+warn_if(1 > 2, "Condition is false so this warning is not shown")
+
+# As with warn() a level can be set
+warn_if(2 > 1, "This is a level 2 warning, so not shown by default", level = 2)
+
+# Set default level in options to determine what is shown
+options(msgr.level = 2)
+warn_if(2 > 1, "This is a level 2 warning, so is shown now", level = 2)
+
+# Set message types in options to determine what is shown
+options(msgr.types = "ERROR")
+warn_if(2 > 1, "This is warning, so will not be shown now")
+
+}
