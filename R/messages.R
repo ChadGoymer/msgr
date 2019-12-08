@@ -32,6 +32,19 @@
 #'
 #' @return A string is return invisibly containing the message.
 #'
+#' @examples
+#' # Use info() to create timed messages
+#' info("This is a simple message")
+#' info("This is a level 2 message, so not shown by default", level = 2)
+#'
+#' # Set default level in options to determine what is shown
+#' options(msgr.level = 2)
+#' info("This is a level 2 message, so is shown now", level = 2)
+#'
+#' # Set message types in options to determine what is shown
+#' options(msgr.types = c("WARNING", "ERROR"))
+#' info("This is message, so will not be shown now")
+#'
 #' @export
 #'
 info <- function(
@@ -108,6 +121,19 @@ info <- function(
 #'   logs are written. Default: set in the option `"msgr.log_path"`.
 #'
 #' @return A string is return invisibly containing the warning
+#'
+#' @examples
+#' # Use warn() to create timed warnings
+#' warn("This is a simple warning")
+#' warn("This is a level 2 warning, so not shown by default", level = 2)
+#'
+#' # Set default level in options to determine what is shown
+#' options(msgr.level = 2)
+#' warn("This is a level 2 warning, so is shown now", level = 2)
+#'
+#' # Set message types in options to determine what is shown
+#' options(msgr.types = "ERROR")
+#' warn("This is warning, so will not be shown now")
 #'
 #' @export
 #'
@@ -186,6 +212,17 @@ warn <- function(
 #'
 #' @return A string is return invisibly containing the error
 #'
+#' @examples
+#' \dontrun{
+#'   # Use error() to create timed errors
+#'   error("This is a simple error")
+#'   error("This is a level 2 error, so not shown by default", level = 2)
+#'
+#'   # Set default level in options to determine what is shown
+#'   options(msgr.level = 2)
+#'   error("This is a level 2 error, so is shown now", level = 2)
+#' }
+#'
 #' @export
 #'
 error <- function(
@@ -248,6 +285,22 @@ error <- function(
 #'
 #' @return A string is return invisibly containing the message.
 #'
+#' @examples
+#' # Use info_if() to create conditional timed messages
+#' info_if(2 > 1, "Condition is true so this message is shown")
+#' info_if(1 > 2, "Condition is false so this message is not shown")
+#'
+#' # As with info() a level can be set
+#' info_if(2 > 1, "This is a level 2 message, so not shown by default", level = 2)
+#'
+#' # Set default level in options to determine what is shown
+#' options(msgr.level = 2)
+#' info_if(2 > 1, "This is a level 2 message, so is shown now", level = 2)
+#'
+#' # Set message types in options to determine what is shown
+#' options(msgr.types = c("WARNING", "ERROR"))
+#' info_if(2 > 1, "This is message, so will not be shown now")
+#'
 #' @export
 #'
 info_if <- function(
@@ -306,6 +359,22 @@ info_if <- function(
 #'   logs are written. Default: set in the option `"msgr.log_path"`.
 #'
 #' @return A string is return invisibly containing the warning.
+#'
+#' @examples
+#' # Use warn_if() to create conditional timed warnings
+#' warn_if(2 > 1, "Condition is true so this warning is shown")
+#' warn_if(1 > 2, "Condition is false so this warning is not shown")
+#'
+#' # As with warn() a level can be set
+#' warn_if(2 > 1, "This is a level 2 warning, so not shown by default", level = 2)
+#'
+#' # Set default level in options to determine what is shown
+#' options(msgr.level = 2)
+#' warn_if(2 > 1, "This is a level 2 warning, so is shown now", level = 2)
+#'
+#' # Set message types in options to determine what is shown
+#' options(msgr.types = "ERROR")
+#' warn_if(2 > 1, "This is warning, so will not be shown now")
 #'
 #' @export
 #'
@@ -366,6 +435,20 @@ warn_if <- function(
 #'
 #' @return A string is return invisibly containing the error
 #'
+#' @examples
+#' \dontrun{
+#'   # Use error_if() to create conditional timed errors
+#'   error_if(2 > 1, "Condition is true so this error is shown")
+#'   error_if(1 > 2, "Condition is false so this error is not shown")
+#'
+#'   # As with error() a level can be set
+#'   error_if(2 > 1, "This is a level 2 error, so not shown by default", level = 2)
+#'
+#'   # Set default level in options to determine what is shown
+#'   options(msgr.level = 2)
+#'   error_if(2 > 1, "This is a level 2 error, so is shown now", level = 2)
+#' }
+#'
 #' @export
 #'
 error_if <- function(
@@ -424,6 +507,21 @@ error_if <- function(
 #'   logs are written. Default: set in the option `"msgr.log_path"`.
 #'
 #' @return A string is return invisibly containing the error
+#'
+#' @examples
+#' \dontrun{
+#'   # Use assert() to create conditional timed errors
+#'   x <- 1
+#'   assert(x > 0, "Condition is true so this error is not shown")
+#'   assert(x < 0, "Condition is false so this error is shown")
+#'
+#'   # As with error() a level can be set
+#'   assert(x < 0, "This is a level 2 error, so not shown by default", level = 2)
+#'
+#'   # Set default level in options to determine what is shown
+#'   options(msgr.level = 2)
+#'   assert(x < 0, "This is a level 2 error, so is shown now", level = 2)
+#' }
 #'
 #' @export
 #'

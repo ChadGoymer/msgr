@@ -31,3 +31,20 @@ A string is return invisibly containing the message.
 This function calls the \code{\link[=info]{info()}} function to display a message if the specified condition
 is true. If a message is not specified then a generic message is displayed.
 }
+\examples{
+# Use info_if() to create conditional timed messages
+info_if(2 > 1, "Condition is true so this message is shown")
+info_if(1 > 2, "Condition is false so this message is not shown")
+
+# As with info() a level can be set
+info_if(2 > 1, "This is a level 2 message, so not shown by default", level = 2)
+
+# Set default level in options to determine what is shown
+options(msgr.level = 2)
+info_if(2 > 1, "This is a level 2 message, so is shown now", level = 2)
+
+# Set message types in options to determine what is shown
+options(msgr.types = c("WARNING", "ERROR"))
+info_if(2 > 1, "This is message, so will not be shown now")
+
+}

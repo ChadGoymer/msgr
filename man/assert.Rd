@@ -31,3 +31,19 @@ A string is return invisibly containing the error
 This function calls the \code{\link[=error]{error()}} function to display an error if the specified condition
 is false. If a message is not specified then a generic message is displayed.
 }
+\examples{
+\dontrun{
+  # Use assert() to create conditional timed errors
+  x <- 1
+  assert(x > 0, "Condition is true so this error is not shown")
+  assert(x < 0, "Condition is false so this error is shown")
+
+  # As with error() a level can be set
+  assert(x < 0, "This is a level 2 error, so not shown by default", level = 2)
+
+  # Set default level in options to determine what is shown
+  options(msgr.level = 2)
+  assert(x < 0, "This is a level 2 error, so is shown now", level = 2)
+}
+
+}
