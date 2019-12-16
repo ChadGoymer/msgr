@@ -4,8 +4,17 @@
 \alias{try_map}
 \title{Apply a function over a vector or list, capturing any errors to display at the end}
 \usage{
-try_map(x, f, ..., msg_prefix, warn_level = 2, error_level = 1,
-  on_error = "error", simplify = FALSE, use_names = TRUE)
+try_map(
+  x,
+  f,
+  ...,
+  msg_prefix,
+  warn_level = 2,
+  error_level = 1,
+  on_error = "error",
+  simplify = FALSE,
+  use_names = TRUE
+)
 }
 \arguments{
 \item{x}{(vector or list) The vector or list to map the function to.}

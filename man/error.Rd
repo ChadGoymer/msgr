@@ -4,9 +4,13 @@
 \alias{error}
 \title{Display an error, and record it in a log file.}
 \usage{
-error(..., level = 1, msg_level = getOption("msgr.level"),
+error(
+  ...,
+  level = 1,
+  msg_level = getOption("msgr.level"),
   msg_types = getOption("msgr.types"),
-  log_path = getOption("msgr.log_path"))
+  log_path = getOption("msgr.log_path")
+)
 }
 \arguments{
 \item{...}{(strings) error to be displayed or written to file.}

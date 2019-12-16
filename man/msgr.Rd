@@ -3,7 +3,6 @@
 \docType{package}
 \name{msgr}
 \alias{msgr}
-\alias{msgr-package}
 \title{Extends messages, warnings and errors by adding levels and log files}
 \description{
 Provides new functions \code{\link[=info]{info()}}, \code{\link[=warn]{warn()}} and \code{\link[=error]{error()}}, similar to \code{\link[=message]{message()}},

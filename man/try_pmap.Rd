@@ -4,8 +4,17 @@
 \alias{try_pmap}
 \title{Apply a function over a list of vectors, capturing any errors to display at the end}
 \usage{
-try_pmap(l, f, ..., msg_prefix, warn_level = 2, error_level = 1,
-  on_error = "error", simplify = FALSE, use_names = TRUE)
+try_pmap(
+  l,
+  f,
+  ...,
+  msg_prefix,
+  warn_level = 2,
+  error_level = 1,
+  on_error = "error",
+  simplify = FALSE,
+  use_names = TRUE
+)
 }
 \arguments{
 \item{l}{(list) A list of vectors the same length to apply the function to.}

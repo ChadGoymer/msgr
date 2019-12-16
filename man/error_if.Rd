@@ -4,10 +4,14 @@
 \alias{error_if}
 \title{Display an error, and record in a log file, if a condition is true.}
 \usage{
-error_if(condition, ..., level = 1,
+error_if(
+  condition,
+  ...,
+  level = 1,
   msg_level = getOption("msgr.level"),
   msg_types = getOption("msgr.types"),
-  log_path = getOption("msgr.log_path"))
+  log_path = getOption("msgr.log_path")
+)
 }
 \arguments{
 \item{condition}{(boolean) The condition to check.}

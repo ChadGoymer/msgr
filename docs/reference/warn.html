@@ -121,9 +121,13 @@ Whether it is shown, or written to the log, depends on the level and type of the
 See details below for more information.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>warn</span>(<span class='no'>...</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>msg_level</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.level"</span>),
+    <pre class="usage"><span class='fu'>warn</span>(
+  <span class='no'>...</span>,
+  <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>msg_level</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.level"</span>),
   <span class='kw'>msg_types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.types"</span>),
-  <span class='kw'>log_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.log_path"</span>))</pre>
+  <span class='kw'>log_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.log_path"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,6 +177,15 @@ display errors and warnings and ignore messages.</p></li>
 this function. messages are added with a time stamp. If the <code>log_path</code> is equal to "" then no
 log is produced.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Use warn() to create timed warnings</span>
+<span class='fu'>warn</span>(<span class='st'>"This is a simple warning"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: [07:34:06] This is a simple warning</span></div><div class='input'><span class='fu'>warn</span>(<span class='st'>"This is a level 2 warning, so not shown by default"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: [07:34:06] This is a level 2 warning, so not shown by default</span></div><div class='input'>
+<span class='co'># Set default level in options to determine what is shown</span>
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>msgr.level</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+<span class='fu'>warn</span>(<span class='st'>"This is a level 2 warning, so is shown now"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: [07:34:06] This is a level 2 warning, so is shown now</span></div><div class='input'>
+<span class='co'># Set message types in options to determine what is shown</span>
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>msgr.types</span> <span class='kw'>=</span> <span class='st'>"ERROR"</span>)
+<span class='fu'>warn</span>(<span class='st'>"This is warning, so will not be shown now"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -180,6 +193,7 @@ log is produced.</p>
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

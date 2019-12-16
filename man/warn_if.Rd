@@ -4,9 +4,14 @@
 \alias{warn_if}
 \title{Display a warning, and record in a log file, if a condition is true.}
 \usage{
-warn_if(condition, ..., level = 1, msg_level = getOption("msgr.level"),
+warn_if(
+  condition,
+  ...,
+  level = 1,
+  msg_level = getOption("msgr.level"),
   msg_types = getOption("msgr.types"),
-  log_path = getOption("msgr.log_path"))
+  log_path = getOption("msgr.log_path")
+)
 }
 \arguments{
 \item{condition}{(boolean) The condition to check.}

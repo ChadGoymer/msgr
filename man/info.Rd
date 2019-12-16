@@ -4,9 +4,13 @@
 \alias{info}
 \title{Display a message, and record it in a log file.}
 \usage{
-info(..., level = 1, msg_level = getOption("msgr.level"),
+info(
+  ...,
+  level = 1,
+  msg_level = getOption("msgr.level"),
   msg_types = getOption("msgr.types"),
-  log_path = getOption("msgr.log_path"))
+  log_path = getOption("msgr.log_path")
+)
 }
 \arguments{
 \item{...}{(strings) message to be displayed or written to file.}

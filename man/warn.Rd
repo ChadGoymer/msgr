@@ -4,9 +4,13 @@
 \alias{warn}
 \title{Display a warning, and record it in a log file.}
 \usage{
-warn(..., level = 1, msg_level = getOption("msgr.level"),
+warn(
+  ...,
+  level = 1,
+  msg_level = getOption("msgr.level"),
   msg_types = getOption("msgr.types"),
-  log_path = getOption("msgr.log_path"))
+  log_path = getOption("msgr.log_path")
+)
 }
 \arguments{
 \item{...}{(strings) warning to be displayed or written to file.}
