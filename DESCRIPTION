@@ -3,8 +3,8 @@ Title: Extends Messages, Warnings and Errors by Adding Levels and Log Files
 Version: 1.1.2
 Authors@R: 
     person("Chad" , "Goymer", email = "chad.goymer@gmail.com" , role = c("aut", "cre"))
-Description: Provides new functions [info()], [warn()] and [error()], similar to [message()],
-    [warning()] and [stop()] respectively. However, the new functions can have a 'level'
+Description: Provides new functions info(), warn() and error(), similar to message(),
+    warning() and stop() respectively. However, the new functions can have a 'level'
     associated with them, so that when executed the global level option determines whether
     they are shown or not. This allows debug modes, outputting more information. The can also
     output all messages to a log file.
@@ -13,7 +13,7 @@ Encoding: UTF-8
 LazyData: true
 Language: en-GB
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Imports:
     rlang,
     purrr
