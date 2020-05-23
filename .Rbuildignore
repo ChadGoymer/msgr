@@ -7,7 +7,7 @@
 ^msgr\.Rproj$
 ^\.Rproj\.user$
 ^msgr.Rcheck
-^.github$
+^\.github$
 ^appveyor\.yml$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
