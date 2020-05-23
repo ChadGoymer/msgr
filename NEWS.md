@@ -1,3 +1,7 @@
+# msgr 1.1.3
+
+- Using GitHub actions for CI
+
 # msgr 1.1.2
 
 - Added CRAN comments file
