@@ -182,11 +182,11 @@ log is produced.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Use info() to create timed messages</span>
-<span class='fu'>info</span>(<span class='st'>"This is a simple message"</span>)</div><div class='output co'>#&gt; <span class='message'>[07:29:43] This is a simple message</span></div><div class='input'><span class='fu'>info</span>(<span class='st'>"This is a level 2 message, so not shown by default"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+<span class='fu'>info</span>(<span class='st'>"This is a simple message"</span>)</div><div class='output co'>#&gt; <span class='message'>[07:42:49] This is a simple message</span></div><div class='input'><span class='fu'>info</span>(<span class='st'>"This is a level 2 message, so not shown by default"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 
 <span class='co'># Set default level in options to determine what is shown</span>
 <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>msgr.level</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='fu'>info</span>(<span class='st'>"This is a level 2 message, so is shown now"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='message'>[07:29:43] This is a level 2 message, so is shown now</span></div><div class='input'>
+<span class='fu'>info</span>(<span class='st'>"This is a level 2 message, so is shown now"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='message'>[07:42:49] This is a level 2 message, so is shown now</span></div><div class='input'>
 <span class='co'># Set message types in options to determine what is shown</span>
 <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>msgr.types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"WARNING"</span>, <span class='st'>"ERROR"</span>))
 <span class='fu'>info</span>(<span class='st'>"This is message, so will not be shown now"</span>)</div></pre>
