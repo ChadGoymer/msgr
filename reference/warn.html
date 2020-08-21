@@ -125,11 +125,11 @@ See details below for more information.</p>
     </div>
 
     <pre class="usage"><span class='fu'>warn</span>(
-  <span class='no'>...</span>,
-  <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>msg_level</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.level"</span>),
-  <span class='kw'>msg_types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.types"</span>),
-  <span class='kw'>log_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.log_path"</span>)
+  <span class='kw'>...</span>,
+  level = <span class='fl'>1</span>,
+  msg_level = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.level"</span>),
+  msg_types = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.types"</span>),
+  log_path = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.log_path"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -182,13 +182,14 @@ log is produced.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Use warn() to create timed warnings</span>
-<span class='fu'>warn</span>(<span class='st'>"This is a simple warning"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: [07:42:51] This is a simple warning</span></div><div class='input'><span class='fu'>warn</span>(<span class='st'>"This is a level 2 warning, so not shown by default"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: [07:42:51] This is a level 2 warning, so not shown by default</span></div><div class='input'>
+<span class='fu'>warn</span>(<span class='st'>"This is a simple warning"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: [07:48:37] This is a simple warning</span></div><div class='input'><span class='fu'>warn</span>(<span class='st'>"This is a level 2 warning, so not shown by default"</span>, level = <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: [07:48:37] This is a level 2 warning, so not shown by default</span></div><div class='input'>
 <span class='co'># Set default level in options to determine what is shown</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>msgr.level</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='fu'>warn</span>(<span class='st'>"This is a level 2 warning, so is shown now"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: [07:42:51] This is a level 2 warning, so is shown now</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(msgr.level = <span class='fl'>2</span>)
+<span class='fu'>warn</span>(<span class='st'>"This is a level 2 warning, so is shown now"</span>, level = <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: [07:48:37] This is a level 2 warning, so is shown now</span></div><div class='input'>
 <span class='co'># Set message types in options to determine what is shown</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>msgr.types</span> <span class='kw'>=</span> <span class='st'>"ERROR"</span>)
-<span class='fu'>warn</span>(<span class='st'>"This is warning, so will not be shown now"</span>)</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(msgr.types = <span class='st'>"ERROR"</span>)
+<span class='fu'>warn</span>(<span class='st'>"This is warning, so will not be shown now"</span>)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

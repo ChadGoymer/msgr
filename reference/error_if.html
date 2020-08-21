@@ -123,12 +123,12 @@ is true. If a message is not specified then a generic message is displayed.</p>
     </div>
 
     <pre class="usage"><span class='fu'>error_if</span>(
-  <span class='no'>condition</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>msg_level</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.level"</span>),
-  <span class='kw'>msg_types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.types"</span>),
-  <span class='kw'>log_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.log_path"</span>)
+  <span class='kw'>condition</span>,
+  <span class='kw'>...</span>,
+  level = <span class='fl'>1</span>,
+  msg_level = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.level"</span>),
+  msg_types = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.types"</span>),
+  log_path = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.log_path"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -168,18 +168,19 @@ logs are written. Default: set in the option <code>"msgr.log_path"</code>.</p></
     <p>A string is return invisibly containing the error</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
   <span class='co'># Use error_if() to create conditional timed errors</span>
-  <span class='fu'>error_if</span>(<span class='fl'>2</span> <span class='kw'>&gt;</span> <span class='fl'>1</span>, <span class='st'>"Condition is true so this error is shown"</span>)
-  <span class='fu'>error_if</span>(<span class='fl'>1</span> <span class='kw'>&gt;</span> <span class='fl'>2</span>, <span class='st'>"Condition is false so this error is not shown"</span>)
+  <span class='fu'>error_if</span>(<span class='fl'>2</span> <span class='op'>&gt;</span> <span class='fl'>1</span>, <span class='st'>"Condition is true so this error is shown"</span>)
+  <span class='fu'>error_if</span>(<span class='fl'>1</span> <span class='op'>&gt;</span> <span class='fl'>2</span>, <span class='st'>"Condition is false so this error is not shown"</span>)
 
   <span class='co'># As with error() a level can be set</span>
-  <span class='fu'>error_if</span>(<span class='fl'>2</span> <span class='kw'>&gt;</span> <span class='fl'>1</span>, <span class='st'>"This is a level 2 error, so not shown by default"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+  <span class='fu'>error_if</span>(<span class='fl'>2</span> <span class='op'>&gt;</span> <span class='fl'>1</span>, <span class='st'>"This is a level 2 error, so not shown by default"</span>, level = <span class='fl'>2</span>)
 
   <span class='co'># Set default level in options to determine what is shown</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>msgr.level</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-  <span class='fu'>error_if</span>(<span class='fl'>2</span> <span class='kw'>&gt;</span> <span class='fl'>1</span>, <span class='st'>"This is a level 2 error, so is shown now"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-}</div></pre>
+  <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(msgr.level = <span class='fl'>2</span>)
+  <span class='fu'>error_if</span>(<span class='fl'>2</span> <span class='op'>&gt;</span> <span class='fl'>1</span>, <span class='st'>"This is a level 2 error, so is shown now"</span>, level = <span class='fl'>2</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
