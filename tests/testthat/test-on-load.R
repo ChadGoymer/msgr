@@ -1,7 +1,39 @@
 
 # TEST: .onLoad ----------------------------------------------------------------
 
-test_that("Options are set when package is loaded", {
+test_that("Default options are set when package is loaded", {
+
+  original_env_vars <- list(
+    MSGR_LEVEL    = Sys.getenv("MSGR_LEVEL"),
+    MSGR_TYPES    = Sys.getenv("MSGR_TYPES"),
+    MSGR_LOG_PATH = Sys.getenv("MSGR_LOG_PATH")
+  )
+
+  original_options <- options(
+    msgr.level    = NULL,
+    msgr.types    = NULL,
+    msgr.log_path = NULL
+  )
+
+  on.exit({
+    do.call(Sys.setenv, original_env_vars)
+    do.call(options, original_options)
+    .onLoad()
+  })
+
+  Sys.setenv(MSGR_LEVEL    = "")
+  Sys.setenv(MSGR_TYPES    = "")
+  Sys.setenv(MSGR_LOG_PATH = "")
+
+  .onLoad()
+
+  expect_identical(getOption("msgr.level"), 1L)
+  expect_identical(getOption("msgr.types"), c("INFO", "WARNING", "ERROR"))
+  expect_identical(getOption("msgr.log_path"), "")
+
+})
+
+test_that("Options are overidden when environment variables are set", {
 
   original_env_vars <- list(
     MSGR_LEVEL    = Sys.getenv("MSGR_LEVEL"),
@@ -30,6 +62,34 @@ test_that("Options are set when package is loaded", {
   expect_identical(getOption("msgr.level"), 10L)
   expect_null(getOption("msgr.types"))
   expect_identical(getOption("msgr.log_path"), "C:/temp/test-msgr.log")
+
+})
+
+test_that("Options are overidden when options are set", {
+
+  original_env_vars <- list(
+    MSGR_LEVEL    = Sys.getenv("MSGR_LEVEL"),
+    MSGR_TYPES    = Sys.getenv("MSGR_TYPES"),
+    MSGR_LOG_PATH = Sys.getenv("MSGR_LOG_PATH")
+  )
+
+  original_options <- options(
+    msgr.level    = 5L,
+    msgr.types    = "INFO",
+    msgr.log_path = "C:/temp/test.log"
+  )
+
+  on.exit({
+    do.call(Sys.setenv, original_env_vars)
+    do.call(options, original_options)
+    .onLoad()
+  })
+
+  .onLoad()
+
+  expect_identical(getOption("msgr.level"), 5L)
+  expect_identical(getOption("msgr.types"), "INFO")
+  expect_identical(getOption("msgr.log_path"), "C:/temp/test.log")
 
 })
 

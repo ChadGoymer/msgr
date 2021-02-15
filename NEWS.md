@@ -1,3 +1,7 @@
+# msgr 1.2.1
+
+- Do not override options if they are set before the package loads
+
 # msgr 1.2.0
 
 - Used `devtools::lint()` to follow tidyverse style guide
