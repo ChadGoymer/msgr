@@ -9,8 +9,8 @@ has_names(x, nm)
 \arguments{
 \item{x}{(any) The object to test}
 
-\item{nm}{(character, optional) The names to check for. If not specified then the function
-checks for any names.}
+\item{nm}{(character, optional) The names to check for. If not specified then
+the function checks for any names.}
 }
 \value{
 TRUE if x has any names, FALSE otherwise

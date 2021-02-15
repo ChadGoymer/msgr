@@ -2,7 +2,7 @@
 % Please edit documentation in R/predicates.R
 \name{is_writeable}
 \alias{is_writeable}
-\title{Checks whether the variable is a path to an existing, writeable file or directory}
+\title{Checks whether input is a path to an existing, writeble file or directory}
 \usage{
 is_writeable(x)
 }
@@ -10,10 +10,11 @@ is_writeable(x)
 \item{x}{(any) The object to test}
 }
 \value{
-TRUE if x is a path to an existing, writeable file or directory, FALSE otherwise
+TRUE if x is a path to an existing, writeable file or directory,
+FALSE otherwise
 }
 \description{
-Checks whether the variable is a path to an existing, writeable file or directory
+Checks whether input is a path to an existing, writeble file or directory
 }
 \examples{
 tmpfile <- tempfile()

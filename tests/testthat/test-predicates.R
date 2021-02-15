@@ -1,7 +1,4 @@
-context("predicates")
-
-
-# TEST: is_na ---------------------------------------------------------------------------------
+# TEST: is_na ------------------------------------------------------------------
 
 test_that("is_na returns TRUE for NA", {
 
@@ -14,10 +11,16 @@ test_that("is_na returns TRUE for NA", {
   expect_identical(is_na(c(1, NA, 3)), c(FALSE, TRUE, FALSE))
   expect_identical(
     is_na(matrix(c(1, 2, NA, 4), nrow = 2)),
-    matrix(c(FALSE, FALSE, TRUE, FALSE), nrow = 2))
+    matrix(c(FALSE, FALSE, TRUE, FALSE), nrow = 2)
+  )
   expect_identical(
     is_na(data.frame(x = LETTERS[1:3], y = c(1, NA, 3))),
-    matrix(c(FALSE, FALSE, FALSE, FALSE, TRUE, FALSE), nrow = 3, dimnames = list(NULL, c("x", "y"))))
+    matrix(
+      c(FALSE, FALSE, FALSE, FALSE, TRUE, FALSE),
+      nrow     = 3,
+      dimnames = list(NULL, c("x", "y"))
+    )
+  )
 
 })
 
@@ -34,7 +37,7 @@ test_that("is_na returns FALSE for non-NAs", {
 })
 
 
-# TEST: is_url --------------------------------------------------------------------------------
+# TEST: is_url -----------------------------------------------------------------
 
 test_that("is_url returns TRUE for valid URLs", {
 
@@ -55,11 +58,16 @@ test_that("is_url returns FALSE for invalid URLs", {
   expect_false(is_url(matrix(1:4, nrow = 2)))
   expect_false(is_url(data.frame(x = LETTERS[1:3], y = 1:3)))
 
-  expect_false(is_url(c("https://www.secure.com/endpoint1", "https://www.secure.com/endpoint2")))
+  expect_false(
+    is_url(c(
+      "https://www.secure.com/endpoint1",
+      "https://www.secure.com/endpoint2"
+    ))
+  )
 
 })
 
-# TEST: is_dir --------------------------------------------------------------------------------
+# TEST: is_dir -----------------------------------------------------------------
 
 test_that("is_dir returns TRUE for an existing directory", {
 
@@ -80,7 +88,7 @@ test_that("is_dir returns FALSE for an invalid directory", {
 
 })
 
-# TEST: is_file -------------------------------------------------------------------------------
+# TEST: is_file ----------------------------------------------------------------
 
 test_that("is_file returns TRUE for an existing directory", {
 
@@ -103,7 +111,7 @@ test_that("is_file returns FALSE for an invalid directory", {
 
 })
 
-# TEST: is_readable ---------------------------------------------------------------------------
+# TEST: is_readable ------------------------------------------------------------
 
 test_that("is_readable returns TRUE for a readable file or directory", {
 
@@ -130,7 +138,7 @@ test_that("is_readable returns FALSE for an unreadable file or directory", {
 
 })
 
-# TEST: is_writeable --------------------------------------------------------------------------
+# TEST: is_writeable -----------------------------------------------------------
 
 test_that("is_writeable returns TRUE for a readable file or directory", {
 
@@ -157,9 +165,9 @@ test_that("is_writeable returns FALSE for an unreadable file or directory", {
 
 })
 
-# TEST: is_in ---------------------------------------------------------------------------------
+# TEST: is_in ------------------------------------------------------------------
 
-test_that("is_in returns TRUE if all elements of the first variable are in the second", {
+test_that("is_in returns TRUE if all elements of x are in y", {
 
   expect_true(is_in(1, 1:3))
   expect_true(is_in(c("a", "b"), letters))
@@ -167,14 +175,14 @@ test_that("is_in returns TRUE if all elements of the first variable are in the s
 
 })
 
-test_that("is_in returns FALSE if not all the elements of the first variable are in the second", {
+test_that("is_in returns FALSE if all the elements of x are not in y", {
 
   expect_false(is_in(0, 1:3))
   expect_false(is_in(LETTERS, c("A", "B", "C")))
 
 })
 
-# TEST: has_names -----------------------------------------------------------------------------
+# TEST: has_names --------------------------------------------------------------
 
 test_that("has_names returns TRUE for an object with names", {
 

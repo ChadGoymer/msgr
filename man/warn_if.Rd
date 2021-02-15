@@ -18,23 +18,27 @@ warn_if(
 
 \item{...}{(strings) message to be displayed or written to file.}
 
-\item{level}{(integer, optional) The level of the message, from 1 to 10. Default: 1.}
+\item{level}{(integer, optional) The level of the message, from 1 to 10.
+Default: 1.}
 
-\item{msg_level}{(integer, optional) The maximum level of messages to output. Default: set
-in the option \code{"msgr.level"}.}
+\item{msg_level}{(integer, optional) The maximum level of messages to output.
+Default: set in the option \code{"msgr.level"}.}
 
-\item{msg_types}{(character, optional) The type to write or display. Must either NULL or one
-or more from "INFO", "WARNING" or "ERROR". Default: set in the option \code{"msgr.types"}.}
+\item{msg_types}{(character, optional) The type to write or display. Must
+either NULL or one or more from "INFO", "WARNING" or "ERROR". Default: set
+in the option \code{"msgr.types"}.}
 
-\item{log_path}{(string, optional) The file path to the text log file. If set to "", then no
-logs are written. Default: set in the option \code{"msgr.log_path"}.}
+\item{log_path}{(string, optional) The file path to the text log file. If set
+to "", then no logs are written. Default: set in the option
+\code{"msgr.log_path"}.}
 }
 \value{
 A string is return invisibly containing the warning.
 }
 \description{
-This function calls the \code{\link[=warn]{warn()}} function to display a warning if the specified condition
-is true. If a message is not specified then a generic message is displayed.
+This function calls the \code{\link[=warn]{warn()}} function to display a warning if the
+specified condition is true. If a message is not specified then a generic
+message is displayed.
 }
 \examples{
 # Use warn_if() to create conditional timed warnings
@@ -42,11 +46,11 @@ warn_if(2 > 1, "Condition is true so this warning is shown")
 warn_if(1 > 2, "Condition is false so this warning is not shown")
 
 # As with warn() a level can be set
-warn_if(2 > 1, "This is a level 2 warning, so not shown by default", level = 2)
+warn_if(2 > 1, "This level 2 warning is not shown by default", level = 2)
 
 # Set default level in options to determine what is shown
 options(msgr.level = 2)
-warn_if(2 > 1, "This is a level 2 warning, so is shown now", level = 2)
+warn_if(2 > 1, "This level 2 warning is shown now", level = 2)
 
 # Set message types in options to determine what is shown
 options(msgr.types = "ERROR")

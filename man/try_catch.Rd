@@ -9,27 +9,33 @@ try_catch(expr, on_error, finally)
 \arguments{
 \item{expr}{(expression) The expression to evaluate}
 
-\item{on_error}{(function, optional) A function describing what to do in the event of a
-error in the above expression. The function must take a single argument, which is the
-\code{\link[=simpleError]{simpleError()}}. If missing or \code{NULL}, errors are not caught. Default: \code{\link[=error]{error()}}
-called with the error's message prefixed by the calling function name.}
+\item{on_error}{(function, optional) A function describing what to do in the
+event of a error in the above expression. The function must take a single
+argument, which is the \code{\link[=simpleError]{simpleError()}}. If missing or \code{NULL}, errors are
+not caught. Default: \code{\link[=error]{error()}} called with the error's message prefixed by
+the calling function name.}
 
-\item{finally}{(expression, optional) An expression to evaluate at the end of the call.
-If missing or \code{NULL}, nothing is actioned.}
+\item{finally}{(expression, optional) An expression to evaluate at the end of
+the call. If missing or \code{NULL}, nothing is actioned.}
 }
 \value{
 The result of the evaluated expression
 }
 \description{
-This function is similar to \code{\link[=tryCatch]{tryCatch()}}, except that, by default, errors are captured
-and presented using \code{\link[=error]{error()}}. Messages and warnings are not captured by this function.
-In addition, a "finally" expression can be specified which is evaluated at the end of
-the call no matter the result.
+This function is similar to \code{\link[=tryCatch]{tryCatch()}}, except that, by default, errors are
+captured and presented using \code{\link[=error]{error()}}. Messages and warnings are not
+captured by this function.
+}
+\details{
+In addition, a "finally" expression can be specified which is evaluated at
+the end of the call no matter the result.
 }
 \examples{
 \dontrun{
-  try_catch(x <- "foo")
-  try_catch(stop("This is an error"))
+
+try_catch(x <- "foo")
+try_catch(stop("This is an error"))
+
 }
 
 }
