@@ -1,5 +1,3 @@
-context("on load")
-
 test_that("evironment variables are set correctly on load", {
 
   expect_identical(Sys.getenv("MSGR_LEVEL"), "1")
