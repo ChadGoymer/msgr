@@ -10,7 +10,7 @@
 # |               |               |   to display          |                    |
 # | MSGR_TYPES    | msgr.types    | The types of messages | INFO|WARNING|ERROR |
 # |               |               |   to display          |                    |
-# | MSGR_LOG_PATH | msgr.log_path | The log file path     | msgr.msg           |
+# | MSGR_LOG_PATH | msgr.log_path | The log file path     | <none>             |
 # +---------------+---------------+-----------------------+--------------------+
 #
 .onLoad <- function(libname, pkgname) {
@@ -31,7 +31,7 @@
   msgr_env <- as.list(Sys.getenv(names(env)))
 
   types <- strsplit(msgr_env[["MSGR_TYPES"]], split = "\\|")[[1]]
-  if (length(types) == 0) {
+  if (identical(types, "NULL")) {
     types <- NULL
   }
 
@@ -69,7 +69,7 @@
 
   msg_level <- getOption("msgr.level")
 
-  if (is.na(msg_level) || !identical(length(msg_level), 1L)) {
+  if (is.na(msg_level) || !rlang::is_scalar_integerish(msg_level)) {
     packageStartupMessage(
       "The option 'msgr.level' must be an integer:\n  ", msg_level
     )
