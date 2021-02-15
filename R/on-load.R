@@ -15,33 +15,45 @@
 #
 .onLoad <- function(libname, pkgname) {
 
-  # Set default values for environment variables, if they have not been set
+  # Set message level
 
-  env <- list(
-    MSGR_LEVEL    = "1",
-    MSGR_TYPES    = "INFO|WARNING|ERROR",
-    MSGR_LOG_PATH = ""
-  )
-
-  toset <- sapply(names(env), function(e) identical(Sys.getenv(e), ""))
-  if (any(toset)) do.call(Sys.setenv, env[toset])
-
-  # Set package options from the environment variables
-
-  msgr_env <- as.list(Sys.getenv(names(env)))
-
-  types <- strsplit(msgr_env[["MSGR_TYPES"]], split = "\\|")[[1]]
-  if (identical(types, "NULL")) {
-    types <- NULL
+  if (is.null(getOption("msgr.level"))) {
+    if (Sys.getenv("MSGR_LEVEL") == "") {
+      level <- 1L
+    } else {
+      level <- suppressWarnings(as.integer(Sys.getenv("MSGR_LEVEL")))
+    }
+    options(msgr.level = level)
   }
 
-  options(
-    msgr.level    = suppressWarnings(as.integer(msgr_env[["MSGR_LEVEL"]])),
-    msgr.types    = types,
-    msgr.log_path = normalizePath(
-      msgr_env[["MSGR_LOG_PATH"]], winslash = "/", mustWork = FALSE
-    )
-  )
+  # Set message types
+
+  if (is.null(getOption("msgr.types"))) {
+    if (Sys.getenv("MSGR_TYPES") == "") {
+      types <- c("INFO", "WARNING", "ERROR")
+    } else {
+      types <- strsplit(Sys.getenv("MSGR_TYPES"), split = "\\|")[[1]]
+      if (identical(types, "NULL")) {
+        types <- NULL
+      }
+    }
+    options(msgr.types = types)
+  }
+
+  # Set log file path
+
+  if (is.null(getOption("msgr.log_path"))) {
+    if (Sys.getenv("MSGR_LOG_PATH") == "") {
+      log_path <- ""
+    } else {
+      log_path <- normalizePath(
+        Sys.getenv("MSGR_LOG_PATH"),
+        winslash = "/",
+        mustWork = FALSE
+      )
+    }
+    options(msgr.log_path = log_path)
+  }
 
 }
 
