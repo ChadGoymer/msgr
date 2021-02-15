@@ -2,7 +2,8 @@
 % Please edit documentation in R/try-catch.R
 \name{try_pmap}
 \alias{try_pmap}
-\title{Apply a function over a list of vectors, capturing any errors to display at the end}
+\title{Apply a function over a list of vectors, capturing any errors to display at
+the end}
 \usage{
 try_pmap(
   l,
@@ -19,54 +20,61 @@ try_pmap(
 \arguments{
 \item{l}{(list) A list of vectors the same length to apply the function to.}
 
-\item{f}{(function) The function to map to the elements of the vectors in \code{l}.}
+\item{f}{(function) The function to map to the elements of the vectors in
+\code{l}.}
 
 \item{...}{(optional) Extra arguments to supply to f.}
 
-\item{msg_prefix}{(string, optional) A message to prefix any resulting error message.}
+\item{msg_prefix}{(string, optional) A message to prefix any resulting error
+message.}
 
-\item{warn_level}{(integer, optional) The level of any warnings about errors encountered.
-If 0 then no warnings are shown. Default: 2.}
+\item{warn_level}{(integer, optional) The level of any warnings about errors
+encountered. If 0 then no warnings are shown. Default: 2.}
 
-\item{error_level}{(integer, optional) The level of any resulting errors. Default: 1.}
+\item{error_level}{(integer, optional) The level of any resulting errors.
+Default: 1.}
 
-\item{on_error}{(string) The kind of message to produce if there is an error. Either "info",
-"warn", or "error". Default: "error".}
+\item{on_error}{(string) The kind of message to produce if there is an error.
+Either "info", "warn", or "error". Default: "error".}
 
-\item{simplify}{(boolean, optional) Whether to try to simplify the result of the mapping
-into an atomic vector. Default: FALSE.}
+\item{simplify}{(boolean, optional) Whether to try to simplify the result of
+the mapping into an atomic vector. Default: FALSE.}
 
-\item{use_names}{(boolean, optional) Whether to use 'x' as names in the resulting list. 'x'
-must be a character vector for this to work. Default: TRUE.}
+\item{use_names}{(boolean, optional) Whether to use 'x' as names in the
+resulting list. 'x' must be a character vector for this to work. Default:
+TRUE.}
 }
 \value{
-If \code{simplify = FALSE} a list is returned. Otherwise, the function attempts to
-simplify the result to an atomic vector.
+If \code{simplify = FALSE} a list is returned. Otherwise, the function
+attempts to simplify the result to an atomic vector.
 }
 \description{
-This function is similar to \code{\link[purrr:pmap]{purrr::pmap()}} except that instead of stopping at the first
-error it captures them and continues. If there are any errors it collects them together
-and displays them at the end. You have the option to specify a prefix to the error message
-using the \code{msg_prefix} argument.
+This function is similar to \code{\link[purrr:pmap]{purrr::pmap()}} except that instead of stopping
+at the first error it captures them and continues. If there are any errors it
+collects them together and displays them at the end. You have the option to
+specify a prefix to the error message using the \code{msg_prefix} argument.
 }
 \details{
-If the mapped function is a long running process \code{try_pmap} can output a warning at the time
-an error occurs, but specifying the \code{warn_level} argument to be greater than 0 (see
-\code{\link[=warn]{warn()}} for more details about message levels. Similarly \code{error_level} argument specifies
-the level of any reported error, as detailed in \code{\link[=error]{error()}}.
+If the mapped function is a long running process \code{try_pmap} can output a
+warning at the time an error occurs, but specifying the \code{warn_level} argument
+to be greater than 0 (see \code{\link[=warn]{warn()}} for more details about message levels.
+Similarly \code{error_level} argument specifies the level of any reported error,
+as detailed in \code{\link[=error]{error()}}.
 
-If you do not want the function to stop with an error, you can instead return a warning or
-info message using the \code{on_error} argument.
+If you do not want the function to stop with an error, you can instead return
+a warning or info message using the \code{on_error} argument.
 
-Finally, \code{simplify} and \code{use_names} allow the user to specify whether to simplify the output
-to an atomic vector, if possible, and whether to use the vector input \code{x} as names to the
-resulting list.
+Finally, \code{simplify} and \code{use_names} allow the user to specify whether to
+simplify the output to an atomic vector, if possible, and whether to use the
+vector input \code{x} as names to the resulting list.
 }
 \examples{
 \dontrun{
+
   test_try_pmap <- function(x, y) if (x > y) stop("x > y") else x
   try_pmap(list(1:3, 3:1), test_try_pmap)
   try_pmap(list(1:3, 2:4), test_try_pmap)
+
 }
 
 }
