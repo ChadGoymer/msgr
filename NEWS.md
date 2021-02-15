@@ -1,3 +1,7 @@
+# msgr 1.2.0
+
+- Used `devtools::lint()` to follow tidyverse style guide
+
 # msgr 1.1.3
 
 - Using GitHub actions for CI
