@@ -23,6 +23,88 @@ is_na <- function(x) {
   is.na(x)
 }
 
+#  FUNCTION: is_integerish -----------------------------------------------------
+#
+#' Check the variable type
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a valid URL, FALSE otherwise
+#'
+#' @examples
+#' is_integerish(1:3)
+#' is_integerish(c(1.0, 2.0))
+#' is_integerish(3.142)
+#'
+#' is_scalar_integerish(1:3)
+#' is_scalar_integerish(c(1.0, 2.0))
+#' is_scalar_integerish(3.142)
+#'
+#' is_numeric(1:3)
+#' is_numeric(c(1.2, 2.4))
+#' is_numeric("text")
+#'
+#' is_scalar_numeric(1)
+#' is_scalar_numeric(c(1.2, 2.4))
+#' is_scalar_numeric("text")
+#'
+#' is_factor(factor(c("a", "b", "a")))
+#' is_factor(1:3)
+#'
+#' is_data_frame(data.frame(a = 1:26, b = letters))
+#' is_data_frame(list(a = 1:26, b = letters))
+#'
+#' @export
+#'
+is_integerish <- function(x) {
+  rlang::is_integerish(x)
+}
+
+#  FUNCTION: is_scalar_integerish ----------------------------------------------
+#
+#' @rdname is_integerish
+#' @export
+#'
+is_scalar_integerish <- function(x) {
+  rlang::is_scalar_integerish(x)
+}
+
+#  FUNCTION: is_numeric --------------------------------------------------------
+#
+#' @rdname is_integerish
+#' @export
+#'
+is_numeric <- function(x) {
+  is.numeric(x)
+}
+
+#  FUNCTION: is_scalar_numeric -------------------------------------------------
+#
+#' @rdname is_integerish
+#' @export
+#'
+is_scalar_numeric <- function(x) {
+  is.numeric(x) && is_scalar_atomic(x)
+}
+
+#  FUNCTION: is_factor ---------------------------------------------------------
+#
+#' @rdname is_integerish
+#' @export
+#'
+is_factor <- function(x) {
+  is.factor(x)
+}
+
+#  FUNCTION: is_data_frame -----------------------------------------------------
+#
+#' @rdname is_integerish
+#' @export
+#'
+is_data_frame <- function(x) {
+  is.data.frame(x)
+}
+
 #  FUNCTION: is_url ------------------------------------------------------------
 #
 #' Checks whether the variable is a valid URL

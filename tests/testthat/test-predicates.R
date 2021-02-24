@@ -36,6 +36,133 @@ test_that("is_na returns FALSE for non-NAs", {
 
 })
 
+# TEST: is_integerish ----------------------------------------------------------
+
+test_that("is_integerish returns TRUE for valid inputs", {
+
+  expect_true(is_integerish(1L))
+  expect_true(is_integerish(2.0))
+  expect_true(is_integerish(1:3))
+  expect_true(is_integerish(c(1.0, 2.0, 3.0)))
+  expect_true(is_integerish(matrix(1:4, nrow = 2)))
+
+})
+
+test_that("is_integerish returns FALSE for invalid inputs", {
+
+  expect_false(is_integerish(TRUE))
+  expect_false(is_integerish(3.142))
+  expect_false(is_integerish("bob"))
+  expect_false(is_integerish(list(1:3)))
+  expect_false(is_integerish(data.frame(x = LETTERS, y = 1:26)))
+
+})
+
+# TEST: is_scalar_integerish ---------------------------------------------------
+
+test_that("is_scalar_integerish returns TRUE for valid inputs", {
+
+  expect_true(is_scalar_integerish(1L))
+  expect_true(is_scalar_integerish(2.0))
+
+})
+
+test_that("is_scalar_integerish returns FALSE for invalid inputs", {
+
+  expect_false(is_scalar_integerish(TRUE))
+  expect_false(is_scalar_integerish(3.142))
+  expect_false(is_scalar_integerish("bob"))
+  expect_false(is_scalar_integerish(list(1:3)))
+  expect_false(is_scalar_integerish(data.frame(x = LETTERS, y = 1:26)))
+
+  expect_false(is_scalar_integerish(1:3))
+  expect_false(is_scalar_integerish(c(1.0, 2.0, 3.0)))
+  expect_false(is_scalar_integerish(matrix(1:4, nrow = 2)))
+
+})
+
+# TEST: is_numeric -------------------------------------------------------------
+
+test_that("is_numeric returns TRUE for valid inputs", {
+
+  expect_true(is_numeric(1L))
+  expect_true(is_numeric(2.5))
+  expect_true(is_numeric(1:3))
+  expect_true(is_numeric(c(1.1, 2.2, 3.3)))
+  expect_true(is_numeric(matrix(1:4, nrow = 2)))
+
+})
+
+test_that("is_numeric returns FALSE for invalid inputs", {
+
+  expect_false(is_numeric(TRUE))
+  expect_false(is_numeric("bob"))
+  expect_false(is_numeric(list(1:3)))
+  expect_false(is_numeric(data.frame(x = LETTERS, y = 1:26)))
+
+})
+
+# TEST: is_scalar_numeric ------------------------------------------------------
+
+test_that("is_scalar_numeric returns TRUE for valid inputs", {
+
+  expect_true(is_scalar_numeric(1L))
+  expect_true(is_scalar_numeric(2.2))
+
+})
+
+test_that("is_scalar_numeric returns FALSE for invalid inputs", {
+
+  expect_false(is_scalar_numeric(TRUE))
+  expect_false(is_scalar_numeric("bob"))
+  expect_false(is_scalar_numeric(list(1:3)))
+  expect_false(is_scalar_numeric(data.frame(x = LETTERS, y = 1:26)))
+
+  expect_false(is_scalar_numeric(1:3))
+  expect_false(is_scalar_numeric(c(1.1, 2.2, 3.3)))
+  expect_false(is_scalar_numeric(matrix(1:4, nrow = 2)))
+
+})
+
+# TEST: is_factor --------------------------------------------------------------
+
+test_that("is_factor returns TRUE for valid inputs", {
+
+  expect_true(is_factor(factor(1, levels = 1)))
+  expect_true(is_factor(factor(c("a", "b", "a"))))
+
+})
+
+test_that("is_factor returns FALSE for invalid inputs", {
+
+  expect_false(is_factor(TRUE))
+  expect_false(is_factor(1:3))
+  expect_false(is_factor(c(1.1, 2.2, 3.3)))
+  expect_false(is_factor(matrix(1:4, nrow = 2)))
+  expect_false(is_factor("bob"))
+  expect_false(is_factor(list(1:3)))
+  expect_false(is_factor(data.frame(x = LETTERS, y = 1:26)))
+
+})
+
+# TEST: is_data_frame ----------------------------------------------------------
+
+test_that("is_data_frame returns TRUE for valid inputs", {
+
+  expect_true(is_data_frame(data.frame(x = LETTERS, y = 1:26)))
+
+})
+
+test_that("is_data_frame returns FALSE for invalid inputs", {
+
+  expect_false(is_data_frame(TRUE))
+  expect_false(is_data_frame(1:3))
+  expect_false(is_data_frame(c(1.1, 2.2, 3.3)))
+  expect_false(is_data_frame(matrix(1:4, nrow = 2)))
+  expect_false(is_data_frame("bob"))
+  expect_false(is_data_frame(list(1:3)))
+
+})
 
 # TEST: is_url -----------------------------------------------------------------
 
@@ -60,7 +187,7 @@ test_that("is_url returns FALSE for invalid URLs", {
   expect_false(is_url("bob"))
   expect_false(is_url(list(1:3)))
   expect_false(is_url(matrix(1:4, nrow = 2)))
-  expect_false(is_url(data.frame(x = LETTERS[1:3], y = 1:3)))
+  expect_false(is_url(data.frame(x = LETTERS, y = 1:26)))
 
   expect_identical(
     is_url(c("https://www.secure.com/endpoint","bob")),
@@ -96,7 +223,7 @@ test_that("is_dir returns FALSE for an invalid directory", {
   expect_false(is_dir("bob"))
   expect_false(is_dir(list(1:3)))
   expect_false(is_dir(matrix(1:4, nrow = 2)))
-  expect_false(is_dir(data.frame(x = LETTERS[1:3], y = 1:3)))
+  expect_false(is_dir(data.frame(x = LETTERS, y = 1:26)))
 
   expect_false(is_dir("C:/does/not/exist"))
   expect_false(is_dir(no_dir))
@@ -140,7 +267,7 @@ test_that("is_file returns FALSE for an invalid directory", {
   expect_false(is_file("bob"))
   expect_false(is_file(list(1:3)))
   expect_false(is_file(matrix(1:4, nrow = 2)))
-  expect_false(is_file(data.frame(x = LETTERS[1:3], y = 1:3)))
+  expect_false(is_file(data.frame(x = LETTERS, y = 1:26)))
 
   expect_false(is_file("C:/does/not/exist.txt"))
   expect_false(is_file(no_file))
@@ -183,7 +310,7 @@ test_that("is_readable returns FALSE for an unreadable file or directory", {
   expect_false(is_readable("bob"))
   expect_false(is_readable(list(1:3)))
   expect_false(is_readable(matrix(1:4, nrow = 2)))
-  expect_false(is_readable(data.frame(x = LETTERS[1:3], y = 1:3)))
+  expect_false(is_readable(data.frame(x = LETTERS, y = 1:26)))
 
   expect_false(is_readable("C:/does/not/exist"))
   expect_false(is_readable(no_dir))
@@ -227,7 +354,7 @@ test_that("is_writeable returns FALSE for an unreadable file or directory", {
   expect_false(is_writeable("bob"))
   expect_false(is_writeable(list(1:3)))
   expect_false(is_writeable(matrix(1:4, nrow = 2)))
-  expect_false(is_writeable(data.frame(x = LETTERS[1:3], y = 1:3)))
+  expect_false(is_writeable(data.frame(x = LETTERS, y = 1:26)))
 
   expect_false(is_writeable("C:/does/not/exist"))
   expect_false(is_writeable(no_dir))
