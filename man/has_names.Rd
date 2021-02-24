@@ -13,10 +13,11 @@ has_names(x, nm)
 the function checks for any names.}
 }
 \value{
-TRUE if x has any names, FALSE otherwise
+TRUE if x has names, FALSE otherwise
 }
 \description{
-Checks whether the variable has names
+If \code{nm} is a character vector each element is checked, returning a logical
+vector of the same length.
 }
 \examples{
 x <- list(a = 1, b = 2)

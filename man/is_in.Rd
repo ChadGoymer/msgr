@@ -2,7 +2,7 @@
 % Please edit documentation in R/predicates.R
 \name{is_in}
 \alias{is_in}
-\title{Checks whether all elements of one variable are in another}
+\title{Checks whether elements of one variable are in another}
 \usage{
 is_in(x, y)
 }
@@ -12,10 +12,11 @@ is_in(x, y)
 \item{y}{(any) The object with elements to test against}
 }
 \value{
-TRUE if all elements in x are in y, FALSE otherwise
+TRUE if elements in x are in y, FALSE otherwise
 }
 \description{
-Checks whether all elements of one variable are in another
+If \code{x} is a character vector each element is checked, returning a logical
+vector of the same length.
 }
 \examples{
 is_in("a", letters)

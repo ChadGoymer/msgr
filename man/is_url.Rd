@@ -13,11 +13,13 @@ is_url(x)
 TRUE if x is a valid URL, FALSE otherwise
 }
 \description{
-Checks whether the variable is a valid URL
+If a character vector is supplied each element is checked, returning a
+logical vector of the same length.
 }
 \examples{
 is_url("http://something.com")
 is_url("https://google.com")
+is_url(c("http://something.com", "https://google.com"))
 
 is_url(1)
 is_url("foo")
