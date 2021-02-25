@@ -164,6 +164,35 @@ test_that("is_data_frame returns FALSE for invalid inputs", {
 
 })
 
+# TEST: has_length -------------------------------------------------------------
+
+test_that("has_length returns TRUE for valid inputs", {
+
+  expect_true(has_length(1, 1))
+  expect_true(has_length(c("bob", "jane"), 2))
+  expect_true(has_length(list(x = 1, y = 2, z = 3), 3))
+
+  expect_true(has_length(1:3, .min = 2))
+  expect_true(has_length(1:3, .max = 10))
+
+  expect_true(has_length(1:3, .min = 2, .max = 10))
+
+})
+
+test_that("has_length returns FALSE for invalid inputs", {
+
+  expect_false(has_length(1:3, 1))
+  expect_false(has_length(c("bob", "jane"), 3))
+  expect_false(has_length(list(x = 1, y = 2, z = 3), 5))
+
+  expect_false(has_length("A", .min = 2))
+  expect_false(has_length(LETTERS, .max = 10))
+
+  expect_false(has_length(1, .min = 2, .max = 10))
+  expect_false(has_length(1:11, .min = 2, .max = 10))
+
+})
+
 # TEST: is_url -----------------------------------------------------------------
 
 test_that("is_url returns TRUE for valid URLs", {
@@ -369,7 +398,7 @@ test_that("is_writeable returns FALSE for an unreadable file or directory", {
 
 # TEST: is_in ------------------------------------------------------------------
 
-test_that("is_in returns TRUE if elements of x are in y", {
+test_that("is_in returns TRUE if elements of x are in allowed values", {
 
   expect_true(is_in(1, 1:3))
   expect_identical(
@@ -383,12 +412,57 @@ test_that("is_in returns TRUE if elements of x are in y", {
 
 })
 
-test_that("is_in returns FALSE if the elements of x are not in y", {
+test_that("is_in returns FALSE if elements of x are not in allowed values", {
 
   expect_false(is_in(0, 1:3))
   expect_identical(
     is_in(c("A", "D"), c("A", "B", "C")),
     c(TRUE, FALSE)
+  )
+
+})
+
+# TEST: is_in_range ------------------------------------------------------------
+
+test_that("is_in_range returns TRUE if elements of x are in range", {
+
+  expect_true(is_in_range(1, .min = 0))
+  expect_true(is_in_range(1, .max = 10))
+  expect_true(is_in_range(1, .min = 0, .max = 10))
+
+  expect_identical(
+    is_in_range(c(1.1, 2.2, 3.3), .min = 0),
+    c(TRUE, TRUE, TRUE)
+  )
+  expect_identical(
+    is_in_range(c(1.1, 2.2, 3.3), .max = 10),
+    c(TRUE, TRUE, TRUE)
+  )
+  expect_identical(
+    is_in_range(c(1.1, 2.2, 3.3), .min = 0, .max = 10),
+    c(TRUE, TRUE, TRUE)
+  )
+
+})
+
+test_that("is_in_range returns FALSE if the elements of x are not in range", {
+
+  expect_false(is_in_range(0, .min = 1))
+  expect_false(is_in_range(11, .max = 10))
+  expect_false(is_in_range(0, .min = 1, .max = 10))
+  expect_false(is_in_range(11, .min = 1, .max = 10))
+
+  expect_identical(
+    is_in_range(c(1.1, 2.2, 3.3), .min = 10),
+    c(FALSE, FALSE, FALSE)
+  )
+  expect_identical(
+    is_in_range(c(1.1, 2.2, 3.3), .max = 1),
+    c(FALSE, FALSE, FALSE)
+  )
+  expect_identical(
+    is_in_range(c(1.1, 2.2, 3.3), .min = 2, .max = 3),
+    c(FALSE, TRUE, FALSE)
   )
 
 })
@@ -429,3 +503,61 @@ test_that("has_names returns FALSE for an object without names", {
   )
 
 })
+
+# TEST: has_char_length --------------------------------------------------------
+
+test_that("has_char_length returns TRUE if character length is valid", {
+
+  expect_true(has_char_length("", 0))
+  expect_true(has_char_length("sometext", 8))
+  expect_true(has_char_length("sometext", .min = 1))
+  expect_true(has_char_length("sometext", .max = 10))
+  expect_true(has_char_length("sometext", .min = 1, .max = 10))
+
+  expect_identical(
+    has_char_length(c("some", "text"), 4),
+    c(TRUE, TRUE)
+  )
+  expect_identical(
+    has_char_length(c("some", "text"), .min = 1),
+    c(TRUE, TRUE)
+  )
+  expect_identical(
+    has_char_length(c("some", "text"), .max = 10),
+    c(TRUE, TRUE)
+  )
+  expect_identical(
+    has_char_length(c("some", "text"), .min = 1, .max = 10),
+    c(TRUE, TRUE)
+  )
+
+})
+
+test_that("has_char_length returns FALSE if character length is invalid", {
+
+  expect_false(has_char_length(1, 0))
+  expect_false(has_char_length("sometext", 4))
+  expect_false(has_char_length("sometext", .min = 10))
+  expect_false(has_char_length("sometext", .max = 4))
+  expect_false(has_char_length("", .min = 1, .max = 10))
+  expect_false(has_char_length("somemoretext", .min = 1, .max = 10))
+
+  expect_identical(
+    has_char_length(c("different", "text"), 4),
+    c(FALSE, TRUE)
+  )
+  expect_identical(
+    has_char_length(c("different", "text"), .min = 5),
+    c(TRUE, FALSE)
+  )
+  expect_identical(
+    has_char_length(c("different", "text"), .max = 5),
+    c(FALSE, TRUE)
+  )
+  expect_identical(
+    has_char_length(c("different", "text"), .min = 5, .max = 8),
+    c(FALSE, FALSE)
+  )
+
+})
+

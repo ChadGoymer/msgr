@@ -17,10 +17,7 @@
 #' @export
 #'
 is_na <- function(x) {
-  if (is_null(x)) {
-    return(FALSE)
-  }
-  is.na(x)
+  if (is_null(x)) FALSE else is.na(x)
 }
 
 #  FUNCTION: is_integerish -----------------------------------------------------
@@ -105,6 +102,37 @@ is_data_frame <- function(x) {
   is.data.frame(x)
 }
 
+#  FUNCTION: has_length --------------------------------------------------------
+#
+#' Check whether the variable has specified length
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a valid URL, FALSE otherwise
+#'
+#' @examples
+#' has_length(1, 1)
+#' has_length(c("bob", "jane"), 2)
+#' has_length(list(x = 1, y = 2, z = 3), 3)
+#'
+#' has_length(1:3, 1)
+#' has_length(c("bob", "jane"), 3)
+#' has_length(list(x = 1, y = 2, z = 3), 5)
+#'
+#' has_length(1:3, .min = 2)
+#' has_length(1:3, .max = 10)
+#'
+#' has_length("A", .min = 2)
+#' has_length(LETTERS, .max = 10)
+#'
+#' @export
+#'
+has_length <- function(x, .length, .min, .max) {
+  (missing(.length) || length(x) == .length) &&
+    (missing(.min) || length(x) >= .min) &&
+    (missing(.max) || length(x) <= .max)
+}
+
 #  FUNCTION: is_url ------------------------------------------------------------
 #
 #' Checks whether the variable is a valid URL
@@ -128,11 +156,7 @@ is_data_frame <- function(x) {
 #' @export
 #'
 is_url <- function(x) {
-  if (is_character(x)) {
-    grepl("^(https|http)://", x)
-  } else {
-    FALSE
-  }
+  if (is_character(x)) grepl("^(https|http)://", x) else FALSE
 }
 
 #  FUNCTION: is_dir ------------------------------------------------------------
@@ -166,11 +190,7 @@ is_url <- function(x) {
 #' @export
 #'
 is_dir <- function(x) {
-  if (is_character(x)) {
-    unname(fs::is_dir(x))
-  } else {
-    FALSE
-  }
+  if (is_character(x)) unname(fs::is_dir(x)) else FALSE
 }
 
 #  FUNCTION: is_file -----------------------------------------------------------
@@ -179,11 +199,7 @@ is_dir <- function(x) {
 #' @export
 #'
 is_file <- function(x) {
-  if (is_character(x)) {
-    unname(fs::is_file(x))
-  } else {
-    FALSE
-  }
+  if (is_character(x)) unname(fs::is_file(x)) else FALSE
 }
 
 #  FUNCTION: is_readable -------------------------------------------------------
@@ -192,11 +208,7 @@ is_file <- function(x) {
 #' @export
 #'
 is_readable <- function(x) {
-  if (is_character(x)) {
-    unname(fs::file_access(x, mode = "read"))
-  } else {
-    FALSE
-  }
+  if (is_character(x)) unname(fs::file_access(x, mode = "read")) else FALSE
 }
 
 #  FUNCTION: is_writeable ------------------------------------------------------
@@ -205,22 +217,21 @@ is_readable <- function(x) {
 #' @export
 #'
 is_writeable <- function(x) {
-  if (is_character(x)) {
-    unname(fs::file_access(x, mode = "write"))
-  } else {
-    FALSE
-  }
+  if (is_character(x)) unname(fs::file_access(x, mode = "write")) else FALSE
 }
 
 #  FUNCTION: is_in -------------------------------------------------------------
 #
-#' Checks whether elements of one variable are in another
+#' Check whether elements of a variable are allowed (or not)
 #'
+#' `is_in()` checks whether the elements of `x` are in a set of allowed values.
+#' `is_in_range()` checks whether the elements of `x` are within a numeric
+#' range.
 #' If `x` is a character vector each element is checked, returning a logical
 #' vector of the same length.
 #'
 #' @param x (any) The object with elements to test
-#' @param y (any) The object with elements to test against
+#' @param .values (any) The allowed (or not allowed) values.
 #'
 #' @return TRUE if elements in x are in y, FALSE otherwise
 #'
@@ -231,22 +242,44 @@ is_writeable <- function(x) {
 #' is_in(1, LETTERS)
 #' is_in(1:2, LETTERS)
 #'
+#' is_in_range(1, .min = 0)
+#' is_in_range(c(1.1, 2.2, 3.3), .min = 0, .max = 10)
+#'
+#' is_in_range(0, .min = 1)
+#' is_in_range(c(1.1, 2.2, 3.3), .min = 2, .max = 3)
+#'
 #' @export
 #'
-is_in <- function(x, y) {
-  x %in% y
+is_in <- function(x, .values) {
+  is_vector(x) & x %in% .values
+}
+
+#  FUNCTION: is_in_range -------------------------------------------------------
+#
+#' @param .min (numeric, optional) The minimum allowed value for a range. If not
+#'   supplied, no minimum is set.
+#' @param .max (numeric, optional) The maximum allowed value for a range. If not
+#'   supplied, no maximum is set.
+#'
+#' @rdname is_in
+#' @export
+#'
+is_in_range <- function(x, .min, .max) {
+  is.numeric(x) &
+    (if (missing(.min)) TRUE else x >= .min) &
+    (if (missing(.max)) TRUE else x <= .max)
 }
 
 #  FUNCTION: has_names ---------------------------------------------------------
 #
 #' Checks whether the variable has names
 #'
-#' If `nm` is a character vector each element is checked, returning a logical
-#' vector of the same length.
+#' If `.names` is a character vector each element is checked, returning a
+#' logical vector of the same length.
 #'
 #' @param x (any) The object to test
-#' @param nm (character, optional) The names to check for. If not specified then
-#'   the function checks for any names.
+#' @param .names (character, optional) The names to check for. If not specified
+#'   then the function checks for any names.
 #'
 #' @return TRUE if x has names, FALSE otherwise
 #'
@@ -260,13 +293,48 @@ is_in <- function(x, y) {
 #'
 #' @export
 #'
-has_names <- function(x, nm) {
+has_names <- function(x, .names) {
   names_exist <- !is_null(names(x))
 
-  if (!missing(nm) && names_exist) {
-    is_character(nm) || stop("names ('nm') must be given as a character vector")
-    is_in(nm, names(x))
+  if (!missing(.names) && names_exist) {
+    is_character(.names) || stop("'.names' must be a character vector")
+    is_in(.names, names(x))
   } else {
     names_exist
+  }
+}
+
+#  FUNCTION: has_char_length ---------------------------------------------------
+#
+#' Check whether the variable has specified character length
+#'
+#' If a character vector is supplied each element is checked, returning a
+#' logical vector of the same length.
+#'
+#' @param x (any) The object to test
+#'
+#' @return TRUE if x is a valid URL, FALSE otherwise
+#'
+#' @examples
+#' has_char_length("", 0)
+#' has_char_length(c("some", "text"), 4)
+#' has_char_length(c("some", "text"), .min = 1)
+#' has_char_length(c("some", "text"), .max = 10)
+#' has_char_length(c("some", "text"), .min = 1, .max = 10)
+#'
+#' has_char_length("sometext", 4)
+#' has_char_length(c("different", "text"), .min = 5)
+#' has_char_length(c("different", "text"), .max = 5)
+#' has_char_length(c("different", "text"), .min = 5, .max = 8)
+#'
+#' @export
+#'
+has_char_length <- function(x, .length, .min, .max) {
+  if (is_character(x)) {
+    (if (missing(.length)) TRUE else nchar(x) == .length) &
+      (if (missing(.min)) TRUE else nchar(x) >= .min) &
+      (if (missing(.max)) TRUE else nchar(x) <= .max)
+  } else {
+    FALSE
   }
 }

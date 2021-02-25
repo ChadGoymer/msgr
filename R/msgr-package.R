@@ -19,7 +19,6 @@
 #'
 #' @author Chad Goymer \email{chad.goymer@@gmail.com}
 #'
-#' @importFrom rlang is_integerish is_scalar_integerish
 #' @import purrr
 #'
 globalVariables(c(".", ".data"))

@@ -59,9 +59,9 @@ info <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (is_scalar_integerish(level) && level > 0 && level <= 10) ||
+  (rlang::is_scalar_integerish(level) && level > 0 && level <= 10) ||
     stop("'level' must be an integer between 1 and 10: ", level)
-  (is_scalar_integerish(msg_level) && msg_level > 0 && msg_level <= 10) ||
+  (rlang::is_scalar_integerish(msg_level) && msg_level > 0 && msg_level <= 10) ||
     stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
   (
     (is_null(msg_types) || is_character(msg_types)) &&
@@ -162,9 +162,9 @@ warn <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (is_scalar_integerish(level) && level > 0 && level <= 10) ||
+  (rlang::is_scalar_integerish(level) && level > 0 && level <= 10) ||
     stop("'level' must be an integer between 1 and 10: ", level)
-  (is_scalar_integerish(msg_level) && msg_level > 0 && msg_level <= 10) ||
+  (rlang::is_scalar_integerish(msg_level) && msg_level > 0 && msg_level <= 10) ||
     stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
   (
     (is_null(msg_types) || is_character(msg_types)) &&
@@ -268,9 +268,9 @@ error <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (is_scalar_integerish(level) && level > 0 && level <= 10) ||
+  (rlang::is_scalar_integerish(level) && level > 0 && level <= 10) ||
     stop("'level' must be an integer between 1 and 10: ", level)
-  (is_scalar_integerish(msg_level) && msg_level > 0 && msg_level <= 10) ||
+  (rlang::is_scalar_integerish(msg_level) && msg_level > 0 && msg_level <= 10) ||
     stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
   (
     (is_null(msg_types) || is_character(msg_types)) &&
@@ -359,9 +359,9 @@ info_if <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (is_scalar_integerish(level) && level > 0 && level <= 10) ||
+  (rlang::is_scalar_integerish(level) && level > 0 && level <= 10) ||
     stop("'level' must be an integer between 1 and 10: ", level)
-  (is_scalar_integerish(msg_level) && msg_level > 0 && msg_level <= 10) ||
+  (rlang::is_scalar_integerish(msg_level) && msg_level > 0 && msg_level <= 10) ||
     stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
   (
     (is_null(msg_types) || is_character(msg_types)) &&
@@ -450,10 +450,10 @@ warn_if <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
+  (rlang::is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
     error("'level' must be an integer between 1 and 10: ", level)
   (
-    is_scalar_integerish(msg_level) &&
+    rlang::is_scalar_integerish(msg_level) &&
       isTRUE(msg_level > 0) &&
       isTRUE(msg_level <= 10)
   ) ||
@@ -544,10 +544,10 @@ error_if <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
+  (rlang::is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
     error("'level' must be an integer between 1 and 10: ", level)
   (
-    is_scalar_integerish(msg_level) &&
+    rlang::is_scalar_integerish(msg_level) &&
       isTRUE(msg_level > 0) &&
       isTRUE(msg_level <= 10)
   ) ||

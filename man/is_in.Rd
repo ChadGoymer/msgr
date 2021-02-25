@@ -2,19 +2,31 @@
 % Please edit documentation in R/predicates.R
 \name{is_in}
 \alias{is_in}
-\title{Checks whether elements of one variable are in another}
+\alias{is_in_range}
+\title{Check whether elements of a variable are allowed (or not)}
 \usage{
-is_in(x, y)
+is_in(x, .values)
+
+is_in_range(x, .min, .max)
 }
 \arguments{
 \item{x}{(any) The object with elements to test}
 
-\item{y}{(any) The object with elements to test against}
+\item{.values}{(any) The allowed (or not allowed) values.}
+
+\item{.min}{(numeric, optional) The minimum allowed value for a range. If not
+supplied, no minimum is set.}
+
+\item{.max}{(numeric, optional) The maximum allowed value for a range. If not
+supplied, no maximum is set.}
 }
 \value{
 TRUE if elements in x are in y, FALSE otherwise
 }
 \description{
+\code{is_in()} checks whether the elements of \code{x} are in a set of allowed values.
+\code{is_in_range()} checks whether the elements of \code{x} are within a numeric
+range.
 If \code{x} is a character vector each element is checked, returning a logical
 vector of the same length.
 }
@@ -24,5 +36,11 @@ is_in(c("a", "b", "c"), letters)
 
 is_in(1, LETTERS)
 is_in(1:2, LETTERS)
+
+is_in_range(1, .min = 0)
+is_in_range(c(1.1, 2.2, 3.3), .min = 0, .max = 10)
+
+is_in_range(0, .min = 1)
+is_in_range(c(1.1, 2.2, 3.3), .min = 2, .max = 3)
 
 }
