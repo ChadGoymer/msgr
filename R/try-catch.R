@@ -143,9 +143,9 @@ try_map <- function(
     error("'f' must be a function")
   (is_null(msg_prefix) || is_scalar_character(msg_prefix)) ||
     error("'msg_prefix' must be NULL or a string")
-  (is_scalar_integerish(warn_level) && isTRUE(warn_level >= 0)) ||
+  (rlang::is_scalar_integerish(warn_level) && isTRUE(warn_level >= 0)) ||
     error("'warn_level' must be an integer greater or equal to 0")
-  (is_scalar_integerish(error_level) && isTRUE(error_level > 0)) ||
+  (rlang::is_scalar_integerish(error_level) && isTRUE(error_level > 0)) ||
     error("'error_level' must be an integer greater than 0")
   (is_scalar_character(on_error) && on_error %in% c("info", "warn", "error")) ||
     error("'on_error' must be either 'info', 'warn' or 'error'")
@@ -292,9 +292,9 @@ try_pmap <- function(
     error("'f' must be a function")
   (is_null(msg_prefix) || is_scalar_character(msg_prefix)) ||
     error("'msg_prefix' must be NULL or a string")
-  (is_scalar_integerish(warn_level) && isTRUE(warn_level >= 0)) ||
+  (rlang::is_scalar_integerish(warn_level) && isTRUE(warn_level >= 0)) ||
     error("'warn_level' must be an integer greater or equal to 0")
-  (is_scalar_integerish(error_level) && isTRUE(error_level > 0)) ||
+  (rlang::is_scalar_integerish(error_level) && isTRUE(error_level > 0)) ||
     error("'error_level' must be an integer greater than 0")
   (is_scalar_character(on_error) && on_error %in% c("info", "warn", "error")) ||
     error("'on_error' must be either 'info', 'warn' or 'error'")

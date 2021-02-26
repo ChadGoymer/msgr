@@ -1,3 +1,19 @@
+# msgr 1.2.2
+
+Added the following function to check type
+- `is_integerish()`
+- `is_scalar_integerish()`
+- `is_numeric()`
+- `is_scalar_numeric()`
+- `is_factor()`
+- `is_data_frame()`
+
+Added or updated the following;
+- `has_length()`
+- `is_in()` (updated to be vectorised)
+- `is_in_range()`
+- `has_char_length()`
+
 # msgr 1.2.1
 
 - Do not override options if they are set before the package loads

@@ -37,12 +37,12 @@ reference:
   desc: These functions help specify conditions
   contents:
   - '`is_na`'
-  - '`is_in`'
-  - '`has_names`'
+  - '`is_integerish`'
+  - '`has_length`'
   - '`is_url`'
   - '`is_dir`'
-  - '`is_file`'
-  - '`is_readable`'
-  - '`is_writeable`'
+  - '`is_in`'
+  - '`has_names`'
+  - '`has_char_length`'
 news:
 - one_page: false

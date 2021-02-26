@@ -4,19 +4,20 @@
 \alias{has_names}
 \title{Checks whether the variable has names}
 \usage{
-has_names(x, nm)
+has_names(x, .names)
 }
 \arguments{
 \item{x}{(any) The object to test}
 
-\item{nm}{(character, optional) The names to check for. If not specified then
-the function checks for any names.}
+\item{.names}{(character, optional) The names to check for. If not specified
+then the function checks for any names.}
 }
 \value{
-TRUE if x has any names, FALSE otherwise
+TRUE if x has names, FALSE otherwise
 }
 \description{
-Checks whether the variable has names
+If \code{.names} is a character vector each element is checked, returning a
+logical vector of the same length.
 }
 \examples{
 x <- list(a = 1, b = 2)

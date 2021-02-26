@@ -2,9 +2,18 @@
 % Please edit documentation in R/predicates.R
 \name{is_dir}
 \alias{is_dir}
-\title{Checks whether the variable is a path to an existing directory}
+\alias{is_file}
+\alias{is_readable}
+\alias{is_writeable}
+\title{Check file paths and directories}
 \usage{
 is_dir(x)
+
+is_file(x)
+
+is_readable(x)
+
+is_writeable(x)
 }
 \arguments{
 \item{x}{(any) The object to test}
@@ -13,11 +22,24 @@ is_dir(x)
 TRUE if x is a path to an existing directory, FALSE otherwise
 }
 \description{
-Checks whether the variable is a path to an existing directory
+These functions check whether the directories or files exist and whether the
+current user has read or write permissions. If a character vector is supplied
+each element is checked, returning a logical vector of the same length.
 }
 \examples{
 is_dir(tempdir())
 is_dir("/does/not/exist")
-is_dir(1)
+
+tmpfile <- tempfile()
+file.create(tmpfile)
+
+is_file(tmpfile)
+is_file("/does/not/exist.txt")
+
+is_readable(tmpfile)
+is_readable("/does/not/exist.txt")
+
+is_writeable(tmpfile)
+is_writeable("/does/not/exist.txt")
 
 }
