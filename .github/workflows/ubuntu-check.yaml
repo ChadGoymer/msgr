@@ -1,16 +1,22 @@
 on:
   push:
-    branches: main
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-name: pkgdown
+name: Ubuntu
 
 jobs:
-  pkgdown:
-    runs-on: macOS-latest
+  Ubuntu:
+    name: Ubuntu-16.04-latest (release)
+    runs-on: ubuntu-16.04
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"
 
     steps:
       - uses: actions/checkout@v2
@@ -35,18 +41,29 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
+      - name: Install system dependencies
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+        run: |
+          Rscript -e "remotes::install_github('r-hub/sysreqs')"
+          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
+          sudo -s eval "$sysreqs"
+
       - name: Install dependencies
         run: |
-          install.packages("remotes")
           remotes::install_deps(dependencies = TRUE)
-          remotes::install_dev("pkgdown")
+          remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
-      - name: Install package
-        run: R CMD INSTALL .
+      - name: Check
+        env:
+          _R_CHECK_CRAN_INCOMING_REMOTE_: false
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+        shell: Rscript {0}
 
-      - name: Deploy package
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ runner.os }}-release-results
+          path: check

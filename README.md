@@ -1,6 +1,8 @@
 # msgr
 
-[![R build status](https://github.com/ChadGoymer/msgr/workflows/R-CMD-check/badge.svg)](https://github.com/ChadGoymer/msgr/actions) [![Code coverage](https://codecov.io/github/ChadGoymer/msgr/branch/master/graphs/badge.svg)](https://codecov.io/github/ChadGoymer/msgr) 
+<!-- badges: start -->
+[![Windows](https://github.com/ChadGoymer/msgr/workflows/Windows/badge.svg)](https://github.com/ChadGoymer/msgr/actions?query=workflow%3AWindows) [![MacOS](https://github.com/ChadGoymer/msgr/workflows/MacOS/badge.svg)](https://github.com/ChadGoymer/msgr/actions?query=workflow%3AMacOS) [![Ubuntu](https://github.com/ChadGoymer/msgr/workflows/Ubuntu/badge.svg)](https://github.com/ChadGoymer/msgr/actions?query=workflow%3AUbuntu) [![Coverage status](https://codecov.io/gh/ChadGoymer/msgr/branch/main/graph/badge.svg)](https://codecov.io/github/ChadGoymer/msgr?branch=main)
+<!-- badges: end -->
 
 This package extends the `message()`, `warning()` and `stop()` functions by adding _levels_ 
 of messages and the option to record them in a log file.
