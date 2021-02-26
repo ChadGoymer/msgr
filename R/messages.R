@@ -65,7 +65,7 @@ info <- function(
     stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
   (
     (is_null(msg_types) || is_character(msg_types)) &&
-      is_in(msg_types, c("INFO", "WARNING", "ERROR"))
+      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
   ) ||
     stop(
       "'msg_types' must be NULL (no messages) or a character vector containing",
@@ -168,7 +168,7 @@ warn <- function(
     stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
   (
     (is_null(msg_types) || is_character(msg_types)) &&
-      is_in(msg_types, c("INFO", "WARNING", "ERROR"))
+      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
   ) ||
     stop(
       "'msg_types' must be NULL (no messages) or a character vector containing",
@@ -274,7 +274,7 @@ error <- function(
     stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
   (
     (is_null(msg_types) || is_character(msg_types)) &&
-      is_in(msg_types, c("INFO", "WARNING", "ERROR"))
+      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
   ) ||
     stop(
       "'msg_types' must be NULL (no messages) or a character vector containing",
@@ -365,7 +365,7 @@ info_if <- function(
     stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
   (
     (is_null(msg_types) || is_character(msg_types)) &&
-      is_in(msg_types, c("INFO", "WARNING", "ERROR"))
+      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
   ) ||
     stop(
       "'msg_types' must be NULL (no messages) or a character vector containing",
@@ -460,7 +460,7 @@ warn_if <- function(
     error("'msg_level' must be an integer between 1 and 10: ", msg_level)
   (
     (is_null(msg_types) || is_character(msg_types)) &&
-      is_in(msg_types, c("INFO", "WARNING", "ERROR"))
+      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
   ) ||
     error(
       "'msg_types' must be NULL (no messages) or a character vector containing",
@@ -554,7 +554,7 @@ error_if <- function(
     error("'msg_level' must be an integer between 1 and 10: ", msg_level)
   (
     (is_null(msg_types) || is_character(msg_types)) &&
-      is_in(msg_types, c("INFO", "WARNING", "ERROR"))
+      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
   ) ||
     error(
       "'msg_types' must be NULL (no messages) or a character vector containing",
@@ -653,7 +653,7 @@ assert <- function(
     error("'msg_level' must be an integer between 1 and 10: ", msg_level)
   (
     (is_null(msg_types) || is_character(msg_types)) &&
-      is_in(msg_types, c("INFO", "WARNING", "ERROR"))
+      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
   ) ||
     error(
       "'msg_types' must be NULL (no messages) or a character vector containing",
