@@ -107,6 +107,9 @@ is_data_frame <- function(x) {
 #' Check whether the variable has specified length
 #'
 #' @param x (any) The object to test
+#' @param .length (integer, optional) The allowed length
+#' @param .min (integer, optional) The allowed minimum length
+#' @param .max (integer, optional) The allowed maximum length
 #'
 #' @return TRUE if x is a valid URL, FALSE otherwise
 #'
@@ -312,6 +315,9 @@ has_names <- function(x, .names) {
 #' logical vector of the same length.
 #'
 #' @param x (any) The object to test
+#' @param .length (integer, optional) The allowed character length
+#' @param .min (integer, optional) The allowed minimum character length
+#' @param .max (integer, optional) The allowed maximum character length
 #'
 #' @return TRUE if x is a valid URL, FALSE otherwise
 #'

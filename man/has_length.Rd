@@ -8,6 +8,12 @@ has_length(x, .length, .min, .max)
 }
 \arguments{
 \item{x}{(any) The object to test}
+
+\item{.length}{(integer, optional) The allowed length}
+
+\item{.min}{(integer, optional) The allowed minimum length}
+
+\item{.max}{(integer, optional) The allowed maximum length}
 }
 \value{
 TRUE if x is a valid URL, FALSE otherwise

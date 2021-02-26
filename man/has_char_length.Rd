@@ -8,6 +8,12 @@ has_char_length(x, .length, .min, .max)
 }
 \arguments{
 \item{x}{(any) The object to test}
+
+\item{.length}{(integer, optional) The allowed character length}
+
+\item{.min}{(integer, optional) The allowed minimum character length}
+
+\item{.max}{(integer, optional) The allowed maximum character length}
 }
 \value{
 TRUE if x is a valid URL, FALSE otherwise
