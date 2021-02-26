@@ -21,4 +21,6 @@
 #'
 #' @import purrr
 #'
+#' @noRd
+#'
 globalVariables(c(".", ".data"))
