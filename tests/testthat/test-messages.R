@@ -75,28 +75,22 @@ test_that("invalid arguments for info throw an error", {
 
   expect_error(
     info("This is INFO", msg_types = 0),
-    paste(
-      "'msg_types' must be NULL \\(no messages\\) or a character vector",
-      "containing \"INFO\", \"WARNING\" or \"ERROR\": 0"
-    )
+    "'msg_types' must be NULL or a character vector: 0"
   )
 
   expect_error(
     info("This is INFO", msg_types = "BOB"),
-    paste(
-      "'msg_types' must be NULL \\(no messages\\) or a character vector",
-      "containing \"INFO\", \"WARNING\" or \"ERROR\": BOB"
-    )
+    "'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': BOB"
   )
 
   expect_error(
     info("This is INFO", msg_level = "a"),
-    "'msg_level' must be an integer between 1 and 10: a"
+    "'msg_level' must be an integer between 0 and 10: a"
   )
 
   expect_error(
-    info("This is INFO", msg_level = 0),
-    "'msg_level' must be an integer between 1 and 10: 0"
+    info("This is INFO", msg_level = -1),
+    "'msg_level' must be an integer between 0 and 10: -1"
   )
 
   expect_error(
@@ -186,28 +180,22 @@ test_that("invalid arguments for warn throw an error", {
 
   expect_error(
     warn("This is a WARNING", msg_types = 0),
-    paste(
-      "'msg_types' must be NULL \\(no messages\\) or a character vector",
-      "containing \"INFO\", \"WARNING\" or \"ERROR\": 0"
-    )
+    "'msg_types' must be NULL or a character vector: 0"
   )
 
   expect_error(
     warn("This is a WARNING", msg_types = "BOB"),
-    paste(
-      "'msg_types' must be NULL \\(no messages\\) or a character vector",
-      "containing \"INFO\", \"WARNING\" or \"ERROR\": BOB"
-    )
+    "'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': BOB"
   )
 
   expect_error(
     warn("This is a WARNING", msg_level = "a"),
-    "'msg_level' must be an integer between 1 and 10: a"
+    "'msg_level' must be an integer between 0 and 10: a"
   )
 
   expect_error(
-    warn("This is a WARNING", msg_level = 0),
-    "'msg_level' must be an integer between 1 and 10: 0"
+    warn("This is a WARNING", msg_level = -1),
+    "'msg_level' must be an integer between 0 and 10: -1"
   )
 
   expect_error(
@@ -297,28 +285,22 @@ test_that("invalid arguments for warn throw an error", {
 
   expect_error(
     error("This is an ERROR", msg_types = 0),
-    paste(
-      "'msg_types' must be NULL \\(no messages\\) or a character vector",
-      "containing \"INFO\", \"WARNING\" or \"ERROR\": 0"
-    )
+    "'msg_types' must be NULL or a character vector: 0"
   )
 
   expect_error(
     error("This is an ERROR", msg_types = "BOB"),
-    paste(
-      "'msg_types' must be NULL \\(no messages\\) or a character vector",
-      "containing \"INFO\", \"WARNING\" or \"ERROR\": BOB"
-    )
+    "'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': BOB"
   )
 
   expect_error(
     error("This is an ERROR", msg_level = "a"),
-    "'msg_level' must be an integer between 1 and 10: a"
+    "'msg_level' must be an integer between 0 and 10: a"
   )
 
   expect_error(
-    error("This is an ERROR", msg_level = 0),
-    "'msg_level' must be an integer between 1 and 10: 0"
+    error("This is an ERROR", msg_level = -1),
+    "'msg_level' must be an integer between 0 and 10: -1"
   )
 
   expect_error(
@@ -345,9 +327,9 @@ test_that("info_if returns a message if the condition is true", {
     "In test_info_if_msg\\(\\): This is rubbish"
   )
 
-  test_info_if_split_msg <- function(x, y) {
+  test_info_if_split_msg <- function(x, y)
     info_if(x > y, "This ", "is ", "rubbish")
-  }
+
   expect_message(
     test_info_if_split_msg(2, 1),
     "In test_info_if_split_msg\\(\\): This is rubbish"
@@ -372,9 +354,9 @@ test_that("warn_if returns a warning if the condition is true", {
     "In test_warn_if_msg\\(\\): This is rubbish"
   )
 
-  test_warn_if_split_msg <- function(x, y) {
+  test_warn_if_split_msg <- function(x, y)
     warn_if(x > y, "This ", "is ", "rubbish")
-  }
+
   expect_warning(
     test_warn_if_split_msg(2, 1),
     "In test_warn_if_split_msg\\(\\): This is rubbish"
@@ -399,9 +381,9 @@ test_that("error_if returns an error if the condition is true", {
     "In test_error_if_msg\\(\\): This is rubbish"
   )
 
-  test_error_if_split_msg <- function(x, y) {
+  test_error_if_split_msg <- function(x, y)
     error_if(x > y, "This ", "is ", "rubbish")
-  }
+
   expect_error(
     test_error_if_split_msg(2, 1),
     "In test_error_if_split_msg\\(\\): This is rubbish"
@@ -414,6 +396,7 @@ test_that("error_if returns an error if the condition is true", {
 test_that("assert returns an error if the condition is false", {
 
   expect_error(assert(2 < 1), "2 < 1 is false")
+  expect_silent(assert(2 > 1))
 
   test_assert <- function(x, y) assert(x > y)
 
@@ -426,9 +409,9 @@ test_that("assert returns an error if the condition is false", {
     "In test_assert_msg\\(\\): This is rubbish"
   )
 
-  test_assert_split_msg <- function(x, y) {
+  test_assert_split_msg <- function(x, y)
     assert(x > y, "This ", "is ", "rubbish")
-  }
+
   expect_error(
     test_assert_split_msg(1, 2),
     "In test_assert_split_msg\\(\\): This is rubbish"

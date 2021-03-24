@@ -2,25 +2,92 @@
 % Please edit documentation in R/predicates.R
 \name{is_na}
 \alias{is_na}
-\title{Checks whether the variable is NA}
+\alias{is_in}
+\alias{is_in_range}
+\alias{has_char_length}
+\title{Checks the variable values}
 \usage{
 is_na(x)
+
+is_in(x, values)
+
+is_in_range(x, min = NULL, max = NULL)
+
+has_char_length(x, n = NULL, n_min = NULL, n_max = NULL)
 }
 \arguments{
-\item{x}{(any) The object to test}
+\item{x}{(any) The object with elements to test}
+
+\item{values}{(any) The allowed (or not allowed) values.}
+
+\item{min}{(numeric, optional) The minimum allowed value for a range. If
+\code{NULL} the minimum value is not checked. Default: \code{NULL}.}
+
+\item{max}{(numeric, optional) The maximum allowed value for a range. If
+\code{NULL} the maximum value is not checked. Default: \code{NULL}.}
+
+\item{n}{(integer, optional) The allowed length. If \code{NULL} the exact
+character length is not checked. Default: \code{NULL}.}
+
+\item{n_min}{(integer, optional) The allowed minimum length. If \code{NULL} the
+minimum character length is not checked. Default: \code{NULL}.}
+
+\item{n_max}{(integer, optional) The allowed maximum length. If \code{NULL} the
+maximum character length is not checked. Default: \code{NULL}.}
 }
 \value{
-TRUE if x is NA, FALSE otherwise
+TRUE if elements in x are in y, FALSE otherwise
 }
 \description{
-Checks whether the variable is NA
+This function returns \code{TRUE} if the variable values are correct and \code{FALSE}
+otherwise.
+}
+\details{
+The following values can be checked:
+\itemize{
+\item \code{is_na()}: Elements of 'x' must be \code{NA}.
+\item \code{is_in()}: Elements of 'x' must in specified \code{values}.
+\item \code{is_in_range()}: Elements of 'x' must be in the specified numeric range.
+\item \code{has_char_length}: Elements of 'x' must have valid character length. You
+can specify the exact length using \code{n} or the minimum and/or maximum length
+using \code{n_min} and \code{n_max} respectively.
+}
 }
 \examples{
+
+# TRUE
+is_na(NA)
+is_na(c(NA, NA))
+# FALSE
+is_na(NULL)
 is_na(1)
 is_na("foo")
-is_na(NA)
-
 is_na(c(1, NA))
-is_na(c(NA, NA))
+
+# TRUE
+is_in("a", letters)
+is_in(c("a", "b", "c"), letters)
+# FALSE
+is_in(1, LETTERS)
+is_in(1:2, LETTERS)
+
+# TRUE
+is_in_range(1, min = 0)
+is_in_range(c(1.1, 2.2, 3.3), min = 0, max = 10)
+# FALSE
+is_in_range(0, min = 1)
+is_in_range(c(1.1, 2.2, 3.3), min = 2, max = 3)
+
+# TRUE
+has_char_length("", 0)
+has_char_length(c("some", "text"), 4)
+has_char_length(c("some", "text"), n_min = 1)
+has_char_length(c("some", "text"), n_max = 10)
+has_char_length(c("some", "text"), n_min = 1, n_max = 10)
+# FALSE
+has_char_length("sometext", 4)
+has_char_length(c("different", "text"), n_min = 5)
+has_char_length(c("different", "text"), n_max = 5)
+has_char_length(c("different", "text"), n_min = 5, n_max = 8)
 
 }

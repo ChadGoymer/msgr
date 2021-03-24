@@ -1,3 +1,17 @@
+# msgr 1.2.3
+
+Replaced functions that conflict with purrr:
+- Replaced `is_integerish()` and `is_scalar_integerish()` with `is_natural()`
+- Replaced `is_numeric()` and `is_scalar_numeric()` with `is_number()`
+
+Added some new predicates:
+- `is_type()`
+- `is_class()`
+- `is_array()`
+- `is_matrix()`
+
+Also tidied up documentation
+
 # msgr 1.2.2
 
 Added the following function to check type
