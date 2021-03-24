@@ -2,29 +2,69 @@
 % Please edit documentation in R/predicates.R
 \name{has_names}
 \alias{has_names}
-\title{Checks whether the variable has names}
+\alias{has_length}
+\title{Checks the variable structure}
 \usage{
-has_names(x, .names)
+has_names(x, names = NULL)
+
+has_length(x, n = NULL, n_min = NULL, n_max = NULL)
 }
 \arguments{
 \item{x}{(any) The object to test}
 
-\item{.names}{(character, optional) The names to check for. If not specified
-then the function checks for any names.}
+\item{names}{(character, optional) The names to check for. If \code{NULL} the
+names are not checked. Default: \code{NULL}.}
+
+\item{n}{(integer, optional) The allowed length. If \code{NULL} the exact length
+is not checked. Default: \code{NULL}.}
+
+\item{n_min}{(integer, optional) The allowed minimum length. If \code{NULL} the
+minimum length is not checked. Default: \code{NULL}.}
+
+\item{n_max}{(integer, optional) The allowed maximum length. If \code{NULL} the
+maximum length is not checked. Default: \code{NULL}.}
 }
 \value{
 TRUE if x has names, FALSE otherwise
 }
 \description{
-If \code{.names} is a character vector each element is checked, returning a
-logical vector of the same length.
+This function returns \code{TRUE} if the variable structure is correct and \code{FALSE}
+otherwise.
+}
+\details{
+The following structures can be checked:
+\itemize{
+\item \code{has_names()}: 'x' must have names and optionally have the specified
+\code{names}. A logical vector is returned checking each name.
+\item \code{has_length()}: 'x' must have valid length. You can specify the exact
+length using \code{n} or the minimum and/or maximum length using \code{n_min} and
+\code{n_max} respectively.
+}
 }
 \examples{
-x <- list(a = 1, b = 2)
 
-has_names(x, "a")
-has_names(x, c("a", "b"))
+# TRUE
+has_names(list(a = 1, b = 2))
+has_names(list(a = 1, b = 2), "a")
+has_names(list(a = 1, b = 2), c("a", "b"))
+# FALSE
+has_names(list(a = 1, b = 2), "c")
+has_names(list(a = 1, b = 2), c("b", "c"))
 
-has_names(x, "c")
+# TRUE
+has_length(1, 1)
+has_length(c("bob", "jane"), 2)
+has_length(list(x = 1, y = 2, z = 3), 3)
+has_length(1:3, n_min = 2)
+has_length(1:3, n_max = 10)
+# FALSE
+has_length(1:3, 1)
+has_length(c("bob", "jane"), 3)
+has_length(list(x = 1, y = 2, z = 3), 5)
+has_length("A", n_min = 2)
+has_length(LETTERS, n_max = 10)
 
+}
+\seealso{
+\code{\link[rlang:is_empty]{rlang::is_empty()}}
 }
