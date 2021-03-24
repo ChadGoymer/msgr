@@ -60,15 +60,15 @@ info <- function(
   log_path  = getOption("msgr.log_path")
 ) {
   is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
-    stop("'level' must be an integer between 1 and 10")
+    stop("'level' must be an integer between 1 and 10: ", level)
   is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
-    stop("'msg_level' must be an integer between 0 and 10")
+    stop("'msg_level' must be an integer between 0 and 10: ", msg_level)
   is.null(msg_types) || is.character(msg_types) ||
-    stop("'msg_types' must be NULL (no messages) or a character vector")
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
   all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
-    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
   is.character(log_path) && length(log_path) == 1 ||
-    stop("'log_path' must be a character vector of length 1")
+    stop("'log_path' must be a string: ", log_path)
 
   msg <- paste0(...)
 
@@ -159,15 +159,15 @@ warn <- function(
   log_path  = getOption("msgr.log_path")
 ) {
   is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
-    stop("'level' must be an integer between 1 and 10")
+    stop("'level' must be an integer between 1 and 10: ", level)
   is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
-    stop("'msg_level' must be an integer between 0 and 10")
+    stop("'msg_level' must be an integer between 0 and 10: ", msg_level)
   is.null(msg_types) || is.character(msg_types) ||
-    stop("'msg_types' must be NULL (no messages) or a character vector")
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
   all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
-    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
   is.character(log_path) && length(log_path) == 1 ||
-    stop("'log_path' must be a character vector of length 1")
+    stop("'log_path' must be a string: ", log_path)
 
   msg <- paste0(...)
 
@@ -261,15 +261,15 @@ error <- function(
   log_path  = getOption("msgr.log_path")
 ) {
   is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
-    stop("'level' must be an integer between 1 and 10")
+    stop("'level' must be an integer between 1 and 10: ", level)
   is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
-    stop("'msg_level' must be an integer between 0 and 10")
+    stop("'msg_level' must be an integer between 0 and 10: ", msg_level)
   is.null(msg_types) || is.character(msg_types) ||
-    stop("'msg_types' must be NULL (no messages) or a character vector")
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
   all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
-    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
   is.character(log_path) && length(log_path) == 1 ||
-    stop("'log_path' must be a character vector of length 1")
+    stop("'log_path' must be a string: ", log_path)
 
   msg <- paste0(...)
 
@@ -348,15 +348,15 @@ info_if <- function(
   log_path  = getOption("msgr.log_path")
 ) {
   is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
-    stop("'level' must be an integer between 1 and 10")
+    stop("'level' must be an integer between 1 and 10: ", level)
   is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
-    stop("'msg_level' must be an integer between 0 and 10")
+    stop("'msg_level' must be an integer between 0 and 10: ", msg_level)
   is.null(msg_types) || is.character(msg_types) ||
-    stop("'msg_types' must be NULL (no messages) or a character vector")
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
   all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
-    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
   is.character(log_path) && length(log_path) == 1 ||
-    stop("'log_path' must be a character vector of length 1")
+    stop("'log_path' must be a string: ", log_path)
 
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
@@ -435,15 +435,15 @@ warn_if <- function(
   log_path  = getOption("msgr.log_path")
 ) {
   is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
-    stop("'level' must be an integer between 1 and 10")
+    stop("'level' must be an integer between 1 and 10: ", level)
   is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
-    stop("'msg_level' must be an integer between 0 and 10")
+    stop("'msg_level' must be an integer between 0 and 10: ", msg_level)
   is.null(msg_types) || is.character(msg_types) ||
-    stop("'msg_types' must be NULL (no messages) or a character vector")
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
   all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
-    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
   is.character(log_path) && length(log_path) == 1 ||
-    stop("'log_path' must be a character vector of length 1")
+    stop("'log_path' must be a string: ", log_path)
 
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
@@ -521,15 +521,15 @@ error_if <- function(
   log_path  = getOption("msgr.log_path")
 ) {
   is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
-    stop("'level' must be an integer between 1 and 10")
+    stop("'level' must be an integer between 1 and 10: ", level)
   is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
-    stop("'msg_level' must be an integer between 0 and 10")
+    stop("'msg_level' must be an integer between 0 and 10: ", msg_level)
   is.null(msg_types) || is.character(msg_types) ||
-    stop("'msg_types' must be NULL (no messages) or a character vector")
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
   all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
-    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
   is.character(log_path) && length(log_path) == 1 ||
-    stop("'log_path' must be a character vector of length 1")
+    stop("'log_path' must be a string: ", log_path)
 
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
@@ -609,15 +609,15 @@ assert <- function(
   log_path  = getOption("msgr.log_path")
 ) {
   is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
-    stop("'level' must be an integer between 1 and 10")
+    stop("'level' must be an integer between 1 and 10: ", level)
   is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
-    stop("'msg_level' must be an integer between 0 and 10")
+    stop("'msg_level' must be an integer between 0 and 10: ", msg_level)
   is.null(msg_types) || is.character(msg_types) ||
-    stop("'msg_types' must be NULL (no messages) or a character vector")
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
   all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
-    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
   is.character(log_path) && length(log_path) == 1 ||
-    stop("'log_path' must be a character vector of length 1")
+    stop("'log_path' must be a string: ", log_path)
 
   if (!isTRUE(condition)) {
     uneval_condition <- substitute(condition)
