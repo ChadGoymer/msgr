@@ -59,20 +59,16 @@ info <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (rlang::is_scalar_integerish(level) && level > 0 && level <= 10) ||
-    stop("'level' must be an integer between 1 and 10: ", level)
-  (rlang::is_scalar_integerish(msg_level) && msg_level > 0 && msg_level <= 10) ||
-    stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
-  (
-    (is_null(msg_types) || is_character(msg_types)) &&
-      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
-  ) ||
-    stop(
-      "'msg_types' must be NULL (no messages) or a character vector containing",
-      " \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types
-    )
-  (is_scalar_character(log_path)) ||
-    stop("'log_path' must be a string: ", log_path)
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10")
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
+    stop("'msg_level' must be an integer between 0 and 10")
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL (no messages) or a character vector")
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a character vector of length 1")
 
   msg <- paste0(...)
 
@@ -162,20 +158,16 @@ warn <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (rlang::is_scalar_integerish(level) && level > 0 && level <= 10) ||
-    stop("'level' must be an integer between 1 and 10: ", level)
-  (rlang::is_scalar_integerish(msg_level) && msg_level > 0 && msg_level <= 10) ||
-    stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
-  (
-    (is_null(msg_types) || is_character(msg_types)) &&
-      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
-  ) ||
-    stop(
-      "'msg_types' must be NULL (no messages) or a character vector containing",
-      " \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types
-    )
-  (is_scalar_character(log_path)) ||
-    stop("'log_path' must be a string: ", log_path)
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10")
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
+    stop("'msg_level' must be an integer between 0 and 10")
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL (no messages) or a character vector")
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a character vector of length 1")
 
   msg <- paste0(...)
 
@@ -268,20 +260,16 @@ error <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (rlang::is_scalar_integerish(level) && level > 0 && level <= 10) ||
-    stop("'level' must be an integer between 1 and 10: ", level)
-  (rlang::is_scalar_integerish(msg_level) && msg_level > 0 && msg_level <= 10) ||
-    stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
-  (
-    (is_null(msg_types) || is_character(msg_types)) &&
-      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
-  ) ||
-    stop(
-      "'msg_types' must be NULL (no messages) or a character vector containing",
-      " \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types
-    )
-  (is_scalar_character(log_path)) ||
-    stop("'log_path' must be a string: ", log_path)
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10")
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
+    stop("'msg_level' must be an integer between 0 and 10")
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL (no messages) or a character vector")
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a character vector of length 1")
 
   msg <- paste0(...)
 
@@ -359,20 +347,16 @@ info_if <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (rlang::is_scalar_integerish(level) && level > 0 && level <= 10) ||
-    stop("'level' must be an integer between 1 and 10: ", level)
-  (rlang::is_scalar_integerish(msg_level) && msg_level > 0 && msg_level <= 10) ||
-    stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
-  (
-    (is_null(msg_types) || is_character(msg_types)) &&
-      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
-  ) ||
-    stop(
-      "'msg_types' must be NULL (no messages) or a character vector containing",
-      " \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types
-    )
-  (is_scalar_character(log_path)) ||
-    stop("'log_path' must be a string: ", log_path)
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10")
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
+    stop("'msg_level' must be an integer between 0 and 10")
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL (no messages) or a character vector")
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a character vector of length 1")
 
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
@@ -450,24 +434,16 @@ warn_if <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (rlang::is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
-    error("'level' must be an integer between 1 and 10: ", level)
-  (
-    rlang::is_scalar_integerish(msg_level) &&
-      isTRUE(msg_level > 0) &&
-      isTRUE(msg_level <= 10)
-  ) ||
-    error("'msg_level' must be an integer between 1 and 10: ", msg_level)
-  (
-    (is_null(msg_types) || is_character(msg_types)) &&
-      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
-  ) ||
-    error(
-      "'msg_types' must be NULL (no messages) or a character vector containing",
-      " \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types
-    )
-  (is_scalar_character(log_path)) ||
-    error("'log_path' must be a string: ", log_path)
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10")
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
+    stop("'msg_level' must be an integer between 0 and 10")
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL (no messages) or a character vector")
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a character vector of length 1")
 
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
@@ -544,24 +520,16 @@ error_if <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (rlang::is_scalar_integerish(level) && isTRUE(level > 0) && isTRUE(level <= 10)) ||
-    error("'level' must be an integer between 1 and 10: ", level)
-  (
-    rlang::is_scalar_integerish(msg_level) &&
-      isTRUE(msg_level > 0) &&
-      isTRUE(msg_level <= 10)
-  ) ||
-    error("'msg_level' must be an integer between 1 and 10: ", msg_level)
-  (
-    (is_null(msg_types) || is_character(msg_types)) &&
-      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
-  ) ||
-    error(
-      "'msg_types' must be NULL (no messages) or a character vector containing",
-      " \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types
-    )
-  (is_scalar_character(log_path)) ||
-    error("'log_path' must be a string: ", log_path)
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10")
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
+    stop("'msg_level' must be an integer between 0 and 10")
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL (no messages) or a character vector")
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a character vector of length 1")
 
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
@@ -592,14 +560,14 @@ error_if <- function(
 
 #  FUNCTION: assert ------------------------------------------------------------
 #
-#' Display an error, and record in a log file, if a condition is false
+#' Display an error if a condition is not met
 #'
 #' This function calls the [error()] function to display an error if the
 #' specified condition is false. If a message is not specified then a generic
 #' message is displayed.
 #'
 #' @param condition (boolean) The condition to check.
-#' @param ... (strings) message to be displayed or written to file.
+#' @param ... (character) message to be displayed or written to file.
 #' @param level (integer, optional) The level of the message, from 1 to 10.
 #'   Default: 1.
 #' @param msg_level (integer, optional) The maximum level of messages to output.
@@ -607,11 +575,12 @@ error_if <- function(
 #' @param msg_types (character, optional) The type to write or display. Must
 #'   either NULL or one or more from "INFO", "WARNING" or "ERROR". Default: set
 #'   in the option `"msgr.types"`.
-#' @param log_path (string, optional) The file path to the text log file. If set
-#'   to "", then no logs are written. Default: set in the option
+#' @param log_path (character, optional) The file path to the text log file. If
+#'   set to "", then no logs are written. Default: set in the option
 #'   `"msgr.log_path"`.
 #'
-#' @return A string is return invisibly containing the error
+#' @return If assertion passes then `TRUE` is returned. This allows you to make
+#'   multiple assertions separated by `&`.
 #'
 #' @examples \dontrun{
 #'
@@ -639,28 +608,16 @@ assert <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
-  (
-    is_scalar_integerish(level) &&
-      isTRUE(level > 0) &&
-      isTRUE(level <= 10)
-  ) ||
-    error("'level' must be an integer between 1 and 10: ", level)
-  (
-    is_scalar_integerish(msg_level) &&
-      isTRUE(msg_level > 0) &&
-      isTRUE(msg_level <= 10)
-  ) ||
-    error("'msg_level' must be an integer between 1 and 10: ", msg_level)
-  (
-    (is_null(msg_types) || is_character(msg_types)) &&
-      all(is_in(msg_types, c("INFO", "WARNING", "ERROR")))
-  ) ||
-    error(
-      "'msg_types' must be NULL (no messages) or a character vector containing",
-      " \"INFO\", \"WARNING\" or \"ERROR\": ", msg_types
-    )
-  (is_scalar_character(log_path)) ||
-    error("'log_path' must be a string: ", log_path)
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10")
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, max = 10) ||
+    stop("'msg_level' must be an integer between 0 and 10")
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL (no messages) or a character vector")
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR'")
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a character vector of length 1")
 
   if (!isTRUE(condition)) {
     uneval_condition <- substitute(condition)
@@ -687,4 +644,6 @@ assert <- function(
       log_path  = log_path
     )
   }
+
+  invisible(TRUE)
 }

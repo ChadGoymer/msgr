@@ -2,7 +2,7 @@
 % Please edit documentation in R/messages.R
 \name{assert}
 \alias{assert}
-\title{Display an error, and record in a log file, if a condition is false}
+\title{Display an error if a condition is not met}
 \usage{
 assert(
   condition,
@@ -16,7 +16,7 @@ assert(
 \arguments{
 \item{condition}{(boolean) The condition to check.}
 
-\item{...}{(strings) message to be displayed or written to file.}
+\item{...}{(character) message to be displayed or written to file.}
 
 \item{level}{(integer, optional) The level of the message, from 1 to 10.
 Default: 1.}
@@ -28,12 +28,13 @@ Default: set in the option \code{"msgr.level"}.}
 either NULL or one or more from "INFO", "WARNING" or "ERROR". Default: set
 in the option \code{"msgr.types"}.}
 
-\item{log_path}{(string, optional) The file path to the text log file. If set
-to "", then no logs are written. Default: set in the option
+\item{log_path}{(character, optional) The file path to the text log file. If
+set to "", then no logs are written. Default: set in the option
 \code{"msgr.log_path"}.}
 }
 \value{
-A string is return invisibly containing the error
+If assertion passes then \code{TRUE} is returned. This allows you to make
+multiple assertions separated by \code{&}.
 }
 \description{
 This function calls the \code{\link[=error]{error()}} function to display an error if the
