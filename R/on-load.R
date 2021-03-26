@@ -81,7 +81,11 @@
 
   msg_level <- getOption("msgr.level")
 
-  if (is.na(msg_level) || !rlang::is_scalar_integerish(msg_level)) {
+  if (
+    is.na(msg_level) ||
+    !is.numeric(msg_level) ||
+    !all(msg_level == trunc(msg_level))
+  ) {
     packageStartupMessage(
       "The option 'msgr.level' must be an integer:\n  ", msg_level
     )
