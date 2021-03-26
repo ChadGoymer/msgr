@@ -23,6 +23,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -35,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">msgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
       </span>
     </div>
 
@@ -43,7 +45,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -57,7 +59,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="http://github.com/ChadGoymer/msgr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -76,46 +78,44 @@
 <div id="msgr" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#msgr" class="anchor"></a>msgr</h1></div>
+<!-- badges: start -->
 
-<p>This package extends the <code><a href="https://rdrr.io/r/base/message.html">message()</a></code>, <code><a href="https://rdrr.io/r/base/warning.html">warning()</a></code> and <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code> functions by adding <em>levels</em> of messages and the option to record them in a log file.</p>
+<p>This package extends the <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code>, <code><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning()</a></code> and <code><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop()</a></code> functions by adding <em>levels</em> of messages and the option to record them in a log file.</p>
 <div id="types" class="section level2">
 <h2 class="hasAnchor">
 <a href="#types" class="anchor"></a>Types</h2>
-<p>Messages come in three <em>types</em>: “INFO”, “WARNING” and “ERROR”, as produced by the functions <code><a href="reference/info.html">info()</a></code>, <code><a href="reference/warn.html">warn()</a></code> and <code><a href="reference/error.html">error()</a></code>, which are equivalent to <code><a href="https://rdrr.io/r/base/message.html">message()</a></code>, <code><a href="https://rdrr.io/r/base/warning.html">warning()</a></code> and <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code>. respectively. When executing code the <em>types</em> to display can be specified as an option. For example, you can ignore “INFO” and only show “WARNING”s and “ERROR”s by setting:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(msgr.types = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"WARNING"</span>, <span class="st">"ERROR"</span>))
-</pre></div>
+<p>Messages come in three <em>types</em>: “INFO”, “WARNING” and “ERROR”, as produced by the functions <code><a href="reference/info.html">info()</a></code>, <code><a href="reference/warn.html">warn()</a></code> and <code><a href="reference/error.html">error()</a></code>, which are equivalent to <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code>, <code><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning()</a></code> and <code><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop()</a></code>. respectively. When executing code the <em>types</em> to display can be specified as an option. For example, you can ignore “INFO” and only show “WARNING”s and “ERROR”s by setting:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>msgr.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WARNING"</span>, <span class="st">"ERROR"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="levels" class="section level2">
 <h2 class="hasAnchor">
 <a href="#levels" class="anchor"></a>Levels</h2>
 <p>Whenever <code><a href="reference/info.html">info()</a></code>, <code><a href="reference/warn.html">warn()</a></code> or <code><a href="reference/error.html">error()</a></code> are used a level can be specified, and when executing the code the <em>levels</em> to display can be specified as an option. The message is only shown if its level is less than, or equal to, the <em>level</em> option.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(msgr.level = <span class="fl">1</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>msgr.level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/warn.html">warn</a></span>(<span class="st">"This is an important warning!"</span>, level = <span class="fl">1</span>)
+<span class="fu"><a href="reference/warn.html">warn</a></span><span class="op">(</span><span class="st">"This is an important warning!"</span>, level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/info.html">info</a></span>(<span class="st">"This is useful information, but not important!"</span>, level = <span class="fl">3</span>)
-</pre></div>
+<span class="fu"><a href="reference/info.html">info</a></span><span class="op">(</span><span class="st">"This is useful information, but not important!"</span>, level <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="log-file" class="section level2">
 <h2 class="hasAnchor">
 <a href="#log-file" class="anchor"></a>Log file</h2>
 <p>Message can also be written to a log file. The log file can be specified each time you use <code><a href="reference/info.html">info()</a></code>, <code><a href="reference/warn.html">warn()</a></code> or <code><a href="reference/error.html">error()</a></code>, or you can specify it as an option.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(msgr.log_path = <span class="st">"~/msgr.log"</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>msgr.log_path <span class="op">=</span> <span class="st">"~/msgr.log"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/info.html">info</a></span>(<span class="st">"This is written to console and log file"</span>)
+<span class="fu"><a href="reference/info.html">info</a></span><span class="op">(</span><span class="st">"This is written to console and log file"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/error.html">error</a></span>(<span class="st">"This is written to console and an error log"</span>, log_path = <span class="st">"~/msgr-errors.log"</span>)
-</pre></div>
+<span class="fu"><a href="reference/error.html">error</a></span><span class="op">(</span><span class="st">"This is written to console and an error log"</span>, log_path <span class="op">=</span> <span class="st">"~/msgr-errors.log"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=msgr">https://​cloud.r-project.org/​package=msgr</a>
 </li>
@@ -125,37 +125,45 @@
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Chad Goymer <br><small class="roles"> Author, maintainer </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/ChadGoymer/msgr/actions"><img src="https://github.com/ChadGoymer/msgr/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/github/ChadGoymer/msgr"><img src="https://codecov.io/github/ChadGoymer/msgr/branch/master/graphs/badge.svg" alt="Code coverage"></a></li>
+<li><a href="https://github.com/ChadGoymer/msgr/actions?query=workflow%3AWindows" class="external-link"><img src="https://github.com/ChadGoymer/msgr/workflows/Windows/badge.svg" alt="Windows"></a></li>
+<li><a href="https://github.com/ChadGoymer/msgr/actions?query=workflow%3AMacOS" class="external-link"><img src="https://github.com/ChadGoymer/msgr/workflows/MacOS/badge.svg" alt="MacOS"></a></li>
+<li><a href="https://github.com/ChadGoymer/msgr/actions?query=workflow%3AUbuntu" class="external-link"><img src="https://github.com/ChadGoymer/msgr/workflows/Ubuntu/badge.svg" alt="Ubuntu"></a></li>
+<li><a href="https://codecov.io/github/ChadGoymer/msgr?branch=main" class="external-link"><img src="https://codecov.io/gh/ChadGoymer/msgr/branch/main/graph/badge.svg" alt="Coverage status"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Chad Goymer.</p>
+  <p></p>
+<p>Developed by Chad Goymer.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -163,6 +171,8 @@
 
   
 
+
+  
 
   </body>
 </html>

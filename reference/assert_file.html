@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Display an error if a condition is not met — assert • msgr</title>
+<title>Display an error if a valid file or directory path — assert_file • msgr</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,9 @@
 
 
 
-<meta property="og:title" content="Display an error if a condition is not met — assert" />
+<meta property="og:title" content="Display an error if a valid file or directory path — assert_file" />
 <meta property="og:description" content="This function calls the error() function to display an error if the
-specified condition is false. If a message is not specified then a generic
-message is displayed." />
+variable's values are not valid file or directory paths." />
 
 
 
@@ -124,20 +123,50 @@ message is displayed." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Display an error if a condition is not met</h1>
+    <h1>Display an error if a valid file or directory path</h1>
     <small class="dont-index">Source: <a href='https://github.com/ChadGoymer/msgr/blob/master/R/assert.R'><code>R/assert.R</code></a></small>
-    <div class="hidden name"><code>assert.Rd</code></div>
+    <div class="hidden name"><code>assert_file.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>This function calls the <code><a href='error.html'>error()</a></code> function to display an error if the
-specified condition is false. If a message is not specified then a generic
-message is displayed.</p>
+variable's values are not valid file or directory paths.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>assert</span><span class='op'>(</span>
-  <span class='va'>condition</span>,
-  <span class='va'>...</span>,
+    <pre class="usage"><span class='fu'>assert_file</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  level <span class='op'>=</span> <span class='fl'>1</span>,
+  msg_level <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.level"</span><span class='op'>)</span>,
+  msg_types <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.types"</span><span class='op'>)</span>,
+  log_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.log_path"</span><span class='op'>)</span>
+<span class='op'>)</span>
+
+<span class='fu'>assert_dir</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  level <span class='op'>=</span> <span class='fl'>1</span>,
+  msg_level <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.level"</span><span class='op'>)</span>,
+  msg_types <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.types"</span><span class='op'>)</span>,
+  log_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.log_path"</span><span class='op'>)</span>
+<span class='op'>)</span>
+
+<span class='fu'>assert_readable</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  level <span class='op'>=</span> <span class='fl'>1</span>,
+  msg_level <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.level"</span><span class='op'>)</span>,
+  msg_types <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.types"</span><span class='op'>)</span>,
+  log_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.log_path"</span><span class='op'>)</span>
+<span class='op'>)</span>
+
+<span class='fu'>assert_writeable</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  level <span class='op'>=</span> <span class='fl'>1</span>,
+  msg_level <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.level"</span><span class='op'>)</span>,
+  msg_types <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.types"</span><span class='op'>)</span>,
+  log_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.log_path"</span><span class='op'>)</span>
+<span class='op'>)</span>
+
+<span class='fu'>assert_url</span><span class='op'>(</span>
+  <span class='va'>x</span>,
   level <span class='op'>=</span> <span class='fl'>1</span>,
   msg_level <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.level"</span><span class='op'>)</span>,
   msg_types <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.types"</span><span class='op'>)</span>,
@@ -148,12 +177,8 @@ message is displayed.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>condition</th>
-      <td><p>(boolean) The condition to check.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>(character) message to be displayed or written to file.</p></td>
+      <th>x</th>
+      <td><p>(any) The variable to check.</p></td>
     </tr>
     <tr>
       <th>level</th>
@@ -183,21 +208,44 @@ set to "", then no logs are written. Default: set in the option
 
     <p>If assertion passes then <code>TRUE</code> is returned. This allows you to make
 multiple assertions separated by <code>&amp;</code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The following validations can be checked:</p><ul>
+<li><p><code>assert_file()</code>: 'x' must be an existing file</p></li>
+<li><p><code>assert_dir()</code>: 'x' must be an existing directory</p></li>
+<li><p><code>assert_readable()</code>: 'x' must be a readable directory or file</p></li>
+<li><p><code>assert_writeable()</code>: 'x' must be a writeable directory or file</p></li>
+<li><p><code>assert_url()</code>: 'x' must be a valid URL</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
-  <span class='co'># Use assert() to create conditional timed errors</span>
-  <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>1</span>
-  <span class='fu'>assert</span><span class='op'>(</span><span class='va'>x</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='st'>"Condition is true so this error is not shown"</span><span class='op'>)</span>
-  <span class='fu'>assert</span><span class='op'>(</span><span class='va'>x</span> <span class='op'>&lt;</span> <span class='fl'>0</span>, <span class='st'>"Condition is false so this error is shown"</span><span class='op'>)</span>
+<span class='co'># No error</span>
+<span class='fu'>assert_file</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"DESCRIPTION"</span>, package <span class='op'>=</span> <span class='st'>"msgr"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># Error</span>
+<span class='fu'>assert_file</span><span class='op'>(</span><span class='st'>"no-such-file.txt"</span><span class='op'>)</span>
 
-  <span class='co'># As with error() a level can be set</span>
-  <span class='fu'>assert</span><span class='op'>(</span><span class='va'>x</span> <span class='op'>&lt;</span> <span class='fl'>0</span>, <span class='st'>"This level 2 error is not shown by default"</span>, level <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='co'># No error</span>
+<span class='fu'>assert_dir</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Rhome.html'>R.home</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># Error</span>
+<span class='fu'>assert_dir</span><span class='op'>(</span><span class='st'>"no-such-directory"</span><span class='op'>)</span>
 
-  <span class='co'># Set default level in options to determine what is shown</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>msgr.level <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-  <span class='fu'>assert</span><span class='op'>(</span><span class='va'>x</span> <span class='op'>&lt;</span> <span class='fl'>0</span>, <span class='st'>"This is a level 2 error, so is shown now"</span>, level <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='co'># No error</span>
+<span class='fu'>assert_readable</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Rhome.html'>R.home</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># Error</span>
+<span class='fu'>assert_readable</span><span class='op'>(</span><span class='st'>"no-such-directory"</span><span class='op'>)</span>
+
+<span class='co'># No error</span>
+<span class='fu'>assert_writeable</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"HOME"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># Error</span>
+<span class='fu'>assert_writeable</span><span class='op'>(</span><span class='st'>"no-such-directory"</span><span class='op'>)</span>
+
+<span class='co'># No error</span>
+<span class='fu'>assert_url</span><span class='op'>(</span><span class='st'>"https://www.google.com"</span><span class='op'>)</span>
+<span class='co'># Error</span>
+<span class='fu'>assert_url</span><span class='op'>(</span><span class='st'>"no-such-site"</span><span class='op'>)</span>
 
 <span class='op'>}</span>
 

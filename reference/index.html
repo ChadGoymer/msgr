@@ -44,6 +44,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -55,9 +57,16 @@
 
 
 
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-index">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -71,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">msgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
       </span>
     </div>
 
@@ -79,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -93,7 +102,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://github.com/ChadGoymer/msgr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -182,12 +191,49 @@
           <p><code><a href="error_if.html">error_if()</a></code> </p>
         </td>
         <td><p>Display an error, and record in a log file, if a condition is true.</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-throw-errors-if-a-condition-is-not-met" class="hasAnchor"><a href="#section-throw-errors-if-a-condition-is-not-met" class="anchor"></a>Throw errors if a condition is not met</h2>
+          <p class="section-desc"><p>These functions can be used to assert variables are valid</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="assert.html">assert()</a></code> </p>
         </td>
-        <td><p>Display an error, and record in a log file, if a condition is false</p></td>
+        <td><p>Display an error if a condition is not met</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="assert_type.html">assert_type()</a></code> <code><a href="assert_type.html">assert_class()</a></code> <code><a href="assert_type.html">assert_null()</a></code> <code><a href="assert_type.html">assert_atomic()</a></code> <code><a href="assert_type.html">assert_vector()</a></code> <code><a href="assert_type.html">assert_logical()</a></code> <code><a href="assert_type.html">assert_integer()</a></code> <code><a href="assert_type.html">assert_natural()</a></code> <code><a href="assert_type.html">assert_double()</a></code> <code><a href="assert_type.html">assert_number()</a></code> <code><a href="assert_type.html">assert_character()</a></code> <code><a href="assert_type.html">assert_factor()</a></code> <code><a href="assert_type.html">assert_list()</a></code> <code><a href="assert_type.html">assert_array()</a></code> <code><a href="assert_type.html">assert_matrix()</a></code> <code><a href="assert_type.html">assert_data_frame()</a></code> <code><a href="assert_type.html">assert_function()</a></code> <code><a href="assert_type.html">assert_formula()</a></code> </p>
+        </td>
+        <td><p>Display an error if not the correct type</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="assert_structure.html">assert_empty()</a></code> <code><a href="assert_structure.html">assert_names()</a></code> <code><a href="assert_structure.html">assert_length()</a></code> </p>
+        </td>
+        <td><p>Display an error if not the correct structure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="assert_values.html">assert_na()</a></code> <code><a href="assert_values.html">assert_in()</a></code> <code><a href="assert_values.html">assert_in_range()</a></code> <code><a href="assert_values.html">assert_char_length()</a></code> </p>
+        </td>
+        <td><p>Display an error if not the allowed values</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="assert_file.html">assert_file()</a></code> <code><a href="assert_file.html">assert_dir()</a></code> <code><a href="assert_file.html">assert_readable()</a></code> <code><a href="assert_file.html">assert_writeable()</a></code> <code><a href="assert_file.html">assert_url()</a></code> </p>
+        </td>
+        <td><p>Display an error if a valid file or directory path</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -212,13 +258,15 @@
         <td>
           <p><code><a href="try_map.html">try_map()</a></code> </p>
         </td>
-        <td><p>Apply a function over a vector or list, capturing any errors to display at the end</p></td>
+        <td><p>Apply a function over a vector or list, capturing any errors to display at
+the end</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="try_pmap.html">try_pmap()</a></code> </p>
         </td>
-        <td><p>Apply a function over a list of vectors, capturing any errors to display at the end</p></td>
+        <td><p>Apply a function over a list of vectors, capturing any errors to display at
+the end</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -235,51 +283,27 @@
       <tr>
         
         <td>
-          <p><code><a href="is_na.html">is_na()</a></code> </p>
+          <p><code><a href="is_type.html">is_type()</a></code> <code><a href="is_type.html">is_class()</a></code> <code><a href="is_type.html">is_natural()</a></code> <code><a href="is_type.html">is_number()</a></code> <code><a href="is_type.html">is_factor()</a></code> <code><a href="is_type.html">is_array()</a></code> <code><a href="is_type.html">is_matrix()</a></code> <code><a href="is_type.html">is_data_frame()</a></code> </p>
         </td>
-        <td><p>Checks whether the variable is NA</p></td>
+        <td><p>Check the variable type &amp; class</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="is_in.html">is_in()</a></code> </p>
+          <p><code><a href="has_names.html">has_names()</a></code> <code><a href="has_names.html">has_length()</a></code> </p>
         </td>
-        <td><p>Checks whether all elements of one variable are in another</p></td>
+        <td><p>Checks the variable structure</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="has_names.html">has_names()</a></code> </p>
+          <p><code><a href="is_na.html">is_na()</a></code> <code><a href="is_na.html">is_in()</a></code> <code><a href="is_na.html">is_in_range()</a></code> <code><a href="is_na.html">has_char_length()</a></code> </p>
         </td>
-        <td><p>Checks whether the variable has names</p></td>
+        <td><p>Checks the variable values</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="is_url.html">is_url()</a></code> </p>
+          <p><code><a href="is_file.html">is_file()</a></code> <code><a href="is_file.html">is_dir()</a></code> <code><a href="is_file.html">is_readable()</a></code> <code><a href="is_file.html">is_writeable()</a></code> <code><a href="is_file.html">is_url()</a></code> </p>
         </td>
-        <td><p>Checks whether the variable is a valid URL</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_dir.html">is_dir()</a></code> </p>
-        </td>
-        <td><p>Checks whether the variable is a path to an existing directory</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_file.html">is_file()</a></code> </p>
-        </td>
-        <td><p>Checks whether the variable is a path to an existing file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_readable.html">is_readable()</a></code> </p>
-        </td>
-        <td><p>Checks whether the variable is a path to an existing, readable file or directory</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_writeable.html">is_writeable()</a></code> </p>
-        </td>
-        <td><p>Checks whether the variable is a path to an existing, writeable file or directory</p></td>
+        <td><p>Check file paths and directories</p></td>
       </tr>
     </tbody>
     </table>
@@ -295,11 +319,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Chad Goymer.</p>
+  <p><p>Developed by Chad Goymer.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -307,6 +331,8 @@
 
   
 
+
+  
 
   </body>
 </html>

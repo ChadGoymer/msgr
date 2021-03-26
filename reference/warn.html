@@ -40,9 +40,11 @@
 
 
 <meta property="og:title" content="Display a warning, and record it in a log file. — warn" />
-<meta property="og:description" content="warn() is similar to warning(), but it also writes the warning to a log file.
-Whether it is shown, or written to the log, depends on the level and type of the warning.
-See details below for more information." />
+<meta property="og:description" content="warn() is similar to warning(), but it also writes the warning to a log
+file. Whether it is shown, or written to the log, depends on the level and
+type of the warning. See details below for more information." />
+
+
 
 
 
@@ -58,9 +60,18 @@ See details below for more information." />
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -74,7 +85,7 @@ See details below for more information." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">msgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
       </span>
     </div>
 
@@ -82,7 +93,7 @@ See details below for more information." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -96,7 +107,7 @@ See details below for more information." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://github.com/ChadGoymer/msgr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -119,18 +130,18 @@ See details below for more information." />
     </div>
 
     <div class="ref-description">
-    <p><code>warn()</code> is similar to <code><a href='https://rdrr.io/r/base/warning.html'>warning()</a></code>, but it also writes the warning to a log file.
-Whether it is shown, or written to the log, depends on the level and type of the warning.
-See details below for more information.</p>
+    <p><code>warn()</code> is similar to <code><a href='https://rdrr.io/r/base/warning.html'>warning()</a></code>, but it also writes the warning to a log
+file. Whether it is shown, or written to the log, depends on the level and
+type of the warning. See details below for more information.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>warn</span>(
-  <span class='kw'>...</span>,
-  level = <span class='fl'>1</span>,
-  msg_level = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.level"</span>),
-  msg_types = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.types"</span>),
-  log_path = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"msgr.log_path"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>warn</span><span class='op'>(</span>
+  <span class='va'>...</span>,
+  level <span class='op'>=</span> <span class='fl'>1</span>,
+  msg_level <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.level"</span><span class='op'>)</span>,
+  msg_types <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.types"</span><span class='op'>)</span>,
+  log_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"msgr.log_path"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,22 +152,25 @@ See details below for more information.</p>
     </tr>
     <tr>
       <th>level</th>
-      <td><p>(integer, optional) The level of the warning, from 1 to 10. Default: 1.</p></td>
+      <td><p>(integer, optional) The level of the warning, from 1 to 10.
+Default: 1.</p></td>
     </tr>
     <tr>
       <th>msg_level</th>
-      <td><p>(integer, optional) The maximum level of messages to output. Default: set
-in the option <code>"msgr.level"</code>.</p></td>
+      <td><p>(integer, optional) The maximum level of messages to output.
+Default: set in the option <code>"msgr.level"</code>.</p></td>
     </tr>
     <tr>
       <th>msg_types</th>
-      <td><p>(character, optional) The type to write or display. Must either NULL or one
-or more from "INFO", "WARNING" or "ERROR". Default: set in the option <code>"msgr.types"</code>.</p></td>
+      <td><p>(character, optional) The type to write or display. Must
+either NULL or one or more from "INFO", "WARNING" or "ERROR". Default: set
+in the option <code>"msgr.types"</code>.</p></td>
     </tr>
     <tr>
       <th>log_path</th>
-      <td><p>(string, optional) The file path to the text log file. If set to "", then no
-logs are written. Default: set in the option <code>"msgr.log_path"</code>.</p></td>
+      <td><p>(string, optional) The file path to the text log file. If set
+to "", then no logs are written. Default: set in the option
+<code>"msgr.log_path"</code>.</p></td>
     </tr>
     </table>
 
@@ -166,29 +180,35 @@ logs are written. Default: set in the option <code>"msgr.log_path"</code>.</p></
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Whether a warning is shown, or written to the log, depends on two options:</p><ol>
-<li><p><strong>Level</strong>: This allows control over the depth of messages. Each message can be assigned a
-<code>level</code> and if it is below the <code>msg_level</code> (set in the package option <code>msgr.level</code> by
-default) the message is displayed and written to the log.</p></li>
-<li><p><strong>Type</strong>: The type is refers to whether the message is "INFO", "WARNING" or "ERROR", as
-produced by the functions <code><a href='info.html'>info()</a></code>, <code>warn()</code> and <code><a href='error.html'>error()</a></code> respectively. If the message
-type is in the <code>msg_types</code> (set in the package option <code>msgr.types</code> by default) the
-message is displayed and written to the log. This allows you to for instance, just
-display errors and warnings and ignore messages.</p></li>
+<li><p><strong>Level</strong>: This allows control over the depth of messages. Each message
+can be assigned a <code>level</code> and if it is below the <code>msg_level</code> (set in the
+package option <code>msgr.level</code> by default) the message is displayed and
+written to the log.</p></li>
+<li><p><strong>Type</strong>: The type is refers to whether the message is "INFO", "WARNING"
+or "ERROR", as produced by the functions <code><a href='info.html'>info()</a></code>, <code>warn()</code> and <code><a href='error.html'>error()</a></code>
+respectively. If the message type is in the <code>msg_types</code> (set in the
+package option <code>msgr.types</code> by default) the message is displayed and
+written to the log. This allows you to for instance, just display errors
+and warnings and ignore messages.</p></li>
 </ol>
 
-<p>The location of the log file is set in the package option <code>msgr.log_path</code>, or as an argument to
-this function. messages are added with a time stamp. If the <code>log_path</code> is equal to "" then no
-log is produced.</p>
+<p>The location of the log file is set in the package option <code>msgr.log_path</code>, or
+as an argument to this function. messages are added with a time stamp. If the
+<code>log_path</code> is equal to "" then no log is produced.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Use warn() to create timed warnings</span>
-<span class='fu'>warn</span>(<span class='st'>"This is a simple warning"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: [07:48:37] This is a simple warning</span></div><div class='input'><span class='fu'>warn</span>(<span class='st'>"This is a level 2 warning, so not shown by default"</span>, level = <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: [07:48:37] This is a level 2 warning, so not shown by default</span></div><div class='input'>
+<span class='fu'>warn</span><span class='op'>(</span><span class='st'>"This is a simple warning"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: [16:30:19] This is a simple warning</span></div><div class='input'><span class='fu'>warn</span><span class='op'>(</span><span class='st'>"This is a level 2 warning, so not shown by default"</span>, level <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: [16:30:19] This is a level 2 warning, so not shown by default</span></div><div class='input'>
 <span class='co'># Set default level in options to determine what is shown</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(msgr.level = <span class='fl'>2</span>)
-<span class='fu'>warn</span>(<span class='st'>"This is a level 2 warning, so is shown now"</span>, level = <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: [07:48:37] This is a level 2 warning, so is shown now</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>msgr.level <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'>warn</span><span class='op'>(</span><span class='st'>"This is a level 2 warning, so is shown now"</span>, level <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: [16:30:19] This is a level 2 warning, so is shown now</span></div><div class='input'>
 <span class='co'># Set message types in options to determine what is shown</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(msgr.types = <span class='st'>"ERROR"</span>)
-<span class='fu'>warn</span>(<span class='st'>"This is warning, so will not be shown now"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>msgr.types <span class='op'>=</span> <span class='st'>"ERROR"</span><span class='op'>)</span>
+<span class='fu'>warn</span><span class='op'>(</span><span class='st'>"This is warning, so will not be shown now"</span><span class='op'>)</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -201,11 +221,11 @@ log is produced.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Chad Goymer.</p>
+  <p><p>Developed by Chad Goymer.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -213,6 +233,8 @@ log is produced.</p>
 
   
 
+
+  
 
   </body>
 </html>

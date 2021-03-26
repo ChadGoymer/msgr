@@ -40,10 +40,11 @@
 
 
 <meta property="og:title" content="Try to evaluate an expressions and capture any messages, warnings or errors — try_catch" />
-<meta property="og:description" content="This function is similar to tryCatch(), except that, by default, errors are captured
-and presented using error(). Messages and warnings are not captured by this function.
-In addition, a &quot;finally&quot; expression can be specified which is evaluated at the end of
-the call no matter the result." />
+<meta property="og:description" content="This function is similar to tryCatch(), except that, by default, errors are
+captured and presented using error(). Messages and warnings are not
+captured by this function." />
+
+
 
 
 
@@ -59,9 +60,18 @@ the call no matter the result." />
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -75,7 +85,7 @@ the call no matter the result." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">msgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
       </span>
     </div>
 
@@ -83,7 +93,7 @@ the call no matter the result." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -97,7 +107,7 @@ the call no matter the result." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://github.com/ChadGoymer/msgr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -120,13 +130,12 @@ the call no matter the result." />
     </div>
 
     <div class="ref-description">
-    <p>This function is similar to <code><a href='https://rdrr.io/r/base/conditions.html'>tryCatch()</a></code>, except that, by default, errors are captured
-and presented using <code><a href='error.html'>error()</a></code>. Messages and warnings are not captured by this function.
-In addition, a "finally" expression can be specified which is evaluated at the end of
-the call no matter the result.</p>
+    <p>This function is similar to <code><a href='https://rdrr.io/r/base/conditions.html'>tryCatch()</a></code>, except that, by default, errors are
+captured and presented using <code><a href='error.html'>error()</a></code>. Messages and warnings are not
+captured by this function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>try_catch</span>(<span class='kw'>expr</span>, <span class='kw'>on_error</span>, <span class='kw'>finally</span>)</pre>
+    <pre class="usage"><span class='fu'>try_catch</span><span class='op'>(</span><span class='va'>expr</span>, <span class='va'>on_error</span>, <span class='va'>finally</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,27 +146,35 @@ the call no matter the result.</p>
     </tr>
     <tr>
       <th>on_error</th>
-      <td><p>(function, optional) A function describing what to do in the event of a
-error in the above expression. The function must take a single argument, which is the
-<code><a href='https://rdrr.io/r/base/conditions.html'>simpleError()</a></code>. If missing or <code>NULL</code>, errors are not caught. Default: <code><a href='error.html'>error()</a></code>
-called with the error's message prefixed by the calling function name.</p></td>
+      <td><p>(function, optional) A function describing what to do in the
+event of a error in the above expression. The function must take a single
+argument, which is the <code><a href='https://rdrr.io/r/base/conditions.html'>simpleError()</a></code>. If missing or <code>NULL</code>, errors are
+not caught. Default: <code><a href='error.html'>error()</a></code> called with the error's message prefixed by
+the calling function name.</p></td>
     </tr>
     <tr>
       <th>finally</th>
-      <td><p>(expression, optional) An expression to evaluate at the end of the call.
-If missing or <code>NULL</code>, nothing is actioned.</p></td>
+      <td><p>(expression, optional) An expression to evaluate at the end of
+the call. If missing or <code>NULL</code>, nothing is actioned.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The result of the evaluated expression</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>In addition, a "finally" expression can be specified which is evaluated at
+the end of the call no matter the result.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-  <span class='fu'>try_catch</span>(<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='st'>"foo"</span>)
-  <span class='fu'>try_catch</span>(<span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"This is an error"</span>))
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+
+<span class='fu'>try_catch</span><span class='op'>(</span><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='st'>"foo"</span><span class='op'>)</span>
+<span class='fu'>try_catch</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"This is an error"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -170,11 +187,11 @@ If missing or <code>NULL</code>, nothing is actioned.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Chad Goymer.</p>
+  <p><p>Developed by Chad Goymer.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -182,6 +199,8 @@ If missing or <code>NULL</code>, nothing is actioned.</p></td>
 
   
 
+
+  
 
   </body>
 </html>

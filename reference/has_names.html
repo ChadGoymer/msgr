@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Checks whether the variable has names — has_names • msgr</title>
+<title>Checks the variable structure — has_names • msgr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,11 @@
 
 
 
-<meta property="og:title" content="Checks whether the variable has names — has_names" />
-<meta property="og:description" content="Checks whether the variable has names" />
+<meta property="og:title" content="Checks the variable structure — has_names" />
+<meta property="og:description" content="This function returns TRUE if the variable structure is correct and FALSE
+otherwise." />
+
+
 
 
 
@@ -56,9 +59,18 @@
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -72,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">msgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
       </span>
     </div>
 
@@ -80,7 +92,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -94,7 +106,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://github.com/ChadGoymer/msgr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -111,16 +123,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Checks whether the variable has names</h1>
+    <h1>Checks the variable structure</h1>
     <small class="dont-index">Source: <a href='https://github.com/ChadGoymer/msgr/blob/master/R/predicates.R'><code>R/predicates.R</code></a></small>
     <div class="hidden name"><code>has_names.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Checks whether the variable has names</p>
+    <p>This function returns <code>TRUE</code> if the variable structure is correct and <code>FALSE</code>
+otherwise.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>has_names</span>(<span class='kw'>x</span>, <span class='kw'>nm</span>)</pre>
+    <pre class="usage"><span class='fu'>has_names</span><span class='op'>(</span><span class='va'>x</span>, names <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>has_length</span><span class='op'>(</span><span class='va'>x</span>, n <span class='op'>=</span> <span class='cn'>NULL</span>, n_min <span class='op'>=</span> <span class='cn'>NULL</span>, n_max <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -130,21 +145,68 @@
       <td><p>(any) The object to test</p></td>
     </tr>
     <tr>
-      <th>nm</th>
-      <td><p>(character, optional) The names to check for. If not specified then the function
-checks for any names.</p></td>
+      <th>names</th>
+      <td><p>(character, optional) The names to check for. If <code>NULL</code> the
+names are not checked. Default: <code>NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>(integer, optional) The allowed length. If <code>NULL</code> the exact length
+is not checked. Default: <code>NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>n_min</th>
+      <td><p>(integer, optional) The allowed minimum length. If <code>NULL</code> the
+minimum length is not checked. Default: <code>NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>n_max</th>
+      <td><p>(integer, optional) The allowed maximum length. If <code>NULL</code> the
+maximum length is not checked. Default: <code>NULL</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>TRUE if x has any names, FALSE otherwise</p>
+    <p>TRUE if x has names, FALSE otherwise</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The following structures can be checked:</p><ul>
+<li><p><code>has_names()</code>: 'x' must have names and optionally have the specified
+<code>names</code>. A logical vector is returned checking each name.</p></li>
+<li><p><code>has_length()</code>: 'x' must have valid length. You can specify the exact
+length using <code>n</code> or the minimum and/or maximum length using <code>n_min</code> and
+<code>n_max</code> respectively.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rlang.r-lib.org/reference/is_empty.html'>rlang::is_empty()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(a = <span class='fl'>1</span>, b = <span class='fl'>2</span>)
-
-<span class='fu'>has_names</span>(<span class='kw'>x</span>, <span class='st'>"a"</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_names</span>(<span class='kw'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='fu'>has_names</span>(<span class='kw'>x</span>, <span class='st'>"c"</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'></div></pre>
+    <pre class="examples"><div class='input'>
+<span class='co'># TRUE</span>
+<span class='fu'>has_names</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_names</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>, <span class='st'>"a"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_names</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'><span class='co'># FALSE</span>
+<span class='fu'>has_names</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>, <span class='st'>"c"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>has_names</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"b"</span>, <span class='st'>"c"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1]  TRUE FALSE</div><div class='input'>
+<span class='co'># TRUE</span>
+<span class='fu'>has_length</span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_length</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bob"</span>, <span class='st'>"jane"</span><span class='op'>)</span>, <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_length</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, y <span class='op'>=</span> <span class='fl'>2</span>, z <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>, <span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_length</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, n_min <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_length</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, n_max <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='co'># FALSE</span>
+<span class='fu'>has_length</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>has_length</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bob"</span>, <span class='st'>"jane"</span><span class='op'>)</span>, <span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>has_length</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, y <span class='op'>=</span> <span class='fl'>2</span>, z <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>, <span class='fl'>5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>has_length</span><span class='op'>(</span><span class='st'>"A"</span>, n_min <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>has_length</span><span class='op'>(</span><span class='va'>LETTERS</span>, n_max <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -156,11 +218,11 @@ checks for any names.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Chad Goymer.</p>
+  <p><p>Developed by Chad Goymer.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -168,6 +230,8 @@ checks for any names.</p></td>
 
   
 
+
+  
 
   </body>
 </html>
