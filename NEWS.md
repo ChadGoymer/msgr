@@ -1,3 +1,60 @@
+# msgr 1.2.4
+
+Added the following assertions on type:
+
+- `assert_type()`: 'x"' must have type `type` and optionally length `n`.
+- `assert_class()`: 'x"' must have class `class` and optionally length `n`.
+- `assert_null()`: 'x' must be `NULL`
+- `assert_atomic()`: 'x' must be an atomic vector and optionally length `n`.
+- `assert_vector()`: 'x' must be a vector and optionally length `n`.
+- `assert_logical()`: 'x' must be a logical vector and optionally length `n`.
+- `assert_integer()`: 'x' must be an integer vector and optionally length `n`.
+- `assert_natural()`: 'x' must be an integerish vector and optionally length 
+  `n`.
+- `assert_double()`: 'x' must be a double vector and optionally length `n`.
+- `assert_number()`: 'x' must be a numeric vector and optionally length `n`.
+- `assert_character()`: 'x' must be a character vector and optionally length 
+  `n`.
+- `assert_factor()`: 'x' must be a factor vector and optionally length `n`.
+- `assert_list()`: 'x' must be a list and optionally length `n`.
+- `assert_array()`: 'x' must be an array and optionally have dimension sizes 
+  `dims`.
+- `assert_matrix()`: 'x' must be a matrix and optionally have number of columns 
+  `n_col` and number of rows `n_row`.
+- `assert_data_frame()`: 'x' must be a data.frame and optionally have number of 
+  columns `n_col` and number of rows `n_row`.
+- `assert_function()`: 'x' must be a function
+- `assert_formula()`: 'x' must be a formula
+
+Added the following assertions on structure:
+
+- `assert_empty()`: 'x' must be empty or `NULL`.
+- `assert_names()`: 'x' must have names and optionally have the specified 
+  `names`.
+- `assert_length()`: 'x' must have valid length. You can specify the exact 
+  length using `n` or the minimum and/or maximum length using `n_min` and
+  `n_max` respectively.
+
+Added the following assertions on values:
+
+- `assert_na()`: All elements of 'x' must be `NA`.
+- `assert_in()`: All elements of 'x' must in specified `values`.
+- `assert_in_range()`: All elements of 'x' must be in the specified numeric
+ range.
+- `assert_char_length`: All elements of 'x' must have valid character length.
+ You can specify the exact length using `n` or the minimum and/or maximum
+ length using `n_min` and `n_max` respectively.
+
+Added the following assertions on files:
+
+- `assert_file()`: 'x' must be an existing file
+- `assert_dir()`: 'x' must be an existing directory
+- `assert_readable()`: 'x' must be a readable directory or file
+- `assert_writeable()`: 'x' must be a writeable directory or file
+- `assert_url()`: 'x' must be a valid URL
+
+Fixed the range assertion on `msg_level`.
+
 # msgr 1.2.3
 
 Replaced functions that conflict with purrr:
