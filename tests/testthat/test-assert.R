@@ -657,3 +657,115 @@ test_that("assert_formula returns an error if input is invalid", {
   )
 
 })
+
+# TEST: assert_empty -----------------------------------------------------------
+
+test_that("assert_empty returns an error if input is invalid", {
+
+  expect_silent(assert_empty(NULL))
+  expect_silent(assert_empty(integer()))
+
+  expect_error(
+    assert_empty(1:3),
+    "'1:3' must be empty or 'NULL'"
+  )
+
+  test_assert <- function(var)
+    assert_empty(x = var)
+
+  expect_silent(test_assert(NULL))
+  expect_silent(test_assert(character()))
+
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must be empty or 'NULL'"
+  )
+
+})
+
+# TEST: assert_names -----------------------------------------------------------
+
+test_that("assert_names returns an error if input is invalid", {
+
+  test_lst <- list(name = "Bob", age = 42)
+  expect_silent(assert_names(test_lst))
+  expect_silent(assert_names(test_lst, names = c("name", "age")))
+
+  expect_error(
+    assert_names(1:3),
+    "'1:3' must have names"
+  )
+  expect_error(
+    assert_names(test_lst, names = c("email", "address")),
+    "'test_lst' must have names in 'email', 'address'"
+  )
+
+  test_assert <- function(var, nam = NULL)
+    assert_names(x = var, names = nam)
+
+  expect_silent(test_assert(test_lst))
+  expect_silent(test_assert(test_lst, nam = c("name", "age")))
+
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must have names"
+  )
+  expect_error(
+    test_assert(test_lst, nam = c("email", "address")),
+    "In test_assert\\(\\): 'var' must have names in 'email', 'address'"
+  )
+
+})
+
+# TEST: assert_length ----------------------------------------------------------
+
+test_that("assert_length returns an error if input is invalid", {
+
+  expect_silent(assert_length(1:3, n = 3))
+  expect_silent(assert_length(1:3, n_min = 1))
+  expect_silent(assert_length(1:3, n_max = 10))
+  expect_silent(assert_length(1:3, n_min = 1, n_max = 10))
+
+  expect_error(
+    assert_length(1:3, n = 1),
+    "'1:3' must have length == 1"
+  )
+  expect_error(
+    assert_length(1:3, n_min = 5),
+    "'1:3' must have length >= 5"
+  )
+  expect_error(
+    assert_length(1:3, n_max = 2),
+    "'1:3' must have length <= 2"
+  )
+  expect_error(
+    assert_length(1:3, n_min = 5, n_max = 10),
+    "'1:3' must have length >= 5 and <= 10"
+  )
+
+  test_assert <- function(var, len = NULL, min = NULL, max = NULL)
+    assert_length(x = var, n = len, n_min = min, n_max = max)
+
+  expect_silent(test_assert(1:3, len = 3))
+  expect_silent(test_assert(1:3, min = 1))
+  expect_silent(test_assert(1:3, max = 10))
+  expect_silent(test_assert(1:3, min = 1, max = 10))
+
+  expect_error(
+    test_assert(1:3, len = 1),
+    "'var' must have length == 1"
+  )
+  expect_error(
+    test_assert(1:3, min = 5),
+    "'var' must have length >= 5"
+  )
+  expect_error(
+    test_assert(1:3, max = 2),
+    "'var' must have length <= 2"
+  )
+  expect_error(
+    test_assert(1:3, min = 5, max = 10),
+    "'var' must have length >= 5 and <= 10"
+  )
+
+})
