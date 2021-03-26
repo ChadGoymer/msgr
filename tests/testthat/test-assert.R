@@ -920,3 +920,108 @@ test_that("assert_char_length returns an error if input is invalid", {
   )
 
 })
+
+# TEST: assert_file ------------------------------------------------------------
+
+test_that("assert_file returns an error if input is invalid", {
+
+  expect_silent(assert_file(system.file("DESCRIPTION", package = "msgr")))
+  expect_error(
+    assert_file("no-such-file.txt"),
+    "'\"no-such-file.txt\"' must be an existing file"
+  )
+
+  test_assert <- function(var)
+    assert_file(x = var)
+
+  expect_silent(test_assert(system.file("DESCRIPTION", package = "msgr")))
+  expect_error(
+    test_assert("no-such-file.txt"),
+    "In test_assert\\(\\): 'var' must be an existing file"
+  )
+
+})
+
+# TEST: assert_dir -------------------------------------------------------------
+
+test_that("assert_dir returns an error if input is invalid", {
+
+  expect_silent(assert_dir(R.home()))
+  expect_error(
+    assert_dir("no-such-directory"),
+    "'\"no-such-directory\"' must be an existing directory"
+  )
+
+  test_assert <- function(var)
+    assert_dir(x = var)
+
+  expect_silent(test_assert(R.home()))
+  expect_error(
+    test_assert("no-such-directory"),
+    "In test_assert\\(\\): 'var' must be an existing directory"
+  )
+
+})
+
+# TEST: assert_readable --------------------------------------------------------
+
+test_that("assert_readable returns an error if input is invalid", {
+
+  expect_silent(assert_readable(R.home()))
+  expect_error(
+    assert_readable("no-such-directory"),
+    "'\"no-such-directory\"' must be a readable directory or file"
+  )
+
+  test_assert <- function(var)
+    assert_readable(x = var)
+
+  expect_silent(test_assert(R.home()))
+  expect_error(
+    test_assert("no-such-directory"),
+    "In test_assert\\(\\): 'var' must be a readable directory or file"
+  )
+
+})
+
+# TEST: assert_writeable -------------------------------------------------------
+
+test_that("assert_writeable returns an error if input is invalid", {
+
+  expect_silent(assert_writeable(Sys.getenv("HOME")))
+  expect_error(
+    assert_writeable("no-such-directory"),
+    "'\"no-such-directory\"' must be a writeable directory or file"
+  )
+
+  test_assert <- function(var)
+    assert_writeable(x = var)
+
+  expect_silent(test_assert(Sys.getenv("HOME")))
+  expect_error(
+    test_assert("no-such-directory"),
+    "In test_assert\\(\\): 'var' must be a writeable directory or file"
+  )
+
+})
+
+# TEST: assert_url -------------------------------------------------------
+
+test_that("assert_url returns an error if input is invalid", {
+
+  expect_silent(assert_url("https://www.google.com"))
+  expect_error(
+    assert_url("no-such-site"),
+    "'\"no-such-site\"' must be a valid URL"
+  )
+
+  test_assert <- function(var)
+    assert_url(x = var)
+
+  expect_silent(test_assert("https://www.google.com"))
+  expect_error(
+    test_assert("no-such-site"),
+    "In test_assert\\(\\): 'var' must be a valid URL"
+  )
+
+})

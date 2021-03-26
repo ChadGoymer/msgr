@@ -1730,3 +1730,282 @@ assert_char_length <- function(
 
   invisible(TRUE)
 }
+
+#  FUNCTION: assert_file -------------------------------------------------------
+#
+#' Display an error if a valid file or directory path
+#'
+#' This function calls the [error()] function to display an error if the
+#' variable's values are not valid file or directory paths.
+#'
+#' The following validations can be checked:
+#'
+#' - `assert_file()`: 'x' must be an existing file
+#' - `assert_dir()`: 'x' must be an existing directory
+#' - `assert_readable()`: 'x' must be a readable directory or file
+#' - `assert_writeable()`: 'x' must be a writeable directory or file
+#' - `assert_url()`: 'x' must be a valid URL
+#'
+#' @param x (any) The variable to check.
+#' @param level (integer, optional) The level of the message, from 1 to 10.
+#'   Default: 1.
+#' @param msg_level (integer, optional) The maximum level of messages to output.
+#'   Default: set in the option `"msgr.level"`.
+#' @param msg_types (character, optional) The type to write or display. Must
+#'   either NULL or one or more from "INFO", "WARNING" or "ERROR". Default: set
+#'   in the option `"msgr.types"`.
+#' @param log_path (character, optional) The file path to the text log file. If
+#'   set to "", then no logs are written. Default: set in the option
+#'   `"msgr.log_path"`.
+#'
+#' @return If assertion passes then `TRUE` is returned. This allows you to make
+#'   multiple assertions separated by `&`.
+#'
+#' @examples \dontrun{
+#'
+#' # No error
+#' assert_file(system.file("DESCRIPTION", package = "msgr"))
+#' # Error
+#' assert_file("no-such-file.txt")
+#'
+#' # No error
+#' assert_dir(R.home())
+#' # Error
+#' assert_dir("no-such-directory")
+#'
+#' # No error
+#' assert_readable(R.home())
+#' # Error
+#' assert_readable("no-such-directory")
+#'
+#' # No error
+#' assert_writeable(Sys.getenv("HOME"))
+#' # Error
+#' assert_writeable("no-such-directory")
+#'
+#' # No error
+#' assert_url("https://www.google.com")
+#' # Error
+#' assert_url("no-such-site")
+#'
+#' }
+#'
+#' @export
+#'
+assert_file <- function(
+  x,
+  level     = 1,
+  msg_level = getOption("msgr.level"),
+  msg_types = getOption("msgr.types"),
+  log_path  = getOption("msgr.log_path")
+) {
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10: ", level)
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, min = 1, max = 10) ||
+    stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a string: ", log_path)
+
+  if (!all(is_file(x))) {
+    prefix <- ""
+    if (sys.nframe() > 1) {
+      calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+      prefix <- paste0("In ", calling_function, "(): ")
+    }
+
+    error(
+      prefix,
+      paste0("'", deparse(substitute(x)), "' must be an existing file"),
+      level     = level,
+      msg_level = msg_level,
+      msg_types = msg_types,
+      log_path  = log_path
+    )
+  }
+
+  invisible(TRUE)
+}
+
+#  FUNCTION: assert_dir --------------------------------------------------------
+#
+#' @rdname assert_file
+#' @export
+#'
+assert_dir <- function(
+  x,
+  level     = 1,
+  msg_level = getOption("msgr.level"),
+  msg_types = getOption("msgr.types"),
+  log_path  = getOption("msgr.log_path")
+) {
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10: ", level)
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, min = 1, max = 10) ||
+    stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a string: ", log_path)
+
+  if (!all(is_dir(x))) {
+    prefix <- ""
+    if (sys.nframe() > 1) {
+      calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+      prefix <- paste0("In ", calling_function, "(): ")
+    }
+
+    error(
+      prefix,
+      paste0("'", deparse(substitute(x)), "' must be an existing directory"),
+      level     = level,
+      msg_level = msg_level,
+      msg_types = msg_types,
+      log_path  = log_path
+    )
+  }
+
+  invisible(TRUE)
+}
+
+#  FUNCTION: assert_readable ---------------------------------------------------
+#
+#' @rdname assert_file
+#' @export
+#'
+assert_readable <- function(
+  x,
+  level     = 1,
+  msg_level = getOption("msgr.level"),
+  msg_types = getOption("msgr.types"),
+  log_path  = getOption("msgr.log_path")
+) {
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10: ", level)
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, min = 1, max = 10) ||
+    stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a string: ", log_path)
+
+  if (!all(is_readable(x))) {
+    prefix <- ""
+    if (sys.nframe() > 1) {
+      calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+      prefix <- paste0("In ", calling_function, "(): ")
+    }
+
+    msg <- paste0(
+      "'", deparse(substitute(x)), "' must be a readable directory or file"
+    )
+
+    error(
+      prefix,
+      msg,
+      level     = level,
+      msg_level = msg_level,
+      msg_types = msg_types,
+      log_path  = log_path
+    )
+  }
+
+  invisible(TRUE)
+}
+
+#  FUNCTION: assert_writeable --------------------------------------------------
+#
+#' @rdname assert_file
+#' @export
+#'
+assert_writeable <- function(
+  x,
+  level     = 1,
+  msg_level = getOption("msgr.level"),
+  msg_types = getOption("msgr.types"),
+  log_path  = getOption("msgr.log_path")
+) {
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10: ", level)
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, min = 1, max = 10) ||
+    stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a string: ", log_path)
+
+  if (!all(is_writeable(x))) {
+    prefix <- ""
+    if (sys.nframe() > 1) {
+      calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+      prefix <- paste0("In ", calling_function, "(): ")
+    }
+
+    msg <- paste0(
+      "'", deparse(substitute(x)), "' must be a writeable directory or file"
+    )
+
+    error(
+      prefix,
+      msg,
+      level     = level,
+      msg_level = msg_level,
+      msg_types = msg_types,
+      log_path  = log_path
+    )
+  }
+
+  invisible(TRUE)
+}
+
+#  FUNCTION: assert_url --------------------------------------------------------
+#
+#' @rdname assert_file
+#' @export
+#'
+assert_url <- function(
+  x,
+  level     = 1,
+  msg_level = getOption("msgr.level"),
+  msg_types = getOption("msgr.types"),
+  log_path  = getOption("msgr.log_path")
+) {
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10: ", level)
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, min = 1, max = 10) ||
+    stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a string: ", log_path)
+
+  if (!all(is_url(x))) {
+    prefix <- ""
+    if (sys.nframe() > 1) {
+      calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
+      prefix <- paste0("In ", calling_function, "(): ")
+    }
+
+    error(
+      prefix,
+      paste0("'", deparse(substitute(x)), "' must be a valid URL"),
+      level     = level,
+      msg_level = msg_level,
+      msg_types = msg_types,
+      log_path  = log_path
+    )
+  }
+
+  invisible(TRUE)
+}
