@@ -769,3 +769,154 @@ test_that("assert_length returns an error if input is invalid", {
   )
 
 })
+
+# TEST: assert_na --------------------------------------------------------------
+
+test_that("assert_na returns an error if input is invalid", {
+
+  expect_silent(assert_na(c(NA, NA)))
+  expect_error(
+    assert_na(1:3),
+    "'1:3' must be a vector of NAs"
+  )
+
+  test_assert <- function(var)
+    assert_na(x = var)
+
+  expect_silent(test_assert(c(NA, NA)))
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must be a vector of NAs"
+  )
+
+})
+
+# TEST: assert_in --------------------------------------------------------------
+
+test_that("assert_in returns an error if input is invalid", {
+
+  expect_silent(assert_in(1:3, values = 1:10))
+  expect_silent(assert_in(c("A", "B"), values = LETTERS))
+
+  expect_error(
+    assert_in(1:10, values = 1:3),
+    "'1:10' must be in '1', '2', '3'"
+  )
+  expect_error(
+    assert_in(c("A", "B"), values = c("a", "b", "c")),
+    "'c\\(\"A\", \"B\"\\)' must be in 'a', 'b', 'c'"
+  )
+
+  test_assert <- function(var, val = NULL)
+    assert_in(x = var, values = val)
+
+  expect_silent(test_assert(1:3, val = 1:10))
+  expect_silent(test_assert(c("A", "B"), val = LETTERS))
+
+  expect_error(
+    test_assert(1:10, val = 1:3),
+    "In test_assert\\(\\): 'var' must be in '1', '2', '3'"
+  )
+  expect_error(
+    test_assert(c("A", "B"), val = c("a", "b", "c")),
+    "In test_assert\\(\\): 'var' must be in 'a', 'b', 'c'"
+  )
+
+})
+
+# TEST: assert_in_range --------------------------------------------------------
+
+test_that("assert_in_range returns an error if input is invalid", {
+
+  expect_silent(assert_in_range(1:3, min = 1))
+  expect_silent(assert_in_range(1:3, max = 10))
+  expect_silent(assert_in_range(1:3, min = 1, max = 10))
+
+  expect_error(
+    assert_in_range(1:3, min = 5),
+    "'1:3' must have values >= 5"
+  )
+  expect_error(
+    assert_in_range(1:3, max = 2),
+    "'1:3' must have values <= 2"
+  )
+  expect_error(
+    assert_in_range(1:3, min = 5, max = 10),
+    "'1:3' must have values >= 5 and <= 10"
+  )
+
+  test_assert <- function(var, mn = NULL, mx = NULL)
+    assert_in_range(x = var, min = mn, max = mx)
+
+  expect_silent(test_assert(1:3, mn = 1))
+  expect_silent(test_assert(1:3, mx = 10))
+  expect_silent(test_assert(1:3, mn = 1, mx = 10))
+
+  expect_error(
+    test_assert(1:3, mn = 5),
+    "'var' must have values >= 5"
+  )
+  expect_error(
+    test_assert(1:3, mx = 2),
+    "'var' must have values <= 2"
+  )
+  expect_error(
+    test_assert(1:3, mn = 5, mx = 10),
+    "'var' must have values >= 5 and <= 10"
+  )
+
+})
+
+# TEST: assert_char_length -----------------------------------------------------
+
+test_that("assert_char_length returns an error if input is invalid", {
+
+  test_chr <- c("bob", "jan")
+  expect_silent(assert_char_length(test_chr, n = 3))
+  expect_silent(assert_char_length(test_chr, n_min = 1))
+  expect_silent(assert_char_length(test_chr, n_max = 10))
+  expect_silent(assert_char_length(test_chr, n_min = 1, n_max = 10))
+
+  expect_error(
+    assert_char_length(test_chr, n = 1),
+    "'test_chr' must have character length == 1"
+  )
+  expect_error(
+    assert_char_length(test_chr, n_min = 5),
+    "'test_chr' must have character length >= 5"
+  )
+  expect_error(
+    assert_char_length(test_chr, n_max = 2),
+    "'test_chr' must have character length <= 2"
+  )
+  expect_error(
+    assert_char_length(test_chr, n_min = 5, n_max = 10),
+    "'test_chr' must have character length >= 5 and <= 10"
+  )
+
+  test_assert <- function(var, len = NULL, min = NULL, max = NULL)
+    assert_char_length(x = var, n = len, n_min = min, n_max = max)
+
+  expect_silent(test_assert(test_chr, len = 3))
+  expect_silent(test_assert(test_chr, min = 1))
+  expect_silent(test_assert(test_chr, max = 10))
+  expect_silent(test_assert(test_chr, min = 1, max = 10))
+
+  expect_error(
+    test_assert(test_chr, len = 1),
+    "'var' must have character length == 1"
+  )
+  expect_error(
+    test_assert(test_chr, min = 5),
+    "'var' must have character length >= 5"
+  )
+  expect_error(
+    test_assert(test_chr, max = 2),
+    "'var' must have character length <= 2"
+  )
+  expect_error(
+    test_assert(test_chr, min = 5, max = 10),
+    "'var' must have character length >= 5 and <= 10"
+  )
+
+})
