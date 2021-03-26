@@ -34,7 +34,7 @@ try_catch <- function(
   on_error,
   finally
 ) {
-  if (missing(on_error) || is_null(on_error)) {
+  if (missing(on_error) || is.null(on_error)) {
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
       prefix <- paste0("In ", calling_function, "(): ")
@@ -141,7 +141,7 @@ try_map <- function(
     error("'x' must be an atomic vector or a list")
   (is_function(f)) ||
     error("'f' must be a function")
-  (is_null(msg_prefix) || is_scalar_character(msg_prefix)) ||
+  (is.null(msg_prefix) || is_scalar_character(msg_prefix)) ||
     error("'msg_prefix' must be NULL or a string")
   (rlang::is_scalar_integerish(warn_level) && isTRUE(warn_level >= 0)) ||
     error("'warn_level' must be an integer greater or equal to 0")
@@ -182,7 +182,7 @@ try_map <- function(
   is_error <- map_lgl(result, function(r) "error" %in% class(r))
 
   if (any(is_error)) {
-    if (is_null(names(result))) {
+    if (is.null(names(result))) {
       prefix <- "\n"
     } else {
       prefix <- paste0("\n'", names(result)[is_error], "': ")
@@ -192,7 +192,7 @@ try_map <- function(
       prefix, map_chr(result[is_error], "message"),
       collapse = "\n"
     )
-    if (!is_null(msg_prefix)) {
+    if (!is.null(msg_prefix)) {
       error_msg <- paste0(msg_prefix, "\n", error_msg)
     }
 
@@ -290,7 +290,7 @@ try_pmap <- function(
     error("'x' must be a list of vectors with equal length")
   (is_function(f)) ||
     error("'f' must be a function")
-  (is_null(msg_prefix) || is_scalar_character(msg_prefix)) ||
+  (is.null(msg_prefix) || is_scalar_character(msg_prefix)) ||
     error("'msg_prefix' must be NULL or a string")
   (rlang::is_scalar_integerish(warn_level) && isTRUE(warn_level >= 0)) ||
     error("'warn_level' must be an integer greater or equal to 0")
@@ -346,7 +346,7 @@ try_pmap <- function(
       prefix, map_chr(result[is_error], "message"),
       collapse = "\n"
     )
-    if (!is_null(msg_prefix)) {
+    if (!is.null(msg_prefix)) {
       error_msg <- paste0(msg_prefix, "\n", error_msg)
     }
 

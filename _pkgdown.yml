@@ -26,7 +26,14 @@ reference:
   - '`info_if`'
   - '`warn_if`'
   - '`error_if`'
+- title: Throw errors if a condition is not met
+  desc: These functions can be used to assert variables are valid
+  contents:
   - '`assert`'
+  - '`assert_type`'
+  - '`assert_empty`'
+  - '`assert_na`'
+  - '`assert_file`'
 - title: Try expressions and catch errors
   desc: These functions catch errors and write them to a log file
   contents:
@@ -36,13 +43,9 @@ reference:
 - title: Predicate functions
   desc: These functions help specify conditions
   contents:
-  - '`is_na`'
-  - '`is_integerish`'
-  - '`has_length`'
-  - '`is_url`'
-  - '`is_dir`'
-  - '`is_in`'
+  - '`is_type`'
   - '`has_names`'
-  - '`has_char_length`'
+  - '`is_na`'
+  - '`is_file`'
 news:
 - one_page: false

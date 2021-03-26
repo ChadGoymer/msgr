@@ -85,12 +85,12 @@ test_that("invalid arguments for info throw an error", {
 
   expect_error(
     info("This is INFO", msg_level = "a"),
-    "'msg_level' must be an integer between 0 and 10: a"
+    "'msg_level' must be an integer between 1 and 10: a"
   )
 
   expect_error(
     info("This is INFO", msg_level = -1),
-    "'msg_level' must be an integer between 0 and 10: -1"
+    "'msg_level' must be an integer between 1 and 10: -1"
   )
 
   expect_error(
@@ -190,12 +190,12 @@ test_that("invalid arguments for warn throw an error", {
 
   expect_error(
     warn("This is a WARNING", msg_level = "a"),
-    "'msg_level' must be an integer between 0 and 10: a"
+    "'msg_level' must be an integer between 1 and 10: a"
   )
 
   expect_error(
     warn("This is a WARNING", msg_level = -1),
-    "'msg_level' must be an integer between 0 and 10: -1"
+    "'msg_level' must be an integer between 1 and 10: -1"
   )
 
   expect_error(
@@ -295,12 +295,12 @@ test_that("invalid arguments for warn throw an error", {
 
   expect_error(
     error("This is an ERROR", msg_level = "a"),
-    "'msg_level' must be an integer between 0 and 10: a"
+    "'msg_level' must be an integer between 1 and 10: a"
   )
 
   expect_error(
     error("This is an ERROR", msg_level = -1),
-    "'msg_level' must be an integer between 0 and 10: -1"
+    "'msg_level' must be an integer between 1 and 10: -1"
   )
 
   expect_error(
@@ -387,34 +387,6 @@ test_that("error_if returns an error if the condition is true", {
   expect_error(
     test_error_if_split_msg(2, 1),
     "In test_error_if_split_msg\\(\\): This is rubbish"
-  )
-
-})
-
-# TEST: assert -----------------------------------------------------------------
-
-test_that("assert returns an error if the condition is false", {
-
-  expect_error(assert(2 < 1), "2 < 1 is false")
-  expect_silent(assert(2 > 1))
-
-  test_assert <- function(x, y) assert(x > y)
-
-  expect_error(test_assert(1, 2), "In test_assert\\(\\): x > y is false")
-  expect_silent(test_assert(2, 1))
-
-  test_assert_msg <- function(x, y) assert(x > y, "This is rubbish")
-  expect_error(
-    test_assert_msg(1, 2),
-    "In test_assert_msg\\(\\): This is rubbish"
-  )
-
-  test_assert_split_msg <- function(x, y)
-    assert(x > y, "This ", "is ", "rubbish")
-
-  expect_error(
-    test_assert_split_msg(1, 2),
-    "In test_assert_split_msg\\(\\): This is rubbish"
   )
 
 })
