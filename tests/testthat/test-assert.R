@@ -25,3 +25,635 @@ test_that("assert returns an error if the condition is false", {
   )
 
 })
+
+# TEST: assert_type ------------------------------------------------------------
+
+test_that("assert_type returns an error if input is invalid", {
+
+  expect_silent(assert_type(data.frame(x = 1:3), "list"))
+  expect_silent(assert_type(list(1, 2, 3), "list", n = 3))
+
+  expect_error(
+    assert_type(1:3, "list"),
+    "'1:3' must have type 'list'"
+  )
+  expect_error(
+    assert_type(1:3, "integer", n = 1),
+    "'1:3' must have type 'integer' and of length 1"
+  )
+
+  test_assert <- function(var, len = NULL)
+    assert_type(var, "list", n = len)
+
+  expect_silent(test_assert(data.frame(x = 1:3)))
+  expect_silent(test_assert(list(1, 2, 3), len = 3))
+
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must have type 'list'"
+  )
+  expect_error(
+    test_assert(list(1, 2, 3), len = 1),
+    "In test_assert\\(\\): 'var' must have type 'list' and of length 1"
+  )
+
+})
+
+# TEST: assert_class -----------------------------------------------------------
+
+test_that("assert_class returns an error if input is invalid", {
+
+  expect_silent(assert_class(data.frame(x = 1:3), "data.frame"))
+  expect_silent(assert_class(list(1, 2, 3), "list", n = 3))
+
+  expect_error(
+    assert_class(list(x = 1:3), "data.frame"),
+    "'list\\(x = 1:3\\)' must have class 'data.frame'"
+  )
+  expect_error(
+    assert_class(1:3, "integer", n = 1),
+    "'1:3' must have class 'integer' and of length 1"
+  )
+
+  test_assert <- function(var, len = NULL)
+    assert_class(var, "list", n = len)
+
+  expect_silent(test_assert(list(1, 2, 3)))
+  expect_silent(test_assert(list(1, 2, 3), len = 3))
+
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must have class 'list'"
+  )
+  expect_error(
+    test_assert(list(1, 2, 3), len = 1),
+    "In test_assert\\(\\): 'var' must have class 'list' and of length 1"
+  )
+
+})
+
+# TEST: assert_null ------------------------------------------------------------
+
+test_that("assert_null returns an error if input is invalid", {
+
+  expect_silent(assert_null(NULL))
+  expect_error(
+    assert_null(1),
+    "'1' must be NULL"
+  )
+
+  test_assert <- function(var) assert_null(var)
+
+  expect_silent(test_assert(NULL))
+  expect_error(
+    test_assert(1),
+    "In test_assert\\(\\): 'var' must be NULL"
+  )
+
+})
+
+# TEST: assert_atomic ----------------------------------------------------------
+
+test_that("assert_atomic returns an error if input is invalid", {
+
+  expect_silent(assert_atomic(1:3))
+  expect_silent(assert_atomic(1:3, n = 3))
+
+  expect_error(
+    assert_atomic(list(1)),
+    "'list\\(1\\)' must be an atomic vector"
+  )
+  expect_error(
+    assert_atomic(1:3, n = 1),
+    "'1:3' must be an atomic vector of length 1"
+  )
+
+  test_assert <- function(var, len = NULL)
+    assert_atomic(x = var, n = len)
+
+  expect_silent(test_assert(1:3))
+  expect_error(
+    test_assert(list(1)),
+    "In test_assert\\(\\): 'var' must be an atomic vector"
+  )
+
+  expect_silent(test_assert(1:3, len = 3))
+  expect_error(
+    test_assert(1:3, len = 1),
+    "In test_assert\\(\\): 'var' must be an atomic vector of length 1"
+  )
+
+})
+
+# TEST: assert_vector ----------------------------------------------------------
+
+test_that("assert_vector returns an error if input is invalid", {
+
+  expect_silent(assert_vector(1:3))
+  expect_silent(assert_vector(1:3, n = 3))
+
+  expect_error(
+    assert_vector(options),
+    "'options' must be a vector"
+  )
+  expect_error(
+    assert_vector(1:3, n = 1),
+    "'1:3' must be a vector of length 1"
+  )
+
+  test_assert <- function(var, len = NULL)
+    assert_vector(x = var, n = len)
+
+  expect_silent(test_assert(1:3))
+  expect_silent(test_assert(1:3, len = 3))
+
+  expect_error(
+    test_assert(options),
+    "In test_assert\\(\\): 'var' must be a vector"
+  )
+  expect_error(
+    test_assert(1:3, len = 1),
+    "In test_assert\\(\\): 'var' must be a vector of length 1"
+  )
+
+})
+
+# TEST: assert_logical ---------------------------------------------------------
+
+test_that("assert_logical returns an error if input is invalid", {
+
+  expect_silent(assert_logical(c(TRUE, FALSE, TRUE)))
+  expect_silent(assert_logical(c(TRUE, FALSE, TRUE), n = 3))
+
+  expect_error(
+    assert_logical(1),
+    "'1' must be a logical vector"
+  )
+  expect_error(
+    assert_logical(c(TRUE, FALSE, TRUE), n = 1),
+    "'c\\(TRUE, FALSE, TRUE\\)' must be a logical vector of length 1"
+  )
+
+  test_assert <- function(var, len = NULL)
+    assert_logical(x = var, n = len)
+
+  expect_silent(test_assert(c(TRUE, FALSE, TRUE)))
+  expect_silent(test_assert(c(TRUE, FALSE, TRUE), len = 3))
+
+  expect_error(
+    test_assert(1),
+    "In test_assert\\(\\): 'var' must be a logical vector"
+  )
+  expect_error(
+    test_assert(c(TRUE, FALSE, TRUE), len = 1),
+    "In test_assert\\(\\): 'var' must be a logical vector of length 1"
+  )
+
+})
+
+# TEST: assert_integer ---------------------------------------------------------
+
+test_that("assert_integer returns an error if input is invalid", {
+
+  expect_silent(assert_integer(1:3))
+  expect_silent(assert_integer(1:3, n = 3))
+
+  expect_error(
+    assert_integer(c(1.414, 3.142)),
+    "'c\\(1.414, 3.142\\)' must be an integer vector"
+  )
+  expect_error(
+    assert_integer(1:3, n = 1),
+    "'1:3' must be an integer vector of length 1"
+  )
+
+  test_assert <- function(var, len = NULL)
+    assert_integer(x = var, n = len)
+
+  expect_silent(test_assert(1:3))
+  expect_silent(test_assert(1:3, len = 3))
+
+  expect_error(
+    test_assert(c(1.414, 3.142)),
+    "In test_assert\\(\\): 'var' must be an integer vector"
+  )
+  expect_error(
+    test_assert(1:3, len = 1),
+    "In test_assert\\(\\): 'var' must be an integer vector of length 1"
+  )
+
+})
+
+# TEST: assert_natural ---------------------------------------------------------
+
+test_that("assert_natural returns an error if input is invalid", {
+
+  expect_silent(assert_natural(c(1.0, 2.0, 3.0)))
+  expect_silent(assert_natural(c(1.0, 2.0, 3.0), n = 3))
+
+  expect_error(
+    assert_natural(-1:3),
+    "'-1:3' must be a positive integer vector"
+  )
+  expect_error(
+    assert_natural(c(1.414, 3.142)),
+    "'c\\(1.414, 3.142\\)' must be a positive integer vector"
+  )
+  expect_error(
+    assert_natural(1:3, n = 1),
+    "'1:3' must be a positive integer vector of length 1"
+  )
+
+  test_assert <- function(var, len = NULL)
+    assert_natural(x = var, n = len)
+
+  expect_silent(test_assert(c(1.0, 2.0, 3.0)))
+  expect_silent(test_assert(c(1.0, 2.0, 3.0), len = 3))
+
+  expect_error(
+    test_assert(c(1.414, 3.142)),
+    "In test_assert\\(\\): 'var' must be a positive integer vector"
+  )
+  expect_error(
+    test_assert(1:3, len = 1),
+    "In test_assert\\(\\): 'var' must be a positive integer vector of length 1"
+  )
+
+})
+
+# TEST: assert_double ----------------------------------------------------------
+
+test_that("assert_double returns an error if input is invalid", {
+
+  expect_silent(assert_double(c(1.1, 2.2, 3.3)))
+  expect_silent(assert_double(c(1.1, 2.2, 3.3), n = 3))
+
+  expect_error(
+    assert_double(c("a", "b", "c")),
+    "'c\\(\"a\", \"b\", \"c\"\\)' must be a double vector"
+  )
+  expect_error(
+    assert_double(c(1.1, 2.2, 3.3), n = 1),
+    "'c\\(1.1, 2.2, 3.3\\)' must be a double vector of length 1"
+  )
+
+  test_assert <- function(var, len = NULL)
+    assert_double(x = var, n = len)
+
+  expect_silent(test_assert(c(1.0, 2.0, 3.0)))
+  expect_silent(test_assert(c(1.0, 2.0, 3.0), len = 3))
+
+  expect_error(
+    test_assert(c("a", "b", "c")),
+    "In test_assert\\(\\): 'var' must be a double vector"
+  )
+  expect_error(
+    test_assert(c(1.1, 2.2, 3.3), len = 1),
+    "In test_assert\\(\\): 'var' must be a double vector of length 1"
+  )
+
+})
+
+# TEST: assert_number ----------------------------------------------------------
+
+test_that("assert_number returns an error if input is invalid", {
+
+  expect_silent(assert_number(1:3))
+  expect_silent(assert_number(c(1.1, 2.2, 3.3), n = 3))
+
+  expect_error(
+    assert_number(c("a", "b", "c")),
+    "'c\\(\"a\", \"b\", \"c\"\\)' must be a numeric vector"
+  )
+  expect_error(
+    assert_number(c(1.1, 2.2, 3.3), n = 1),
+    "'c\\(1.1, 2.2, 3.3\\)' must be a numeric vector of length 1"
+  )
+
+  test_assert <- function(var, len = NULL)
+    assert_number(x = var, n = len)
+
+  expect_silent(test_assert(1:3))
+  expect_silent(test_assert(c(1.1, 2.2, 3.3), len = 3))
+
+  expect_error(
+    test_assert(c("a", "b", "c")),
+    "In test_assert\\(\\): 'var' must be a numeric vector"
+  )
+  expect_error(
+    test_assert(c(1.1, 2.2, 3.3), len = 1),
+    "In test_assert\\(\\): 'var' must be a numeric vector of length 1"
+  )
+
+})
+
+# TEST: assert_character -------------------------------------------------------
+
+test_that("assert_character returns an error if input is invalid", {
+
+  expect_silent(assert_character(letters))
+  expect_silent(assert_character(c("a", "b", "c"), n = 3))
+
+  expect_error(
+    assert_character(1:3),
+    "'1:3' must be a character vector"
+  )
+  expect_error(
+    assert_character(letters, n = 1),
+    "'letters' must be a character vector of length 1"
+  )
+
+  test_assert <- function(var, len = NULL)
+    assert_character(x = var, n = len)
+
+  expect_silent(test_assert(letters))
+  expect_silent(test_assert(c("a", "b", "c"), len = 3))
+
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must be a character vector"
+  )
+  expect_error(
+    test_assert(letters, len = 1),
+    "In test_assert\\(\\): 'var' must be a character vector of length 1"
+  )
+
+})
+
+# TEST: assert_factor -------------------------------------------------------
+
+test_that("assert_factor returns an error if input is invalid", {
+
+  test_fct <- factor(c("a", "b", "a"))
+  expect_silent(assert_factor(test_fct))
+  expect_silent(assert_factor(test_fct, levels = c("a", "b")))
+  expect_silent(assert_factor(test_fct, n = 3))
+  expect_silent(assert_factor(test_fct, levels = c("a", "b"), n = 3))
+
+  expect_error(
+    assert_factor(1:3),
+    "'1:3' must be a factor vector"
+  )
+  expect_error(
+    assert_factor(test_fct, levels = c("b", "c")),
+    "'test_fct' must be a factor vector with levels 'b', 'c'"
+  )
+  expect_error(
+    assert_factor(test_fct, n = 1),
+    "'test_fct' must be a factor vector of length 1"
+  )
+  expect_error(
+    assert_factor(test_fct, levels = c("b", "c"), n = 1),
+    "'test_fct' must be a factor vector with levels 'b', 'c' of length 1"
+  )
+
+  test_assert <- function(var, lev = NULL, len = NULL)
+    assert_factor(x = var, levels = lev, n = len)
+
+  expect_silent(test_assert(test_fct))
+  expect_silent(test_assert(test_fct, lev = c("a", "b")))
+  expect_silent(test_assert(test_fct, len = 3))
+  expect_silent(test_assert(test_fct, lev = c("a", "b"), len = 3))
+
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must be a factor vector"
+  )
+  expect_error(
+    test_assert(letters, lev = c("b", "c")),
+    "In test_assert\\(\\): 'var' must be a factor vector with levels 'b', 'c'"
+  )
+  expect_error(
+    test_assert(letters, len = 1),
+    "In test_assert\\(\\): 'var' must be a factor vector of length 1"
+  )
+  expect_error(
+    test_assert(letters, lev = c("b", "c"), len = 1),
+    paste(
+      "In test_assert\\(\\): 'var' must be a factor vector",
+      "with levels 'b', 'c' of length 1"
+    )
+  )
+
+})
+
+# TEST: assert_list ------------------------------------------------------------
+
+test_that("assert_list returns an error if input is invalid", {
+
+  expect_silent(assert_list(list(1, 2, 3)))
+  expect_silent(assert_list(list(1, 2, 3), n = 3))
+
+  expect_error(
+    assert_list(1:3),
+    "'1:3' must be a list"
+  )
+  expect_error(
+    assert_list(list(1, 2, 3), n = 1),
+    "'list\\(1, 2, 3\\)' must be a list of length 1"
+  )
+
+  test_assert <- function(var, len = NULL)
+    assert_list(x = var, n = len)
+
+  expect_silent(test_assert(list(1, 2, 3)))
+  expect_silent(test_assert(list(1, 2, 3), len = 3))
+
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must be a list"
+  )
+  expect_error(
+    test_assert(list(1, 2, 3), len = 1),
+    "In test_assert\\(\\): 'var' must be a list of length 1"
+  )
+
+})
+
+# TEST: assert_array -----------------------------------------------------------
+
+test_that("assert_array returns an error if input is invalid", {
+
+  test_ary <- array(1:12, dim = c(3, 4))
+  expect_silent(assert_array(test_ary))
+  expect_silent(assert_array(test_ary, dims = c(3, 4)))
+
+  expect_error(
+    assert_array(1:3),
+    "'1:3' must be an array"
+  )
+  expect_error(
+    assert_array(test_ary, dims = c(1, 1)),
+    "'test_ary' must be an array with dimensions 1 x 1"
+  )
+
+  test_assert <- function(var, dim = NULL)
+    assert_array(x = var, dims = dim)
+
+  expect_silent(test_assert(test_ary))
+  expect_silent(test_assert(test_ary, dim = c(3, 4)))
+
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must be an array"
+  )
+  expect_error(
+    test_assert(test_ary, dim = c(1, 1)),
+    "In test_assert\\(\\): 'var' must be an array with dimensions 1 x 1"
+  )
+
+})
+
+# TEST: assert_matrix ----------------------------------------------------------
+
+test_that("assert_matrix returns an error if input is invalid", {
+
+  test_mtx <- matrix(1:12, ncol = 4, nrow = 3)
+  expect_silent(assert_matrix(test_mtx))
+  expect_silent(assert_matrix(test_mtx, n_col = 4))
+  expect_silent(assert_matrix(test_mtx, n_row = 3))
+  expect_silent(assert_matrix(test_mtx, n_col = 4, n_row = 3))
+
+  expect_error(
+    assert_matrix(1:3),
+    "'1:3' must be a matrix"
+  )
+  expect_error(
+    assert_matrix(test_mtx, n_col = 1),
+    "'test_mtx' must be a matrix with 1 columns"
+  )
+  expect_error(
+    assert_matrix(test_mtx, n_row = 1),
+    "'test_mtx' must be a matrix with 1 rows"
+  )
+  expect_error(
+    assert_matrix(test_mtx, n_col = 1, n_row = 1),
+    "'test_mtx' must be a matrix with 1 columns and 1 rows"
+  )
+
+  test_assert <- function(var, col = NULL, row = NULL)
+    assert_matrix(x = var, n_col = col, n_row = row)
+
+  expect_silent(test_assert(test_mtx))
+  expect_silent(test_assert(test_mtx, col = 4))
+  expect_silent(test_assert(test_mtx, row = 3))
+  expect_silent(test_assert(test_mtx, col = 4, row = 3))
+
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must be a matrix"
+  )
+  expect_error(
+    test_assert(test_mtx, col = 1),
+    "In test_assert\\(\\): 'var' must be a matrix with 1 columns"
+  )
+  expect_error(
+    test_assert(test_mtx, row = 1),
+    "In test_assert\\(\\): 'var' must be a matrix with 1 rows"
+  )
+  expect_error(
+    test_assert(test_mtx, col = 1, row = 1),
+    "In test_assert\\(\\): 'var' must be a matrix with 1 columns and 1 rows"
+  )
+
+})
+
+# TEST: assert_data_frame ------------------------------------------------------
+
+test_that("assert_data_frame returns an error if input is invalid", {
+
+  test_df <- data.frame(a = 1:3, b = c("a", "b", "c"))
+  expect_silent(assert_data_frame(test_df))
+  expect_silent(assert_data_frame(test_df, n_col = 2))
+  expect_silent(assert_data_frame(test_df, n_row = 3))
+  expect_silent(assert_data_frame(test_df, n_col = 2, n_row = 3))
+
+  expect_error(
+    assert_data_frame(1:3),
+    "'1:3' must be a data.frame"
+  )
+  expect_error(
+    assert_data_frame(test_df, n_col = 1),
+    "'test_df' must be a data.frame with 1 columns"
+  )
+  expect_error(
+    assert_data_frame(test_df, n_row = 1),
+    "'test_df' must be a data.frame with 1 rows"
+  )
+  expect_error(
+    assert_data_frame(test_df, n_col = 1, n_row = 1),
+    "'test_df' must be a data.frame with 1 columns and 1 rows"
+  )
+
+  test_assert <- function(var, col = NULL, row = NULL)
+    assert_data_frame(x = var, n_col = col, n_row = row)
+
+  expect_silent(test_assert(test_df))
+  expect_silent(test_assert(test_df, col = 2))
+  expect_silent(test_assert(test_df, row = 3))
+  expect_silent(test_assert(test_df, col = 2, row = 3))
+
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must be a data.frame"
+  )
+  expect_error(
+    test_assert(test_df, col = 1),
+    "In test_assert\\(\\): 'var' must be a data.frame with 1 columns"
+  )
+  expect_error(
+    test_assert(test_df, row = 1),
+    "In test_assert\\(\\): 'var' must be a data.frame with 1 rows"
+  )
+  expect_error(
+    test_assert(test_df, col = 1, row = 1),
+    "In test_assert\\(\\): 'var' must be a data.frame with 1 columns and 1 rows"
+  )
+
+})
+
+# TEST: assert_function --------------------------------------------------------
+
+test_that("assert_function returns an error if input is invalid", {
+
+  expect_silent(assert_function(options))
+
+  expect_error(
+    assert_function(1:3),
+    "'1:3' must be a function"
+  )
+
+  test_assert <- function(var)
+    assert_function(x = var)
+
+  expect_silent(test_assert(options))
+
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must be a function"
+  )
+
+})
+
+# TEST: assert_formula ---------------------------------------------------------
+
+test_that("assert_formula returns an error if input is invalid", {
+
+  expect_silent(assert_formula(x ~ y))
+
+  expect_error(
+    assert_formula(1:3),
+    "'1:3' must be a formula"
+  )
+
+  test_assert <- function(var)
+    assert_formula(x = var)
+
+  expect_silent(test_assert(x ~ y))
+
+  expect_error(
+    test_assert(1:3),
+    "In test_assert\\(\\): 'var' must be a formula"
+  )
+
+})
