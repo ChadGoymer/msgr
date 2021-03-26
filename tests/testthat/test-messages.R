@@ -85,12 +85,12 @@ test_that("invalid arguments for info throw an error", {
 
   expect_error(
     info("This is INFO", msg_level = "a"),
-    "'msg_level' must be an integer between 0 and 10: a"
+    "'msg_level' must be an integer between 1 and 10: a"
   )
 
   expect_error(
     info("This is INFO", msg_level = -1),
-    "'msg_level' must be an integer between 0 and 10: -1"
+    "'msg_level' must be an integer between 1 and 10: -1"
   )
 
   expect_error(
@@ -190,12 +190,12 @@ test_that("invalid arguments for warn throw an error", {
 
   expect_error(
     warn("This is a WARNING", msg_level = "a"),
-    "'msg_level' must be an integer between 0 and 10: a"
+    "'msg_level' must be an integer between 1 and 10: a"
   )
 
   expect_error(
     warn("This is a WARNING", msg_level = -1),
-    "'msg_level' must be an integer between 0 and 10: -1"
+    "'msg_level' must be an integer between 1 and 10: -1"
   )
 
   expect_error(
@@ -295,12 +295,12 @@ test_that("invalid arguments for warn throw an error", {
 
   expect_error(
     error("This is an ERROR", msg_level = "a"),
-    "'msg_level' must be an integer between 0 and 10: a"
+    "'msg_level' must be an integer between 1 and 10: a"
   )
 
   expect_error(
     error("This is an ERROR", msg_level = -1),
-    "'msg_level' must be an integer between 0 and 10: -1"
+    "'msg_level' must be an integer between 1 and 10: -1"
   )
 
   expect_error(
