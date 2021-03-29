@@ -109,7 +109,7 @@
 is_type <- function(x, type, n = NULL) {
   is.character(type) && length(type) == 1 ||
     stop("'type' must be a character vector of length 1")
-  identical(typeof(x), type) && has_length(x = x, n = n)
+  typeof(x) == type && has_length(x = x, n = n)
 }
 
 #  FUNCTION: is_class ----------------------------------------------------------
@@ -404,7 +404,13 @@ is_na <- function(x) {
 #' @export
 #'
 is_in <- function(x, values) {
-  is_vector(x) & x %in% values
+  if (rlang::is_vector(x)) {
+    rlang::is_vector(values) ||
+      stop("'values' must be a vector")
+    x %in% values
+  } else {
+    FALSE
+  }
 }
 
 #  FUNCTION: is_in_range -------------------------------------------------------
@@ -418,21 +424,25 @@ is_in <- function(x, values) {
 #' @export
 #'
 is_in_range <- function(x, min = NULL, max = NULL) {
-  check_min <- TRUE
-  if (!is.null(min)) {
-    is.numeric(min) && length(min) == 1 && min >= 0 ||
-      stop("'min' must be a positive numeric vector of length 1")
-    check_min <- x >= min
-  }
+  if (is.numeric(x)) {
+    check_min <- TRUE
+    if (!is.null(min)) {
+      is.numeric(min) && length(min) == 1 && min >= 0 ||
+        stop("'min' must be a positive numeric vector of length 1")
+      check_min <- x >= min
+    }
 
-  check_max <- TRUE
-  if (!is.null(max)) {
-    is.numeric(max) && length(max) == 1 && max >= 0 ||
-      stop("'max' must be a positive numeric vector of length 1")
-    check_max <- x <= max
-  }
+    check_max <- TRUE
+    if (!is.null(max)) {
+      is.numeric(max) && length(max) == 1 && max >= 0 ||
+        stop("'max' must be a positive numeric vector of length 1")
+      check_max <- x <= max
+    }
 
-  is.numeric(x) & check_min & check_max
+    check_min & check_max
+  } else {
+    FALSE
+  }
 }
 
 #  FUNCTION: has_char_length ---------------------------------------------------

@@ -19,8 +19,6 @@
 #'
 #' @author Chad Goymer \email{chad.goymer@@gmail.com}
 #'
-#' @import purrr
-#'
 #' @noRd
 #'
 globalVariables(c(".", ".data"))

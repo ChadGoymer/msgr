@@ -9,7 +9,7 @@ try_pmap(
   l,
   f,
   ...,
-  msg_prefix,
+  msg_prefix = NULL,
   warn_level = 2,
   error_level = 1,
   on_error = "error",
