@@ -32,7 +32,7 @@
 try_catch <- function(
   expr,
   on_error,
-  finally
+  finally = NULL
 ) {
   if (missing(on_error) || is.null(on_error)) {
     if (sys.nframe() > 1) {
@@ -54,12 +54,7 @@ try_catch <- function(
     }
   }
 
-  assert(is_function(on_error), "'on_error' must be a function")
-
-  if (missing(finally)) {
-    finally <- NULL
-  }
-
+  assert(is.function(on_error), "'on_error' must be a function")
   tryCatch(expr, error = on_error, finally = finally)
 }
 
@@ -120,14 +115,14 @@ try_map <- function(
   x,
   f,
   ...,
-  msg_prefix,
+  msg_prefix  = NULL,
   warn_level  = 2,
   error_level = 1,
   on_error    = "error",
   simplify    = FALSE,
   use_names   = TRUE
 ) {
-  if (missing(msg_prefix)) {
+  if (is.null(msg_prefix)) {
     mapped_function <- as.character(substitute(f))
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
@@ -137,24 +132,25 @@ try_map <- function(
     }
   }
 
-  (is_atomic(x) || is_list(x)) ||
-    error("'x' must be an atomic vector or a list")
-  (is_function(f)) ||
+  is.vector(x) ||
+    error("'x' must be a vector")
+  is.function(f) ||
     error("'f' must be a function")
-  (is.null(msg_prefix) || is_scalar_character(msg_prefix)) ||
-    error("'msg_prefix' must be NULL or a string")
-  (rlang::is_scalar_integerish(warn_level) && isTRUE(warn_level >= 0)) ||
-    error("'warn_level' must be an integer greater or equal to 0")
-  (rlang::is_scalar_integerish(error_level) && isTRUE(error_level > 0)) ||
-    error("'error_level' must be an integer greater than 0")
-  (is_scalar_character(on_error) && on_error %in% c("info", "warn", "error")) ||
+  is.character(msg_prefix) && length(msg_prefix) == 1 ||
+    error("'msg_prefix' must be a character vector of length 1")
+  is_natural(warn_level, n = 1) ||
+    error("'warn_level' must be a positive integer vector of length 1")
+  is_natural(error_level, n = 1) ||
+    error("'error_level' must be a positive integer vector of length 1")
+  is.character(on_error) && length(on_error) == 1 &&
+    is_in(on_error, c("info", "warn", "error")) ||
     error("'on_error' must be either 'info', 'warn' or 'error'")
-  (is_scalar_logical(simplify)) ||
-    error("'simplify' must be boolean")
-  (is_scalar_logical(use_names)) ||
-    error("'use_names' must be boolean")
+  is.logical(simplify) && length(simplify) == 1 ||
+    error("'simplify' must be a logical vector of length 1")
+  is.logical(use_names) && length(use_names) == 1 ||
+    error("'use_names' must be a logical vector of length 1")
 
-  result <- map(.x = x, ..., .f = function(x, ...) {
+  result <- purrr::map(.x = x, ..., .f = function(x, ...) {
     tryCatch({
       f(x, ...)
     },
@@ -167,7 +163,7 @@ try_map <- function(
         warn("Failed for ", names(formals(f))[1], " = ", x, level = warn_level)
       }
 
-      if (is_scalar_character(mapped_function)) {
+      if (is.character(mapped_function) && length(mapped_function) == 1) {
         e$message <- paste0("In ", mapped_function, "(): ", e$message)
       }
 
@@ -175,11 +171,11 @@ try_map <- function(
     })
   })
 
-  if (use_names && is_character(x)) {
+  if (use_names && is.character(x)) {
     names(result) <- x
   }
 
-  is_error <- map_lgl(result, function(r) "error" %in% class(r))
+  is_error <- purrr::map_lgl(result, function(r) "error" %in% class(r))
 
   if (any(is_error)) {
     if (is.null(names(result))) {
@@ -189,7 +185,7 @@ try_map <- function(
     }
 
     error_msg <- paste0(
-      prefix, map_chr(result[is_error], "message"),
+      prefix, purrr::map_chr(result[is_error], "message"),
       collapse = "\n"
     )
     if (!is.null(msg_prefix)) {
@@ -204,7 +200,7 @@ try_map <- function(
     )
   }
 
-  if (simplify && all(map_int(result, length) == 1L)) {
+  if (simplify && all(purrr::map_int(result, length) == 1L)) {
     result <- unlist(result)
   }
 
@@ -269,14 +265,14 @@ try_pmap <- function(
   l,
   f,
   ...,
-  msg_prefix,
+  msg_prefix  = NULL,
   warn_level  = 2,
   error_level = 1,
   on_error    = "error",
   simplify    = FALSE,
   use_names   = TRUE
 ) {
-  if (missing(msg_prefix)) {
+  if (is.null(msg_prefix)) {
     mapped_function <- as.character(substitute(f))
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
@@ -286,26 +282,27 @@ try_pmap <- function(
     }
   }
 
-  (is_list(l) && identical(length(unique(map_int(l, length))), 1L)) ||
-    error("'x' must be a list of vectors with equal length")
-  (is_function(f)) ||
+  is.list(l) && length(unique(purrr::map_int(l, length)) == 1) ||
+    error("'l' must be a list of vectors with equal length")
+  is.function(f) ||
     error("'f' must be a function")
-  (is.null(msg_prefix) || is_scalar_character(msg_prefix)) ||
-    error("'msg_prefix' must be NULL or a string")
-  (rlang::is_scalar_integerish(warn_level) && isTRUE(warn_level >= 0)) ||
-    error("'warn_level' must be an integer greater or equal to 0")
-  (rlang::is_scalar_integerish(error_level) && isTRUE(error_level > 0)) ||
-    error("'error_level' must be an integer greater than 0")
-  (is_scalar_character(on_error) && on_error %in% c("info", "warn", "error")) ||
+  is.character(msg_prefix) && length(msg_prefix) == 1 ||
+    error("'msg_prefix' must be a character vector of length 1")
+  is_natural(warn_level, n = 1) ||
+    error("'warn_level' must be a positive integer vector of length 1")
+  is_natural(error_level, n = 1) ||
+    error("'error_level' must be a positive integer vector of length 1")
+  is.character(on_error) && length(on_error) == 1 &&
+    is_in(on_error, c("info", "warn", "error")) ||
     error("'on_error' must be either 'info', 'warn' or 'error'")
-  (is_scalar_logical(simplify)) ||
-    error("'simplify' must be boolean")
-  (is_scalar_logical(use_names)) ||
-    error("'use_names' must be boolean")
+  is.logical(simplify) && length(simplify) == 1 ||
+    error("'simplify' must be a logical vector of length 1")
+  is.logical(use_names) && length(use_names) == 1 ||
+    error("'use_names' must be a logical vector of length 1")
 
-  result <- pmap(.l = l, ..., .f = function(...) {
+  result <- purrr::pmap(.l = l, ..., .f = function(...) {
     tryCatch({
-      exec(f, ...)
+      rlang::exec(f, ...)
     },
     error = function(e) {
       args <- list(...)
@@ -321,7 +318,7 @@ try_pmap <- function(
         )
       }
 
-      if (is_scalar_character(mapped_function)) {
+      if (is.character(mapped_function) && length(mapped_function) == 1) {
         e$message <- paste0("In ", mapped_function, "(): ", e$message)
       }
 
@@ -329,11 +326,11 @@ try_pmap <- function(
     })
   })
 
-  if (use_names && is_character(l[[1]])) {
+  if (use_names && is.character(l[[1]])) {
     names(result) <- l[[1]]
   }
 
-  is_error <- map_lgl(result, function(r) "error" %in% class(r))
+  is_error <- purrr::map_lgl(result, function(r) "error" %in% class(r))
 
   if (any(is_error)) {
     if (is.null(names(result))) {
@@ -343,7 +340,7 @@ try_pmap <- function(
     }
 
     error_msg <- paste0(
-      prefix, map_chr(result[is_error], "message"),
+      prefix, purrr::map_chr(result[is_error], "message"),
       collapse = "\n"
     )
     if (!is.null(msg_prefix)) {
@@ -358,7 +355,7 @@ try_pmap <- function(
     )
   }
 
-  if (simplify && all(map_int(result, length) == 1L)) {
+  if (simplify && all(purrr::map_int(result, length) == 1L)) {
     result <- unlist(result)
   }
 

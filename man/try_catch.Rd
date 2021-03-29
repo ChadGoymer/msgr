@@ -4,7 +4,7 @@
 \alias{try_catch}
 \title{Try to evaluate an expressions and capture any messages, warnings or errors}
 \usage{
-try_catch(expr, on_error, finally)
+try_catch(expr, on_error, finally = NULL)
 }
 \arguments{
 \item{expr}{(expression) The expression to evaluate}
