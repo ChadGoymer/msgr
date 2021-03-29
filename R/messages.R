@@ -73,7 +73,7 @@ info <- function(
   msg <- paste0(...)
 
   if ("INFO" %in% msg_types && level <= msg_level) {
-    if (!identical(log_path, "")) {
+    if (log_path != "") {
       log_path <- normalizePath(log_path, winslash = "/", mustWork = FALSE)
 
       if (!is_dir(dirname(log_path))) {
@@ -172,7 +172,7 @@ warn <- function(
   msg <- paste0(...)
 
   if ("WARNING" %in% msg_types && level <= msg_level) {
-    if (!identical(log_path, "")) {
+    if (log_path != "") {
       log_path <- normalizePath(log_path, winslash = "/", mustWork = FALSE)
 
       if (!is_dir(dirname(log_path))) {
@@ -274,7 +274,7 @@ error <- function(
   msg <- paste0(...)
 
   if ("ERROR" %in% msg_types && level <= msg_level) {
-    if (!identical(log_path, "")) {
+    if (log_path != "") {
       log_path <- normalizePath(log_path, winslash = "/", mustWork = FALSE)
 
       if (!is_dir(dirname(log_path))) {
@@ -369,7 +369,7 @@ info_if <- function(
     }
 
     msg <- list(...)
-    if (identical(length(msg), 0L)) {
+    if (length(msg) == 0) {
       msg <- paste(deparse(uneval_condition), "is true")
     } else {
       msg <- paste(as.character(msg), collapse = "")
@@ -456,7 +456,7 @@ warn_if <- function(
     }
 
     msg <- list(...)
-    if (identical(length(msg), 0L)) {
+    if (length(msg) == 0) {
       msg <- paste(deparse(uneval_condition), "is true")
     } else {
       msg <- paste(as.character(msg), collapse = "")
@@ -542,7 +542,7 @@ error_if <- function(
     }
 
     msg <- list(...)
-    if (identical(length(msg), 0L)) {
+    if (length(msg) == 0) {
       msg <- paste(deparse(uneval_condition), "is true")
     } else {
       msg <- paste(as.character(msg), collapse = "")
