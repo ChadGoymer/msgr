@@ -116,7 +116,7 @@
 
   msg_log_path <- getOption("msgr.log_path")
 
-  if (!is.character(msg_log_path) || !identical(length(msg_log_path), 1L)) {
+  if (!is.character(msg_log_path) || length(msg_log_path) != 1) {
     packageStartupMessage(
       "The option 'msgr.log_path' must be a string:\n  ", msg_log_path
     )
