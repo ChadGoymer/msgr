@@ -109,7 +109,7 @@
 is_type <- function(x, type, n = NULL) {
   is.character(type) && length(type) == 1 ||
     stop("'type' must be a character vector of length 1")
-  identical(typeof(x), type) && has_length(x = x, n = n)
+  typeof(x) == type && has_length(x = x, n = n)
 }
 
 #  FUNCTION: is_class ----------------------------------------------------------
