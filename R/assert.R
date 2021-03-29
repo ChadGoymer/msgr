@@ -69,7 +69,7 @@ assert <- function(
     }
 
     msg <- list(...)
-    if (identical(length(msg), 0L)) {
+    if (length(msg) == 0) {
       msg <- paste(deparse(uneval_condition), "is false")
     } else {
       msg <- paste(as.character(msg), collapse = "")
@@ -444,7 +444,7 @@ assert_atomic <- function(
   is.character(log_path) && length(log_path) == 1 ||
     stop("'log_path' must be a string: ", log_path)
 
-  if (!purrr::is_atomic(x, n = n)) {
+  if (!rlang::is_atomic(x, n = n)) {
     prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
@@ -495,7 +495,7 @@ assert_vector <- function(
   is.character(log_path) && length(log_path) == 1 ||
     stop("'log_path' must be a string: ", log_path)
 
-  if (!purrr::is_vector(x, n = n)) {
+  if (!rlang::is_vector(x, n = n)) {
     prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
@@ -546,7 +546,7 @@ assert_logical <- function(
   is.character(log_path) && length(log_path) == 1 ||
     stop("'log_path' must be a string: ", log_path)
 
-  if (!purrr::is_logical(x, n = n)) {
+  if (!rlang::is_logical(x, n = n)) {
     prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
@@ -597,7 +597,7 @@ assert_integer <- function(
   is.character(log_path) && length(log_path) == 1 ||
     stop("'log_path' must be a string: ", log_path)
 
-  if (!purrr::is_integer(x, n = n)) {
+  if (!rlang::is_integer(x, n = n)) {
     prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
@@ -701,7 +701,7 @@ assert_double <- function(
   is.character(log_path) && length(log_path) == 1 ||
     stop("'log_path' must be a string: ", log_path)
 
-  if (!purrr::is_double(x, n = n)) {
+  if (!rlang::is_double(x, n = n)) {
     prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
@@ -803,7 +803,7 @@ assert_character <- function(
   is.character(log_path) && length(log_path) == 1 ||
     stop("'log_path' must be a string: ", log_path)
 
-  if (!purrr::is_character(x, n = n)) {
+  if (!rlang::is_character(x, n = n)) {
     prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
@@ -916,7 +916,7 @@ assert_list <- function(
   is.character(log_path) && length(log_path) == 1 ||
     stop("'log_path' must be a string: ", log_path)
 
-  if (!purrr::is_list(x, n = n)) {
+  if (!rlang::is_list(x, n = n)) {
     prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
@@ -1145,7 +1145,7 @@ assert_function <- function(
   is.character(log_path) && length(log_path) == 1 ||
     stop("'log_path' must be a string: ", log_path)
 
-  if (!purrr::is_function(x)) {
+  if (!rlang::is_function(x)) {
     prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
@@ -1188,7 +1188,7 @@ assert_formula <- function(
   is.character(log_path) && length(log_path) == 1 ||
     stop("'log_path' must be a string: ", log_path)
 
-  if (!purrr::is_formula(x)) {
+  if (!rlang::is_formula(x)) {
     prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
@@ -1285,7 +1285,7 @@ assert_empty <- function(
   is.character(log_path) && length(log_path) == 1 ||
     stop("'log_path' must be a string: ", log_path)
 
-  if (!purrr::is_empty(x)) {
+  if (!rlang::is_empty(x)) {
     prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
@@ -1553,6 +1553,8 @@ assert_in <- function(
   msg_types = getOption("msgr.types"),
   log_path  = getOption("msgr.log_path")
 ) {
+  rlang::is_vector(values) ||
+    stop("'values' must be a vector")
   is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
     stop("'level' must be an integer between 1 and 10: ", level)
   is_natural(msg_level, n = 1) && is_in_range(msg_level, min = 1, max = 10) ||
