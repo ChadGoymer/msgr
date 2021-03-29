@@ -1,3 +1,7 @@
+# msgr 1.2.5
+
+Simplified argument checks and package dependencies
+
 # msgr 1.2.4
 
 Added the following assertions on type:
