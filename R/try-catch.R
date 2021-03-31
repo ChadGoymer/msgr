@@ -43,14 +43,7 @@ try_catch <- function(
     }
 
     on_error <- function(e) {
-      if (grepl("^\\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\\] ", e$message)) {
-        e$message <- sub(
-          pattern     = "^\\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\\] ",
-          replacement = "",
-          x           = e$message
-        )
-      }
-      error(prefix, e$message)
+      error(prefix, remove_time(e$message))
     }
   }
 
@@ -358,4 +351,25 @@ try_pmap <- function(
   }
 
   result
+}
+
+#  FUNCTION: remove_time -------------------------------------------------------
+#
+#' Remove time component from a message
+#'
+#' @param msg (character) The message to remove time from
+#'
+#' @return The message with the time removed
+#'
+#' @noRd
+#'
+remove_time <- function(msg) {
+  if (grepl("^\\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\\] ", msg)) {
+    msg <- sub(
+      pattern     = "^\\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\\] ",
+      replacement = "",
+      x           = msg
+    )
+  }
+  msg
 }

@@ -275,3 +275,18 @@ test_that("try_pmap catches errors and displays a warning", {
   )
 
 })
+
+# TEST: remove_time ------------------------------------------------------------
+
+test_that("remove_time removes time component if it is there", {
+
+  expect_identical(
+    remove_time("This is a message without time"),
+    "This is a message without time"
+  )
+  expect_identical(
+    remove_time("[12:54:12] This is a message with time"),
+    "This is a message with time"
+  )
+
+})
