@@ -70,6 +70,124 @@ try_silently <- function(
   }, error = function(e) NULL)
 }
 
+#  FUNCTION: with_msgr ---------------------------------------------------------
+#
+#' Convert messages, warnings and stops into msgr messages
+#'
+#' This function allows you to execute an expression and all messages, warnings
+#' and stops are converted to [msgr::info()], [msgr::warn()] and [msgr::error()]
+#' respectively.
+#'
+#' This function can also be used to change the `level` of message, so if a
+#' function raises a message with level 1, it can be downgraded to level 2+.
+#' Similarly it can also be used to modify the `msg_level`. For example, if the
+#' current `msg_level` is set to 1, and a function raises a message with level
+#' 3, the message will not be displayed. If you want it displayed for this
+#' function but not everywhere else, you can use `with_msgr()` and set the
+#' `msg_level` to 3 for that call alone.
+#'
+#' @param expr (expression) The expression to execute.
+#' @param level (integer, optional) The level of messages, from 1 to 10.
+#'   Default: 1.
+#' @param warn_level (integer, optional) The level of warnings, from 1 to 10.
+#'   Default: 1.
+#' @param error_level (integer, optional) The level of errors, from 1 to 10.
+#'   Default: 1.
+#' @param msg_level (integer, optional) The maximum level of messages to output.
+#'   Default: set in the option `"msgr.level"`.
+#' @param msg_types (character, optional) The type to write or display. Must
+#'   either NULL or one or more from "INFO", "WARNING" or "ERROR". Default: set
+#'   in the option `"msgr.types"`.
+#' @param log_path (string, optional) The file path to the text log file. If set
+#'   to "", then no logs are written. Default: set in the option
+#'   `"msgr.log_path"`.
+#'
+#' @return Whatever the expression returns
+#'
+#' @examples \dontrun{
+#'
+#' test_msgr <- function(x) {
+#'   if (x == "msg") message("This is a message")
+#'   if (x == "wrn") warning("This is a warning")
+#'   if (x == "err") stop("This is an error")
+#' }
+#'
+#' with_msgr(test_msgr("msg"))
+#' with_msgr(test_msgr("wrn"))
+#' with_msgr(test_msgr("err"))
+#'
+#' with_msgr(test_msgr("msg"), level = 2)
+#' with_msgr(test_msgr("wrn"), level = 2)
+#' with_msgr(test_msgr("err"), level = 2)
+#'
+#' test_lvl <- function(x) {
+#'   if (x == "msg") info("This is a message", level = 3)
+#'   if (x == "wrn") warn("This is a warning", level = 3)
+#'   if (x == "err") error("This is an error", level = 3)
+#' }
+#'
+#' with_msgr(test_lvl("msg"), msg_level = 3)
+#' with_msgr(test_lvl("wrn"), msg_level = 3)
+#' with_msgr(test_lvl("err"), msg_level = 3)
+#'
+#' }
+#'
+#' @export
+#'
+with_msgr <- function(
+  expr,
+  level       = 1,
+  warn_level  = level,
+  error_level = 1,
+  msg_level   = getOption("msgr.level"),
+  msg_types   = getOption("msgr.types"),
+  log_path    = getOption("msgr.log_path")
+) {
+  is_natural(level, n = 1) && is_in_range(level, min = 1, max = 10) ||
+    stop("'level' must be an integer between 1 and 10: ", level)
+  is_natural(warn_level, n = 1) && is_in_range(warn_level, min = 1, max = 10) ||
+    stop("'warn_level' must be an integer between 1 and 10: ", warn_level)
+  is_natural(error_level, n = 1) &&
+    is_in_range(error_level, min = 1, max = 10) ||
+    stop("'error_level' must be an integer between 1 and 10: ", error_level)
+  is_natural(msg_level, n = 1) && is_in_range(msg_level, min = 1, max = 10) ||
+    stop("'msg_level' must be an integer between 1 and 10: ", msg_level)
+  is.null(msg_types) || is.character(msg_types) ||
+    stop("'msg_types' must be NULL or a character vector: ", msg_types)
+  all(is_in(msg_types, c("INFO", "WARNING", "ERROR"))) ||
+    stop("'msg_types' must be either 'INFO', 'WARNING' or 'ERROR': ", msg_types)
+  is.character(log_path) && length(log_path) == 1 ||
+    stop("'log_path' must be a string: ", log_path)
+
+  original_options <- options(
+    msgr.level    = msg_level,
+    msgr.types    = msg_types,
+    msgr.log_path = log_path
+  )
+  on.exit(options(original_options))
+
+  withCallingHandlers(
+    withRestarts(
+      expr,
+      muffleMessage = function() NULL,
+      muffleWarning = function() NULL,
+      muffleStop    = function() NULL
+    ),
+    message = function(m) {
+      msgr::info(remove_time(m$message), level = level)
+      invokeRestart("muffleMessage")
+    },
+    warning = function(w) {
+      msgr::warn(remove_time(w$message), level = warn_level)
+      invokeRestart("muffleWarning")
+    },
+    error   = function(e) {
+      msgr::error(remove_time(e$message), level = error_level)
+      invokeRestart("muffleWarning")
+    }
+  )
+}
+
 #  FUNCTION: try_map -----------------------------------------------------------
 #
 #' Apply a function over a vector or list, capturing any errors to display at

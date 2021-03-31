@@ -65,6 +65,90 @@ test_that("try_silently returns NULL if there is an error", {
 
 })
 
+# TEST: with_msgr --------------------------------------------------------------
+
+test_that("with_msgr converts messages, warnings and stops", {
+
+  test_fn <- function(x) {
+    if (x == "msg") message("This is a message")
+    if (x == "wrn") warning("This is a warning")
+    if (x == "err") stop("This is an error")
+    x
+  }
+
+  msgr.level <- options(msgr.level = 1)
+  on.exit(options(msgr.level))
+
+  expect_message(
+    with_msgr(test_fn("msg")),
+    "This is a message"
+  )
+  expect_warning(
+    with_msgr(test_fn("wrn")),
+    "This is a warning"
+  )
+  expect_error(
+    with_msgr(test_fn("err")),
+    "This is an error"
+  )
+
+  expect_silent(
+    with_msgr(test_fn("msg"), level = 2)
+  )
+  expect_silent(
+    with_msgr(test_fn("wrn"), level = 2)
+  )
+  expect_error(
+    with_msgr(test_fn("err"), level = 2),
+    "This is an error"
+  )
+
+  expect_message(
+    with_msgr(test_fn("msg"), warn_level = 2),
+    "This is a message"
+  )
+  expect_silent(
+    with_msgr(test_fn("wrn"), warn_level = 2)
+  )
+  expect_error(
+    with_msgr(test_fn("err"), warn_level = 2),
+    "This is an error"
+  )
+
+  expect_message(
+    with_msgr(test_fn("msg"), error_level = 2),
+    "This is a message"
+  )
+  expect_warning(
+    with_msgr(test_fn("wrn"), error_level = 2),
+    "This is a warning"
+  )
+  expect_silent(
+    with_msgr(test_fn("err"), error_level = 2)
+  )
+
+  test_msgr_fn <- function(x) {
+    if (x == "msg") info("This is a message", level = 3)
+    if (x == "wrn") warn("This is a warning", level = 3)
+    if (x == "err") error("This is an error", level = 3)
+    x
+  }
+
+  expect_message(
+    with_msgr(test_msgr_fn("msg"), msg_level = 3),
+    "This is a message"
+  )
+  expect_warning(
+    with_msgr(test_msgr_fn("wrn"), msg_level = 3),
+    "This is a warning"
+  )
+  expect_error(
+    with_msgr(test_msgr_fn("err"), msg_level = 3),
+    "This is an error"
+  )
+
+})
+
 # TEST: try_map ----------------------------------------------------------------
 
 test_that("try_map catches errors and displays a warning", {
