@@ -399,6 +399,7 @@ test_that("is_in returns FALSE if elements of x are not in allowed values", {
     is_in(c("A", "D"), c("A", "B", "C")),
     c(TRUE, FALSE)
   )
+  expect_false(is_in(options, "msgr.level"))
 
 })
 
@@ -444,6 +445,8 @@ test_that("is_in_range returns FALSE if the elements of x are not in range", {
     is_in_range(c(1.1, 2.2, 3.3), min = 2, max = 3),
     c(FALSE, TRUE, FALSE)
   )
+
+  expect_false(is_in_range("a", min = 0))
 
 })
 

@@ -38,6 +38,7 @@ reference:
   desc: These functions catch errors and write them to a log file
   contents:
   - '`try_catch`'
+  - '`with_msgr`'
   - '`try_map`'
   - '`try_pmap`'
 - title: Predicate functions
