@@ -2,9 +2,12 @@
 % Please edit documentation in R/try-catch.R
 \name{try_catch}
 \alias{try_catch}
+\alias{try_silently}
 \title{Try to evaluate an expressions and capture any messages, warnings or errors}
 \usage{
 try_catch(expr, on_error, finally = NULL)
+
+try_silently(expr)
 }
 \arguments{
 \item{expr}{(expression) The expression to evaluate}
@@ -22,19 +25,23 @@ the call. If missing or \code{NULL}, nothing is actioned.}
 The result of the evaluated expression
 }
 \description{
-This function is similar to \code{\link[=tryCatch]{tryCatch()}}, except that, by default, errors are
+\code{try_catch()} is similar to \code{\link[=tryCatch]{tryCatch()}}, except that, by default, errors are
 captured and presented using \code{\link[=error]{error()}}. Messages and warnings are not
-captured by this function.
+captured by this function. In addition, a "finally" expression can be
+specified which is evaluated at the end of the call no matter the result.
 }
 \details{
-In addition, a "finally" expression can be specified which is evaluated at
-the end of the call no matter the result.
+\code{try_silenty()} is similar to \code{try(..., silently = TRUE)} however if there is
+an error it returns \code{NULL}. All messages and warnings are also suppressed.
 }
 \examples{
 \dontrun{
 
 try_catch(x <- "foo")
 try_catch(stop("This is an error"))
+
+try_silently("This is fine")
+try_silently(stop("This is an error"))
 
 }
 

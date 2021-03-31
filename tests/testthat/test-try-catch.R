@@ -34,6 +34,37 @@ test_that("try_catch catches messages, warnings and errors appropriately", {
 
 })
 
+# TEST: try_silently -----------------------------------------------------------
+
+test_that("try_silently returns NULL if there is an error", {
+
+  expect_silent({
+    normal_result <- try_silently("This is normal output")
+  })
+  expect_identical(normal_result, "This is normal output")
+
+  expect_silent({
+    print_result <- try_silently(print("This is a printed output"))
+  })
+  expect_identical(print_result, "This is a printed output")
+
+  expect_silent({
+    msg_result <- try_silently(message("This is a message"))
+  })
+  expect_null(msg_result)
+
+  expect_silent({
+    warn_result <- try_silently(warning("This is a warning"))
+  })
+  expect_identical(warn_result, "This is a warning")
+
+  expect_silent({
+    error_result <- try_silently(stop("This is an error"))
+  })
+  expect_null(error_result)
+
+})
+
 # TEST: try_map ----------------------------------------------------------------
 
 test_that("try_map catches errors and displays a warning", {

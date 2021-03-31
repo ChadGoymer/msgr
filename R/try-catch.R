@@ -2,12 +2,13 @@
 #
 #' Try to evaluate an expressions and capture any messages, warnings or errors
 #'
-#' This function is similar to [tryCatch()], except that, by default, errors are
+#' `try_catch()` is similar to [tryCatch()], except that, by default, errors are
 #' captured and presented using [error()]. Messages and warnings are not
-#' captured by this function.
+#' captured by this function. In addition, a "finally" expression can be
+#' specified which is evaluated at the end of the call no matter the result.
 #'
-#' In addition, a "finally" expression can be specified which is evaluated at
-#' the end of the call no matter the result.
+#' `try_silenty()` is similar to `try(..., silently = TRUE)` however if there is
+#' an error it returns `NULL`. All messages and warnings are also suppressed.
 #'
 #' @param expr (expression) The expression to evaluate
 #' @param on_error (function, optional) A function describing what to do in the
@@ -24,6 +25,9 @@
 #'
 #' try_catch(x <- "foo")
 #' try_catch(stop("This is an error"))
+#'
+#' try_silently("This is fine")
+#' try_silently(stop("This is an error"))
 #'
 #' }
 #'
@@ -49,6 +53,21 @@ try_catch <- function(
 
   assert(is.function(on_error), "'on_error' must be a function")
   tryCatch(expr, error = on_error, finally = finally)
+}
+
+#  FUNCTION: try_silently ------------------------------------------------------
+#
+#' @rdname try_catch
+#' @export
+#'
+try_silently <- function(
+  expr
+) {
+  tryCatch({
+    sink(fs::file_temp())
+    on.exit(sink())
+    invisible(suppressWarnings(suppressMessages(force(expr))))
+  }, error = function(e) NULL)
 }
 
 #  FUNCTION: try_map -----------------------------------------------------------
