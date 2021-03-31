@@ -155,6 +155,18 @@ test_that("Options are validation when package is attached", {
     "The option 'msgr.log_path' must be a string"
   )
 
+  options(msgr.log_path = R.home("etc/Renviron.site"))
+  expect_message(
+    .onAttach(),
+    "The option 'msgr.log_path' must be a writeable path"
+  )
+
+  options(msgr.log_path = R.home("etc"))
+  expect_message(
+    .onAttach(),
+    "The option 'msgr.log_path' must in a writeable directory"
+  )
+
   options(msgr.log_path = original_options$msgr.log_path)
 
 })

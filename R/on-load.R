@@ -123,6 +123,7 @@
   }
   else if (
     file.exists(msg_log_path) &&
+    !file.info(msg_log_path)$isdir &&
     !file.access(msg_log_path, mode = 2)[[1]] == 0
   ) {
     packageStartupMessage(

@@ -4,6 +4,13 @@ test_that("try_catch catches messages, warnings and errors appropriately", {
 
   expect_error(try_catch(stop("This is an ERROR")), "This is an ERROR")
 
+  error_message <- tryCatch(
+    try_catch(stop("[00:00:00] This is an ERROR")),
+    error = function(e) e$message
+  )
+  expect_match(error_message, "This is an ERROR")
+  expect_false(grepl("\\[00:00:00\\]", error_message))
+
   expect_error(
     capture.output(
       try_catch(
@@ -49,6 +56,16 @@ test_that("try_map catches errors and displays a warning", {
   expect_error(
     suppressWarnings(try_map(1:3, test_try_map, 2)),
     "In test_try_map\\(\\): x > y"
+  )
+
+  test_try_char <- function(x) if (nchar(x) > 20) stop("string too long") else x
+
+  expect_warning(
+    try(
+      try_map(paste(LETTERS, collapse = ""), test_try_char, warn_level = 1),
+      silent = TRUE
+    ),
+    "Failed for x = ABCDEFGHIJKLMNOPQRST..."
   )
 
   expect_silent(try_map(1:3, test_try_map, 5))
@@ -106,6 +123,26 @@ test_that("try_map catches errors and displays a warning", {
     "In test_try_map\\(\\): x > y"
   )
 
+  expect_identical(
+    try_map(c("bob", "jane"), nchar),
+    list(bob = 3L, jane = 4L)
+  )
+
+  expect_identical(
+    try_map(c("bob", "jane"), nchar, use_names = FALSE),
+    list(3L, 4L)
+  )
+
+  expect_error(
+    try_map(c("bob", "jane"), stop),
+    "'bob': In stop\\(\\): bob\n'jane': In stop\\(\\): jane"
+  )
+
+  expect_identical(
+    try_map(c("bob", "jane"), nchar, simplify = TRUE),
+    c(bob = 3L, jane = 4L)
+  )
+
 })
 
 # TEST: try_pmap ---------------------------------------------------------------
@@ -134,6 +171,20 @@ test_that("try_pmap catches errors and displays a warning", {
       try_pmap(list(1:3, 3:1), test_try_pmap)
     ),
     "In test_try_pmap\\(\\): x > y"
+  )
+
+  test_try_char <- function(x) if (nchar(x) > 20) stop("string too long") else x
+
+  expect_warning(
+    try(
+      try_pmap(
+        list(paste(LETTERS, collapse = "")),
+        test_try_char,
+        warn_level = 1
+      ),
+      silent = TRUE
+    ),
+    "Failed for x = ABCDEFGHIJKLMNOPQRST..."
   )
 
   expect_silent(try_pmap(list(1:3, 2:4), test_try_pmap))
@@ -187,6 +238,40 @@ test_that("try_pmap catches errors and displays a warning", {
   expect_message(
     try_pmap(list(1:3, 3:1), test_try_pmap, on_error = "info", warn_level = 0),
     "In test_try_pmap\\(\\): x > y"
+  )
+
+  expect_identical(
+    try_pmap(
+      list(c("bob", "jim"), c("jane", "brenda")),
+      function(x, y) nchar(paste0(x, y))
+    ),
+    list(bob = 7L, jim = 9L)
+  )
+
+  expect_identical(
+    try_pmap(
+      list(c("bob", "jim"), c("jane", "brenda")),
+      function(x, y) nchar(paste0(x, y)),
+      use_names = FALSE
+    ),
+    list(7L, 9L)
+  )
+
+  expect_error(
+    try_pmap(
+      list(c("bob", "jim"), c("jane", "brenda")),
+      function(x, y) stop(paste(x, y))
+    ),
+    "'bob': bob jane\n'jim': jim brenda"
+  )
+
+  expect_identical(
+    try_pmap(
+      list(c("bob", "jim"), c("jane", "brenda")),
+      function(x, y) nchar(paste0(x, y)),
+      simplify = TRUE
+    ),
+    c(bob = 7L, jim = 9L)
   )
 
 })

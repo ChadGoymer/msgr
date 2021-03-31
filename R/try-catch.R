@@ -178,10 +178,9 @@ try_map <- function(
   is_error <- purrr::map_lgl(result, function(r) "error" %in% class(r))
 
   if (any(is_error)) {
-    if (is.null(names(result))) {
-      prefix <- "\n"
-    } else {
-      prefix <- paste0("\n'", names(result)[is_error], "': ")
+    prefix <- ""
+    if (!is.null(names(result))) {
+      prefix <- paste0("'", names(result)[is_error], "': ")
     }
 
     error_msg <- paste0(
@@ -333,10 +332,9 @@ try_pmap <- function(
   is_error <- purrr::map_lgl(result, function(r) "error" %in% class(r))
 
   if (any(is_error)) {
-    if (is.null(names(result))) {
-      prefix <- "\n"
-    } else {
-      prefix <- paste0("\n'", names(result)[is_error], "': ")
+    prefix <- ""
+    if (!is.null(names(result))) {
+      prefix <- paste0("'", names(result)[is_error], "': ")
     }
 
     error_msg <- paste0(
