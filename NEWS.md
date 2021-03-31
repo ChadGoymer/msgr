@@ -1,3 +1,8 @@
+# msgr 1.2.6
+
+- Added `try_silently()`
+- Added `with_msgr()`
+
 # msgr 1.2.5
 
 Simplified argument checks and package dependencies
