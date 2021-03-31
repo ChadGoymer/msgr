@@ -17,7 +17,7 @@ test_that("Default options are set when package is loaded", {
 
   on.exit({
     do.call(Sys.setenv, original_env_vars)
-    do.call(options, original_options)
+    options(original_options)
     .onLoad()
   })
 
@@ -49,7 +49,7 @@ test_that("Options are overidden when environment variables are set", {
 
   on.exit({
     do.call(Sys.setenv, original_env_vars)
-    do.call(options, original_options)
+    options(original_options)
     .onLoad()
   })
 
@@ -81,7 +81,7 @@ test_that("Options are overidden when options are set", {
 
   on.exit({
     do.call(Sys.setenv, original_env_vars)
-    do.call(options, original_options)
+    options(original_options)
     .onLoad()
   })
 
@@ -104,7 +104,7 @@ test_that("Options are validation when package is attached", {
   )
 
   on.exit({
-    do.call(options, original_options)
+    options(original_options)
     .onAttach()
   })
 
@@ -154,19 +154,5 @@ test_that("Options are validation when package is attached", {
     .onAttach(),
     "The option 'msgr.log_path' must be a string"
   )
-
-  options(msgr.log_path = R.home("etc/Renviron.site"))
-  expect_message(
-    .onAttach(),
-    "The option 'msgr.log_path' must be a writeable path"
-  )
-
-  options(msgr.log_path = R.home("etc"))
-  expect_message(
-    .onAttach(),
-    "The option 'msgr.log_path' must in a writeable directory"
-  )
-
-  options(msgr.log_path = original_options$msgr.log_path)
 
 })

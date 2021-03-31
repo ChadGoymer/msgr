@@ -89,8 +89,7 @@
     packageStartupMessage(
       "The option 'msgr.level' must be an integer:\n  ", msg_level
     )
-  }
-  else if (msg_level < 1 || msg_level > 10) {
+  } else if (msg_level < 1 || msg_level > 10) {
     packageStartupMessage(
       "The option 'msgr.level' must be between 1 and 10:\n  ", msg_level
     )
@@ -104,8 +103,7 @@
     packageStartupMessage(
       "The option 'msgr.types' must be a character vector:\n  ", msg_types
     )
-  }
-  else if (!all(msg_types %in% c("INFO", "WARNING", "ERROR"))) {
+  } else if (!all(msg_types %in% c("INFO", "WARNING", "ERROR"))) {
     packageStartupMessage(
       "The option 'msgr.types' must be either 'INFO', 'WARNING' or 'ERROR':",
       "\n  ", msg_types
@@ -119,24 +117,6 @@
   if (!is.character(msg_log_path) || length(msg_log_path) != 1) {
     packageStartupMessage(
       "The option 'msgr.log_path' must be a string:\n  ", msg_log_path
-    )
-  }
-  else if (
-    file.exists(msg_log_path) &&
-    !file.info(msg_log_path)$isdir &&
-    !file.access(msg_log_path, mode = 2)[[1]] == 0
-  ) {
-    packageStartupMessage(
-      "The option 'msgr.log_path' must be a writeable path:\n  ", msg_log_path
-    )
-  }
-  else if (
-    dir.exists(dirname(msg_log_path)) &&
-    !file.access(dirname(msg_log_path), mode = 2)[[1]] == 0
-  ) {
-    packageStartupMessage(
-      "The option 'msgr.log_path' must in a writeable directory:\n  ",
-      msg_log_path
     )
   }
 
