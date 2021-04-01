@@ -925,7 +925,7 @@ test_that("assert_char_length returns an error if input is invalid", {
 
 test_that("assert_file returns an error if input is invalid", {
 
-  expect_silent(assert_file(system.file("DESCRIPTION", package = "msgr")))
+  expect_silent(assert_file(fs::path_package("DESCRIPTION", package = "msgr")))
   expect_error(
     assert_file("no-such-file.txt"),
     "'\"no-such-file.txt\"' must be an existing file"
@@ -934,7 +934,7 @@ test_that("assert_file returns an error if input is invalid", {
   test_assert <- function(var)
     assert_file(x = var)
 
-  expect_silent(test_assert(system.file("DESCRIPTION", package = "msgr")))
+  expect_silent(test_assert(fs::path_package("DESCRIPTION", package = "msgr")))
   expect_error(
     test_assert("no-such-file.txt"),
     "In test_assert\\(\\): 'var' must be an existing file"

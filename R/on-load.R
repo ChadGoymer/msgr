@@ -46,11 +46,7 @@
     if (Sys.getenv("MSGR_LOG_PATH") == "") {
       log_path <- ""
     } else {
-      log_path <- normalizePath(
-        Sys.getenv("MSGR_LOG_PATH"),
-        winslash = "/",
-        mustWork = FALSE
-      )
+      log_path <- fs::path_expand(Sys.getenv("MSGR_LOG_PATH"))
     }
     options(msgr.log_path = log_path)
   }

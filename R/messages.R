@@ -74,18 +74,14 @@ info <- function(
 
   if ("INFO" %in% msg_types && level <= msg_level) {
     if (log_path != "") {
-      log_path <- normalizePath(log_path, winslash = "/", mustWork = FALSE)
+      log_path <- fs::path_expand(log_path)
 
-      if (!is_dir(dirname(log_path))) {
-        dir.create(dirname(log_path), recursive = TRUE) ||
-          stop(
-            "Cannot create directory for log file: '", dirname(log_path), "'"
-          )
+      if (!fs::is_dir(fs::path_dir(log_path))) {
+        fs::dir_create(fs::path_dir(log_path), recurse = TRUE)
       }
 
-      if (!is_file(log_path)) {
-        file.create(log_path) ||
-          stop("Cannot create log file: '", log_path, "'")
+      if (!fs::is_file(log_path)) {
+        fs::file_create(log_path)
       }
 
       write(paste0(Sys.time(), " | INFO | ", msg), log_path, append = TRUE)
@@ -173,18 +169,14 @@ warn <- function(
 
   if ("WARNING" %in% msg_types && level <= msg_level) {
     if (log_path != "") {
-      log_path <- normalizePath(log_path, winslash = "/", mustWork = FALSE)
+      log_path <- fs::path_expand(log_path)
 
-      if (!is_dir(dirname(log_path))) {
-        dir.create(dirname(log_path), recursive = TRUE) ||
-          stop(
-            "Cannot create directory for log file: '", dirname(log_path), "'"
-          )
+      if (!fs::is_dir(fs::path_dir(log_path))) {
+        fs::dir_create(fs::path_dir(log_path), recurse = TRUE)
       }
 
-      if (!is_file(log_path)) {
-        file.create(log_path) ||
-          stop("Cannot create log file: '", log_path, "'")
+      if (!fs::is_file(log_path)) {
+        fs::file_create(log_path)
       }
 
       write(paste0(Sys.time(), " | WARNING | ", msg), log_path, append = TRUE)
@@ -275,18 +267,14 @@ error <- function(
 
   if ("ERROR" %in% msg_types && level <= msg_level) {
     if (log_path != "") {
-      log_path <- normalizePath(log_path, winslash = "/", mustWork = FALSE)
+      log_path <- fs::path_expand(log_path)
 
-      if (!is_dir(dirname(log_path))) {
-        dir.create(dirname(log_path), recursive = TRUE) ||
-          stop(
-            "Cannot create directory for log file: '", dirname(log_path), "'"
-          )
+      if (!fs::is_dir(fs::path_dir(log_path))) {
+        fs::dir_create(fs::path_dir(log_path), recurse = TRUE)
       }
 
-      if (!is_file(log_path)) {
-        file.create(log_path) ||
-          stop("Cannot create log file: '", log_path, "'")
+      if (!fs::is_file(log_path)) {
+        fs::file_create(log_path)
       }
 
       write(paste0(Sys.time(), " | ERROR | ", msg), log_path, append = TRUE)
@@ -361,11 +349,10 @@ info_if <- function(
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
 
+    prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
       prefix <- paste0("In ", calling_function, "(): ")
-    } else {
-      prefix <- ""
     }
 
     msg <- list(...)
@@ -448,11 +435,10 @@ warn_if <- function(
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
 
+    prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
       prefix <- paste0("In ", calling_function, "(): ")
-    } else {
-      prefix <- ""
     }
 
     msg <- list(...)
@@ -534,11 +520,10 @@ error_if <- function(
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
 
+    prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
       prefix <- paste0("In ", calling_function, "(): ")
-    } else {
-      prefix <- ""
     }
 
     msg <- list(...)

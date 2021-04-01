@@ -511,11 +511,11 @@ test_that("has_char_length returns FALSE if character length is invalid", {
 
 test_that("is_file returns TRUE for an existing directory", {
 
-  temp_file_1 <- tempfile("1", fileext = ".txt")
-  temp_file_2 <- tempfile("2", fileext = ".txt")
+  temp_file_1 <- fs::file_temp("1", ext = ".txt")
+  temp_file_2 <- fs::file_temp("2", ext = ".txt")
 
-  file.create(temp_file_1)
-  file.create(temp_file_2)
+  fs::file_create(temp_file_1)
+  fs::file_create(temp_file_2)
 
   expect_true(is_file(temp_file_1))
   expect_true(is_file(temp_file_2))
@@ -529,10 +529,10 @@ test_that("is_file returns TRUE for an existing directory", {
 
 test_that("is_file returns FALSE for an invalid directory", {
 
-  temp_file <- tempfile(fileext = ".txt")
+  temp_file <- fs::file_temp(ext = ".txt")
 
-  no_file <- file.path(tempdir(), "does_not_exist.txt")
-  file.create(temp_file)
+  no_file <- fs::path(fs::path_temp(), "does_not_exist.txt")
+  fs::file_create(temp_file)
 
   expect_false(is_file(TRUE))
   expect_false(is_file(3.142))
@@ -556,7 +556,7 @@ test_that("is_file returns FALSE for an invalid directory", {
 test_that("is_dir returns TRUE for an existing directory", {
 
   home_dir <- R.home()
-  temp_dir <- tempdir()
+  temp_dir <- fs::path_temp()
 
   expect_true(is_dir(home_dir))
   expect_true(is_dir(temp_dir))
@@ -570,8 +570,8 @@ test_that("is_dir returns TRUE for an existing directory", {
 
 test_that("is_dir returns FALSE for an invalid directory", {
 
-  temp_dir <- tempdir()
-  no_dir   <- file.path(temp_dir, "does_not_exist")
+  temp_dir <- fs::path_temp()
+  no_dir   <- fs::path(temp_dir, "does_not_exist")
 
   expect_false(is_dir(TRUE))
   expect_false(is_dir(3.142))
@@ -594,10 +594,10 @@ test_that("is_dir returns FALSE for an invalid directory", {
 
 test_that("is_readable returns TRUE for a readable file or directory", {
 
-  temp_dir <- tempdir()
+  temp_dir <- fs::path_temp()
 
-  temp_file <- file.path(temp_dir, "readable_file.txt")
-  file.create(temp_file)
+  temp_file <- fs::path(temp_dir, "readable_file.txt")
+  fs::file_create(temp_file)
 
   expect_true(is_readable(temp_dir))
   expect_true(is_readable(temp_file))
@@ -611,10 +611,10 @@ test_that("is_readable returns TRUE for a readable file or directory", {
 
 test_that("is_readable returns FALSE for an unreadable file or directory", {
 
-  temp_dir <- tempdir()
-  no_dir <- file.path(temp_dir, "does_not_exist")
+  temp_dir <- fs::path_temp()
+  no_dir <- fs::path(temp_dir, "does_not_exist")
 
-  temp_file <- file.path(temp_dir, "unreadable_file.txt")
+  temp_file <- fs::path(temp_dir, "unreadable_file.txt")
 
   expect_false(is_readable(TRUE))
   expect_false(is_readable(3.142))
@@ -638,10 +638,10 @@ test_that("is_readable returns FALSE for an unreadable file or directory", {
 
 test_that("is_writeable returns TRUE for a readable file or directory", {
 
-  temp_dir <- tempdir()
+  temp_dir <- fs::path_temp()
 
-  temp_file <- file.path(temp_dir, "writeable_file.txt")
-  file.create(temp_file)
+  temp_file <- fs::path(temp_dir, "writeable_file.txt")
+  fs::file_create(temp_file)
 
   expect_true(is_writeable(temp_dir))
   expect_true(is_writeable(temp_file))
@@ -655,10 +655,10 @@ test_that("is_writeable returns TRUE for a readable file or directory", {
 
 test_that("is_writeable returns FALSE for an unreadable file or directory", {
 
-  temp_dir <- tempdir()
-  no_dir <- file.path(temp_dir, "does_not_exist")
+  temp_dir <- fs::path_temp()
+  no_dir <- fs::path(temp_dir, "does_not_exist")
 
-  temp_file <- file.path(temp_dir, "unwriteable_file.txt")
+  temp_file <- fs::path(temp_dir, "unwriteable_file.txt")
 
   expect_false(is_writeable(TRUE))
   expect_false(is_writeable(3.142))

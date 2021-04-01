@@ -39,11 +39,10 @@ try_catch <- function(
   finally = NULL
 ) {
   if (missing(on_error) || is.null(on_error)) {
+    prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
       prefix <- paste0("In ", calling_function, "(): ")
-    } else {
-      prefix <- ""
     }
 
     on_error <- function(e) {
@@ -254,11 +253,10 @@ try_map <- function(
 ) {
   if (is.null(msg_prefix)) {
     mapped_function <- as.character(substitute(f))
+    msg_prefix <- "In try_map():"
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
       msg_prefix <- paste0("In ", calling_function, "(): ")
-    } else {
-      msg_prefix <- "In try_map():"
     }
   }
 
@@ -403,11 +401,10 @@ try_pmap <- function(
 ) {
   if (is.null(msg_prefix)) {
     mapped_function <- as.character(substitute(f))
+    msg_prefix <- "In try_pmap():"
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
       msg_prefix <- paste0("In ", calling_function, "(): ")
-    } else {
-      msg_prefix <- "In try_pmap():"
     }
   }
 
