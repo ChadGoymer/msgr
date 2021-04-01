@@ -2,11 +2,11 @@
 
 test_that("info displays a message, and records it in a log file", {
 
-  log_dir <- tempdir()
-  log_path <- file.path(log_dir, "test-info.log")
+  log_dir <- fs::path_temp()
+  log_path <- fs::path(log_dir, "test-info/msgr.log")
 
   expect_message(info("This is INFO", log_path = log_path), "This is INFO")
-  expect_true(file.exists(log_path))
+  expect_true(fs::file_exists(log_path))
 
   log_txt <- readLines(log_path)
   expect_match(log_txt[length(log_txt)], "INFO \\| This is INFO")
@@ -104,14 +104,14 @@ test_that("invalid arguments for info throw an error", {
 
 test_that("warn displays a warning, and records it in a log file", {
 
-  log_dir <- tempdir()
-  log_path <- file.path(log_dir, "test-warn.log")
+  log_dir <- fs::path_temp()
+  log_path <- fs::path(log_dir, "test-warn/msgr.log")
 
   expect_warning(
     warn("This is a WARNING", log_path = log_path),
     "This is a WARNING"
   )
-  expect_true(file.exists(log_path))
+  expect_true(fs::file_exists(log_path))
 
   log_txt <- readLines(log_path)
   expect_match(log_txt[length(log_txt)], "WARNING \\| This is a WARNING")
@@ -209,14 +209,14 @@ test_that("invalid arguments for warn throw an error", {
 
 test_that("error displays a error, and records it in a log file", {
 
-  log_dir <- tempdir()
-  log_path <- file.path(log_dir, "test-error.log")
+  log_dir <- fs::path_temp()
+  log_path <- fs::path(log_dir, "test-error/msgr.log")
 
   expect_error(
     error("This is an ERROR", log_path = log_path),
     "This is an ERROR"
   )
-  expect_true(file.exists(log_path))
+  expect_true(fs::file_exists(log_path))
 
   log_txt <- readLines(log_path)
   expect_match(log_txt[length(log_txt)], "ERROR \\| This is an ERROR")
