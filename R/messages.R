@@ -349,11 +349,10 @@ info_if <- function(
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
 
+    prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
       prefix <- paste0("In ", calling_function, "(): ")
-    } else {
-      prefix <- ""
     }
 
     msg <- list(...)
@@ -436,11 +435,10 @@ warn_if <- function(
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
 
+    prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
       prefix <- paste0("In ", calling_function, "(): ")
-    } else {
-      prefix <- ""
     }
 
     msg <- list(...)
@@ -522,11 +520,10 @@ error_if <- function(
   if (isTRUE(condition)) {
     uneval_condition <- substitute(condition)
 
+    prefix <- ""
     if (sys.nframe() > 1) {
       calling_function <- deparse(sys.calls()[[sys.nframe() - 1]][[1]])
       prefix <- paste0("In ", calling_function, "(): ")
-    } else {
-      prefix <- ""
     }
 
     msg <- list(...)
