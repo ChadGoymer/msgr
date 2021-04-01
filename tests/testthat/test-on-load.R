@@ -61,7 +61,10 @@ test_that("Options are overidden when environment variables are set", {
 
   expect_identical(getOption("msgr.level"), 10L)
   expect_null(getOption("msgr.types"))
-  expect_identical(getOption("msgr.log_path"), "C:/temp/test-msgr.log")
+  expect_identical(
+    getOption("msgr.log_path"),
+    fs::path("C:/temp/test-msgr.log")
+  )
 
 })
 
