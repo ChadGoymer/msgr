@@ -1,6 +1,6 @@
 Package: msgr
 Title: Extends Messages, Warnings and Errors by Adding Levels and Log Files
-Version: 1.2.6
+Version: 1.2.7
 Authors@R: person("Chad", "Goymer", email = "chad.goymer@gmail.com", role = c("aut", "cre"))
 Description: Provides new functions info(), warn() and error(), similar to message(),
     warning() and stop() respectively. However, the new functions can have a 'level'

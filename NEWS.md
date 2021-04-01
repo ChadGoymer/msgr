@@ -1,3 +1,7 @@
+# msgr 1.2.7
+
+Using {fs} for all file management
+
 # msgr 1.2.6
 
 - Added `try_silently()`
