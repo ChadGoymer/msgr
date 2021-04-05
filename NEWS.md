@@ -1,3 +1,10 @@
+# msgr 1.2.8
+
+Final checks before requesting release to CRAN
+- `spell_check()`
+- `check_rhub()`
+- `check_win_devel()`
+
 # msgr 1.2.7
 
 Using {fs} for all file management
