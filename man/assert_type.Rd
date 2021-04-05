@@ -242,8 +242,8 @@ The following types can be checked:
 \item \code{assert_logical()}: 'x' must be a logical vector and optionally length \code{n}.
 \item \code{assert_integer()}: 'x' must be an integer vector and optionally length
 \code{n}.
-\item \code{assert_natural()}: 'x' must be an integerish vector and optionally length
-\code{n}.
+\item \code{assert_natural()}: 'x' must be a positive integer vector and optionally
+length \code{n}.
 \item \code{assert_double()}: 'x' must be a double vector and optionally length \code{n}.
 \item \code{assert_number()}: 'x' must be a numeric vector and optionally length \code{n}.
 \item \code{assert_character()}: 'x' must be a character vector and optionally length

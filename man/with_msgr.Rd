@@ -42,7 +42,7 @@ Whatever the expression returns
 }
 \description{
 This function allows you to execute an expression and all messages, warnings
-and stops are converted to \code{\link[msgr:info]{msgr::info()}}, \code{\link[msgr:warn]{msgr::warn()}} and \code{\link[msgr:error]{msgr::error()}}
+and stops are converted to \code{\link[=info]{info()}}, \code{\link[=warn]{warn()}} and \code{\link[=error]{error()}}
 respectively.
 }
 \details{
