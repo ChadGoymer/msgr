@@ -147,8 +147,8 @@ is_data_frame(data.frame(a = 1:26, b = letters), n_row = 5)
 
 }
 \seealso{
-\code{\link[rlang:is_null]{rlang::is_null()}}, \code{\link[rlang:is_atomic]{rlang::is_atomic()}}, \code{\link[rlang:is_vector]{rlang::is_vector()}},
-\code{\link[rlang:is_logical]{rlang::is_logical()}}, \code{\link[rlang:is_integer]{rlang::is_integer()}}, \code{\link[rlang:is_double]{rlang::is_double()}},
-\code{\link[rlang:is_character]{rlang::is_character()}}, \code{\link[rlang:is_raw]{rlang::is_raw()}}, \code{\link[rlang:is_bytes]{rlang::is_bytes()}},
-\code{\link[rlang:is_list]{rlang::is_list()}}
+\code{\link[rlang:type-predicates]{rlang::is_null()}}, \code{\link[rlang:type-predicates]{rlang::is_atomic()}}, \code{\link[rlang:type-predicates]{rlang::is_vector()}},
+\code{\link[rlang:type-predicates]{rlang::is_logical()}}, \code{\link[rlang:type-predicates]{rlang::is_integer()}}, \code{\link[rlang:type-predicates]{rlang::is_double()}},
+\code{\link[rlang:type-predicates]{rlang::is_character()}}, \code{\link[rlang:type-predicates]{rlang::is_raw()}}, \code{\link[rlang:type-predicates]{rlang::is_bytes()}},
+\code{\link[rlang:type-predicates]{rlang::is_list()}}
 }

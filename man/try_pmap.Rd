@@ -49,7 +49,7 @@ If \code{simplify = FALSE} a list is returned. Otherwise, the function
 attempts to simplify the result to an atomic vector.
 }
 \description{
-This function is similar to \code{\link[purrr:pmap]{purrr::pmap()}} except that instead of stopping
+This function is similar to \code{\link[purrr:map2]{purrr::pmap()}} except that instead of stopping
 at the first error it captures them and continues. If there are any errors it
 collects them together and displays them at the end. You have the option to
 specify a prefix to the error message using the \code{msg_prefix} argument.
