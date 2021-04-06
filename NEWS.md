@@ -1,3 +1,18 @@
+# msgr 1.2.9
+
+Expanded GitHub Actions to test more combinations:
+
+- MacOS Release: MacOS latest with the release version of R
+- Ubuntu Release: Ubuntu 20.04 with the release version of R
+- Windows Release: Windows latest with the release version of R
+- MacOS Development: MacOS latest with the development version of R
+- Ubuntu Development: Ubuntu 20.04 with the development version of R
+- Windows Development: Windows latest with the development version of R
+- Windows 3.6.3: Windows latest with the version 3.6.3 of R 
+  pointing at RSPM at 2020-06-29
+- Windows 3.5.3: Windows latest with the version 3.5.3 of R 
+  pointing at RSPM at 2019-05-07
+
 # msgr 1.2.8
 
 Final checks before requesting release to CRAN
