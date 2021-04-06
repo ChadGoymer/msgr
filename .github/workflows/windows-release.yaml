@@ -6,11 +6,11 @@ on:
     branches:
       - main
 
-name: Windows
+name: Windows Release
 
 jobs:
   Windows:
-    name: Windows-latest (release)
+    name: Windows-latest R-release
     runs-on: windows-latest
 
     env:

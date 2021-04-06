@@ -6,11 +6,11 @@ on:
     branches:
       - main
 
-name: MacOS
+name: MacOS Release
 
 jobs:
   MacOS:
-    name: MacOS-latest (release)
+    name: MacOS-latest R-release
     runs-on: macOS-latest
 
     env:
