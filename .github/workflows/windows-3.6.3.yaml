@@ -6,24 +6,24 @@ on:
     branches:
       - main
 
-name: Test Coverage
+name: Windows 3.6.3
 
 jobs:
-  test-coverage:
-    name: codecov
+  Windows:
+    name: Windows-latest R-3.6.3
     runs-on: windows-latest
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"
+      RSPM: "https://packagemanager.rstudio.com/cran/2020-06-29"
 
     steps:
       - uses: actions/checkout@v2
 
       - uses: r-lib/actions/setup-r@master
         with:
-          r-version: 'release'
+          r-version: '3.6.3'
 
       - uses: r-lib/actions/setup-pandoc@master
 
@@ -40,6 +40,15 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
-      - name: Test coverage
-        run: covr::codecov()
+      - name: Check
+        env:
+          _R_CHECK_CRAN_INCOMING_REMOTE_: false
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ runner.os }}-release-results
+          path: check
