@@ -1,7 +1,13 @@
 # msgr
 
 <!-- badges: start -->
-[![Windows](https://github.com/ChadGoymer/msgr/workflows/Windows/badge.svg)](https://github.com/ChadGoymer/msgr/actions?query=workflow%3AWindows) [![MacOS](https://github.com/ChadGoymer/msgr/workflows/MacOS/badge.svg)](https://github.com/ChadGoymer/msgr/actions?query=workflow%3AMacOS) [![Ubuntu](https://github.com/ChadGoymer/msgr/workflows/Ubuntu/badge.svg)](https://github.com/ChadGoymer/msgr/actions?query=workflow%3AUbuntu) [![Coverage status](https://codecov.io/gh/ChadGoymer/msgr/branch/main/graph/badge.svg)](https://codecov.io/github/ChadGoymer/msgr?branch=main)
+[![Windows Release](https://github.com/ChadGoymer/msgr/actions/workflows/windows-release.yaml/badge.svg)](https://github.com/ChadGoymer/msgr/actions/workflows/windows-release.yaml)  
+[![MacOS Release](https://github.com/ChadGoymer/msgr/actions/workflows/macos-release.yaml/badge.svg)](https://github.com/ChadGoymer/msgr/actions/workflows/macos-release.yaml)  
+[![Ubuntu Release](https://github.com/ChadGoymer/msgr/actions/workflows/ubuntu-release.yaml/badge.svg)](https://github.com/ChadGoymer/msgr/actions/workflows/ubuntu-release.yaml)  
+[![Windows Develop](https://github.com/ChadGoymer/msgr/actions/workflows/windows-develop.yaml/badge.svg)](https://github.com/ChadGoymer/msgr/actions/workflows/windows-develop.yaml)  
+[![MacOS Develop](https://github.com/ChadGoymer/msgr/actions/workflows/macos-develop.yaml/badge.svg)](https://github.com/ChadGoymer/msgr/actions/workflows/macos-develop.yaml)  
+[![Ubuntu Develop](https://github.com/ChadGoymer/msgr/actions/workflows/ubuntu-develop.yaml/badge.svg)](https://github.com/ChadGoymer/msgr/actions/workflows/ubuntu-develop.yaml)  
+[![Test Coverage](https://codecov.io/gh/ChadGoymer/msgr/branch/main/graph/badge.svg)](https://codecov.io/github/ChadGoymer/msgr?branch=main)
 <!-- badges: end -->
 
 This package extends the `message()`, `warning()` and `stop()` functions by adding _levels_ 
