@@ -7,9 +7,25 @@ navbar:
     reference:
       text: Reference
       href: reference/index.html
+    articles:
+     text: Articles
+     menu:
+     - text: Using Messages
+       href: articles/messages.html
+     - text: Using Assertions
+       href: articles/assertions.html
     news:
       text: Release Notes
-      href: news/index.html
+      menu:
+        - text: Release 1.2
+          href: news/news-1.2.html
+        - text: Release 1.1
+          href: news/news-1.1.html
+        - text: Release 1.0
+          href: news/news-1.0.html
+        - text: -------
+        - text: Development Releases
+          href: news/index.html
   right:
     - icon: fa-github fa-lg
       href: http://github.com/ChadGoymer/msgr
