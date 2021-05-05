@@ -1,12 +1,13 @@
 Package: msgr
 Title: Extends Messages, Warnings and Errors by Adding Levels and Log Files
 Version: 1.2.9
-Authors@R: person("Chad", "Goymer", email = "chad.goymer@gmail.com", role = c("aut", "cre"))
-Description: Provides new functions info(), warn() and error(), similar to message(),
-    warning() and stop() respectively. However, the new functions can have a 'level'
-    associated with them, so that when executed the global level option determines whether
-    they are shown or not. This allows debug modes, outputting more information. The can also
-    output all messages to a log file.
+Authors@R: person(
+    "Chad", "Goymer", email = "chad.goymer@gmail.com", role = c("aut", "cre"))
+Description: Provides new functions info(), warn() and error(), similar to 
+    message(), warning() and stop() respectively. However, the new functions can 
+    have a 'level' associated with them, so that when executed the global level 
+    option determines whether they are shown or not. This allows debug modes, 
+    outputting more information. The can also output all messages to a log file.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-GB
