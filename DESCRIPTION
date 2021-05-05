@@ -18,6 +18,9 @@ Imports:
     rlang
 Suggests: 
     covr,
+    knitr,
+    rmarkdown,
     testthat
 URL: https://github.com/ChadGoymer/msgr
 BugReports: https://github.com/ChadGoymer/msgr/issues
+VignetteBuilder: knitr

@@ -1,0 +1,16 @@
+---
+title: "Assertions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Assertions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, setup, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  comment = ""
+)
+library(msgr)
+```
